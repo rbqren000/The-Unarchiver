@@ -8,22 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		28D47D8C285222AE00CE0994 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D47D8B285222AE00CE0994 /* AppDelegate.swift */; };
-		28D47D8E285222AE00CE0994 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D47D8D285222AE00CE0994 /* SceneDelegate.swift */; };
 		28D47D90285222AE00CE0994 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D47D8F285222AE00CE0994 /* ViewController.swift */; };
 		28D47D93285222AE00CE0994 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28D47D91285222AE00CE0994 /* Main.storyboard */; };
 		28D47D95285222B300CE0994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28D47D94285222B300CE0994 /* Assets.xcassets */; };
 		28D47D98285222B300CE0994 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28D47D96285222B300CE0994 /* LaunchScreen.storyboard */; };
+		38768E520458BD0B8E3D64E3 /* Pods_The_Unarchiver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36489CE615A8197521B0473C /* Pods_The_Unarchiver.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		28D47D88285222AE00CE0994 /* The-Unarchiver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The-Unarchiver.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D47D8B285222AE00CE0994 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		28D47D8D285222AE00CE0994 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		28D47D8F285222AE00CE0994 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		28D47D92285222AE00CE0994 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		28D47D94285222B300CE0994 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28D47D97285222B300CE0994 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28D47D99285222B300CE0994 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28D47D9F285226A000CE0994 /* The-Unarchiver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "The-Unarchiver-Bridging-Header.h"; sourceTree = "<group>"; };
+		36489CE615A8197521B0473C /* Pods_The_Unarchiver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_The_Unarchiver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		492880C3480FDDABC6CD3F90 /* Pods-The-Unarchiver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The-Unarchiver.debug.xcconfig"; path = "Target Support Files/Pods-The-Unarchiver/Pods-The-Unarchiver.debug.xcconfig"; sourceTree = "<group>"; };
+		8B8A733A9ADAD2EC060FF193 /* Pods-The-Unarchiver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The-Unarchiver.release.xcconfig"; path = "Target Support Files/Pods-The-Unarchiver/Pods-The-Unarchiver.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38768E520458BD0B8E3D64E3 /* Pods_The_Unarchiver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +46,8 @@
 			children = (
 				28D47D8A285222AE00CE0994 /* The-Unarchiver */,
 				28D47D89285222AE00CE0994 /* Products */,
+				47B31421A9B5D079C255D373 /* Pods */,
+				2E8BF8005EEC63FE1A374E76 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,14 +63,31 @@
 			isa = PBXGroup;
 			children = (
 				28D47D8B285222AE00CE0994 /* AppDelegate.swift */,
-				28D47D8D285222AE00CE0994 /* SceneDelegate.swift */,
 				28D47D8F285222AE00CE0994 /* ViewController.swift */,
 				28D47D91285222AE00CE0994 /* Main.storyboard */,
 				28D47D94285222B300CE0994 /* Assets.xcassets */,
 				28D47D96285222B300CE0994 /* LaunchScreen.storyboard */,
 				28D47D99285222B300CE0994 /* Info.plist */,
+				28D47D9F285226A000CE0994 /* The-Unarchiver-Bridging-Header.h */,
 			);
 			path = "The-Unarchiver";
+			sourceTree = "<group>";
+		};
+		2E8BF8005EEC63FE1A374E76 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				36489CE615A8197521B0473C /* Pods_The_Unarchiver.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		47B31421A9B5D079C255D373 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				492880C3480FDDABC6CD3F90 /* Pods-The-Unarchiver.debug.xcconfig */,
+				8B8A733A9ADAD2EC060FF193 /* Pods-The-Unarchiver.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +97,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 28D47D9C285222B300CE0994 /* Build configuration list for PBXNativeTarget "The-Unarchiver" */;
 			buildPhases = (
+				67071BCC021562498756D308 /* [CP] Check Pods Manifest.lock */,
 				28D47D84285222AE00CE0994 /* Sources */,
 				28D47D85285222AE00CE0994 /* Frameworks */,
 				28D47D86285222AE00CE0994 /* Resources */,
+				A7E1096336EFDB129EAD75D7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -99,6 +124,7 @@
 				TargetAttributes = {
 					28D47D87285222AE00CE0994 = {
 						CreatedOnToolsVersion = 13.3.1;
+						LastSwiftMigration = 1330;
 					};
 				};
 			};
@@ -133,6 +159,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		67071BCC021562498756D308 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-The-Unarchiver-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A7E1096336EFDB129EAD75D7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-The-Unarchiver/Pods-The-Unarchiver-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-The-Unarchiver/Pods-The-Unarchiver-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-The-Unarchiver/Pods-The-Unarchiver-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		28D47D84285222AE00CE0994 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -140,7 +208,6 @@
 			files = (
 				28D47D90285222AE00CE0994 /* ViewController.swift in Sources */,
 				28D47D8C285222AE00CE0994 /* AppDelegate.swift in Sources */,
-				28D47D8E285222AE00CE0994 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,9 +349,11 @@
 		};
 		28D47D9D285222B300CE0994 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 492880C3480FDDABC6CD3F90 /* Pods-The-Unarchiver.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -293,8 +362,10 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,6 +374,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swing.The-Unarchiver";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "The-Unarchiver/The-Unarchiver-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -310,9 +383,11 @@
 		};
 		28D47D9E285222B300CE0994 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B8A733A9ADAD2EC060FF193 /* Pods-The-Unarchiver.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -321,8 +396,10 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -331,6 +408,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swing.The-Unarchiver";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "The-Unarchiver/The-Unarchiver-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
