@@ -16,13 +16,11 @@ class DownloadViewController: ViewController {
     fileprivate var downloadURLs: [String] = []
     fileprivate var addTaskButton = Button()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         getHistoryDownloadList()
     }
-    
 
     override func initSubviews() {
         super.initSubviews()

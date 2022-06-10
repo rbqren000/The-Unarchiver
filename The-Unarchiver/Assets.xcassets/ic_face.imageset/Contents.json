@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "ic_user.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -9,7 +10,6 @@
       "scale" : "2x"
     },
     {
-      "filename" : "icon-1024.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

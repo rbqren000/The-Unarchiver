@@ -37,7 +37,7 @@ class WebViewController: ViewController {
     deinit {
         self.webView?.removeObserver(self, forKeyPath: kWebViewTitle)
         NotificationCenter.default.removeObserver(self)
-        print(message: "LWebViewController Deinit")
+        print(message: "WebViewController Deinit")
     }
     
     override func initSubviews() {

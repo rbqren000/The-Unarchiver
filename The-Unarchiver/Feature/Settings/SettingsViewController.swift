@@ -14,7 +14,7 @@ import Async
 
 class SettingsViewController: ViewController {
     
-    let tableView = QMUITableView.init(frame: CGRect.zero, style: .grouped)
+    var tableView = QMUITableView.init(frame: CGRect.zero, style: .grouped)
     let cellIdentifier = "settingsCell"
     let privateURL = URL(string: "https://abox.swing1993.cn/private.html")!
     let tutorialURL = URL(string: "https://swing1993.cn/aboxshi-yong-jiao-cheng/")!
@@ -23,16 +23,13 @@ class SettingsViewController: ViewController {
     let aboxIssuesURL = URL(string: "https://github.com/SWING1993/ABox_iOS/issues")!
 
     //  ("关于我们", "ic_aboutus")
-    let cellData = [[("证书管理", "ic_contract"),
-                     ("设备UDID", "ic_udid"),
-                     ("解锁码有效期", "ic_lock")],
-                    [("检测更新", "ic_update"),
-                     ("问题反馈", "feedback"),
-                     //                     ("分享给好友", "ic_share"),
+    let cellData = [[("解压设置", "rar-setting")],
+                    [("问题反馈", "feedback"),
+                     ("分享给好友", "ic_share"),
                      ("清理缓存", "ic_helper"),
-                     ("使用教程", "ic_aboutus"),
                      ("服务及隐私协议", "ic_unlock"),
-                     ("GitHub仓库", "github-logo")]]
+                     ("GitHub仓库", "github-logo"),
+                     ("关于我们", "ic_aboutus")]]
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -50,7 +47,9 @@ class SettingsViewController: ViewController {
     
     override func initSubviews() {
         super.initSubviews()
-
+        if #available(iOS 13.0, *) {
+            self.tableView = QMUITableView.init(frame: .zero, style: .insetGrouped)
+        }
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.showsVerticalScrollIndicator = false
@@ -98,28 +97,11 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
         cell?.textLabel?.text = item.0
         cell?.imageView?.image = UIImage(named: item.1)?.qmui_image(withTintColor: kTextColor)
         cell?.detailTextLabel?.text = nil
-
-        if item.0 == "证书管理" {
-            if let signingCertificateName = AppDefaults.shared.signingCertificateName {
-                cell?.detailTextLabel?.text = signingCertificateName
-            } else {
-                cell?.detailTextLabel?.text = "选择签名证书"
-            }
-           
-        } else if item.0 == "设备UDID" {
-            if let udid = AppDefaults.shared.deviceUDID {
-                cell?.detailTextLabel?.text = udid
-            } else {
-                cell?.detailTextLabel?.text = "点击获取"
-            }
-        } else if item.0 == "解锁码有效期" {
-            cell?.detailTextLabel?.text = "点击解锁"
-        }
         return cell!
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        return 20
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -127,17 +109,13 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return section == 0 ? nil : "\(kAppDisPlayName!)：\(kAppVersion!)(\(kAppBuildVersion!))\nAppID：\(kAppBundleIdentifier!)\n编译日期：\(NSString.bulidDate())"
+        return section == 0 ? nil : "\(kAppDisPlayName!)：\(kAppVersion!)(\(kAppBuildVersion!))\n编译日期：\(NSString.bulidDate())"
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*
+        
         let item = self.cellData[indexPath.section][indexPath.row]
-        if item.0 == "证书管理" {
-            let controller = CertificateListViewController()
-            controller.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(controller, animated: true)
-        } else if item.0 == "分享给好友" {
+        if item.0 == "分享给好友" {
             let title = kAppDisPlayName!
             let image = UIImage(named: "icon-1024")!
             let items: [Any] = [aboxGitHubURL, title, image]
@@ -152,63 +130,22 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
                 QMUITips.hideAllTips(in: self.view)
                 kAlert("已清除全部缓存")
             }
-        } else if item.0 == "检测更新" {
-            UIApplication.shared.open(aboxReleaseURL, options: [:]) { completion in
-                
-            }
         } else if item.0 == "问题反馈" {
             UIApplication.shared.open(aboxIssuesURL, options: [:]) { completion in
                 
             }
         } else if item.0 == "服务及隐私协议" {
-            let webVC = WebViewController(url: privateURL)
-            webVC.hidesBottomBarWhenPushed = true
-            webVC.title = "隐私协议"
-            self.navigationController?.pushViewController(webVC, animated: true)
+            self.openURLWithSafari(privateURL)
         } else if item.0 == "关于我们" {
             let controller = AboutUSViewController()
             controller.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(controller, animated: true)
-        } else if item.0 == "设备UDID" {
-            let alertController = QMUIAlertController.init(title: "获取UDID", message: "下载配置描述文件后请在【设置】应用中安装。", preferredStyle: .actionSheet)
-            if let udid = AppDefaults.shared.deviceUDID {
-                alertController.addAction(QMUIAlertAction.init(title: "复制", style: .default, handler: { _, _ in
-                    UIPasteboard.general.string = udid
-                    QMUITips.showSucceed("已复制UDID\n\(udid)", in: self.view).whiteStyle()
-                }))
-                alertController.addAction(QMUIAlertAction.init(title: "重新获取", style: .destructive, handler: { _, _ in
-                    self.getUDID()
-                }))
-            } else {
-                alertController.addAction(QMUIAlertAction.init(title: "获取", style: .destructive, handler: { _, _ in
-                    self.getUDID()
-                }))
-            }
-            alertController.addAction(QMUIAlertAction.init(title: "取消", style: .cancel, handler: nil))
-            alertController.showWith(animated: true)
-        } else if item.0 == "使用教程" {
-            let webVC = WebViewController(url: tutorialURL)
-            webVC.hidesBottomBarWhenPushed = true
-            webVC.title = "使用教程"
-            self.navigationController?.pushViewController(webVC, animated: true)
-        } else if item.0 == "解锁码有效期" {
-            if Client.shared.device.vipType <= 0 {
-                let alert = QMUIAlertController.init(title: "解锁码", message: nil, preferredStyle: .actionSheet)
-                alert.addAction(QMUIAlertAction.init(title: "输入解锁码", style: .default, handler: { _, _ in
-                    self.showActivateVipDialogViewController()
-                }))
-                alert.addAction(QMUIAlertAction.init(title: "购买", style: .default, handler: { _, _ in
-                    self.openURLWithSafari(KuaifakaURL)
-                }))
-                alert.addAction(QMUIAlertAction.init(title: "取消", style: .cancel, handler: nil))
-                alert.showWith(animated: true)
-            }
         } else if item.0 == "GitHub仓库" {
             UIApplication.shared.open(aboxGitHubURL, options: [:]) { completion in
                 
             }
         }
-         */
+        
     }
     
 
