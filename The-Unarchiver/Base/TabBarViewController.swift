@@ -28,7 +28,7 @@ class TabBarViewController: QMUITabBarViewController {
         fileExchangedNav.navigationItem.largeTitleDisplayMode = .automatic
         fileExchangedNav.tabBarItem = UITabBarItem.init(title: "互传", image: UIImage.init(named: "tabbar_exchange"), tag: 3)
         
-        let downloadController = ViewController()
+        let downloadController = DownloadViewController()
         downloadController.title = "下载"
         let downloadNav = QMUINavigationController(rootViewController: downloadController)
         downloadNav.navigationBar.prefersLargeTitles = true

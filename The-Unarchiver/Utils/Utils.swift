@@ -270,6 +270,7 @@ func kAlert(_ text: String, showCancel: Bool = false, preferredStyle: QMUIAlertC
     }
 }
 
+let kDownloadTableName = "download_tbl"
 let wordTypes = ["doc", "docm", "docx", "docx", "dot", "dotm", "dotx", "odt", "xps"]
 let excelTypes = ["csv", "xls", "xlsb", "xlsm", "xlsx", "xlt", "xltm", "xltx", "xlw", "xml"]
 let pptTypes = ["pot", "potm", "potx", "ppa", "ppam", "pps", "ppsm", "ppsx", "ppt", "pptm", "pptx"]

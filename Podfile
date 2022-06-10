@@ -16,5 +16,8 @@ target 'The-Unarchiver' do
   pod 'SwiftDate'
   pod 'SSZipArchive'
   pod 'STPopup'
+  pod 'RxAlamofire'
+  pod 'HandyJSON', '~> 5.0.2-beta'
+  pod 'YTKKeyValueStore'
 
 end

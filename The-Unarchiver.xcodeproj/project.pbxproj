@@ -118,6 +118,14 @@
 		16F93AEE2852E94C00281A81 /* libXADMaster.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F93AEC2852E94C00281A81 /* libXADMaster.ios.a */; };
 		16F93AF12852ECDE00281A81 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AF02852ECDE00281A81 /* SettingsViewController.swift */; };
 		16F93AF42853346000281A81 /* FileExchangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AF32853346000281A81 /* FileExchangeController.swift */; };
+		16F93AF72853398500281A81 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AF62853398500281A81 /* DownloadViewController.swift */; };
+		16F93AF9285339B500281A81 /* InputURLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AF8285339B500281A81 /* InputURLViewController.swift */; };
+		16F93AFB285339BA00281A81 /* DownloadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AFA285339BA00281A81 /* DownloadTableViewCell.swift */; };
+		16F93AFD285339BF00281A81 /* DownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AFC285339BF00281A81 /* DownloadTask.swift */; };
+		16F93AFF28533B1900281A81 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AFE28533B1900281A81 /* DownloadManager.swift */; };
+		16F93B0128533BA200281A81 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93B0028533BA200281A81 /* Client.swift */; };
+		16F93B0328533C5300281A81 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93B0228533C5300281A81 /* API.swift */; };
+		16F93B0528533CAA00281A81 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93B0428533CAA00281A81 /* WebViewController.swift */; };
 		28D47D8C285222AE00CE0994 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D47D8B285222AE00CE0994 /* AppDelegate.swift */; };
 		28D47D93285222AE00CE0994 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28D47D91285222AE00CE0994 /* Main.storyboard */; };
 		28D47D95285222B300CE0994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28D47D94285222B300CE0994 /* Assets.xcassets */; };
@@ -496,6 +504,14 @@
 		16F93AEC2852E94C00281A81 /* libXADMaster.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libXADMaster.ios.a; sourceTree = "<group>"; };
 		16F93AF02852ECDE00281A81 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		16F93AF32853346000281A81 /* FileExchangeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExchangeController.swift; sourceTree = "<group>"; };
+		16F93AF62853398500281A81 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
+		16F93AF8285339B500281A81 /* InputURLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputURLViewController.swift; sourceTree = "<group>"; };
+		16F93AFA285339BA00281A81 /* DownloadTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableViewCell.swift; sourceTree = "<group>"; };
+		16F93AFC285339BF00281A81 /* DownloadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTask.swift; sourceTree = "<group>"; };
+		16F93AFE28533B1900281A81 /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		16F93B0028533BA200281A81 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		16F93B0228533C5300281A81 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		16F93B0428533CAA00281A81 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		28D47D88285222AE00CE0994 /* The-Unarchiver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The-Unarchiver.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D47D8B285222AE00CE0994 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28D47D92285222AE00CE0994 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -531,6 +547,8 @@
 			children = (
 				16F938F02852CFA000281A81 /* XADHelper.h */,
 				16F938EF2852CFA000281A81 /* XADHelper.m */,
+				16F93B0228533C5300281A81 /* API.swift */,
+				16F93B0028533BA200281A81 /* Client.swift */,
 				16F93AC02852DEB300281A81 /* AppManager.swift */,
 				16F938E92852CF8400281A81 /* Utils.swift */,
 				16F938EB2852CF8900281A81 /* AppDefaults.swift */,
@@ -951,8 +969,9 @@
 		16F93A632852D04E00281A81 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				16F93AEF2852EC8700281A81 /* Settings */,
 				16F93A642852D06500281A81 /* Documents */,
+				16F93AF52853396300281A81 /* Download */,
+				16F93AEF2852EC8700281A81 /* Settings */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -977,6 +996,7 @@
 				16F93A682852D12900281A81 /* NavigationController.swift */,
 				16F93A672852D12900281A81 /* TabBarViewController.swift */,
 				16F93A662852D12900281A81 /* ViewController.swift */,
+				16F93B0428533CAA00281A81 /* WebViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1124,6 +1144,18 @@
 				16F93AF02852ECDE00281A81 /* SettingsViewController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		16F93AF52853396300281A81 /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				16F93AF62853398500281A81 /* DownloadViewController.swift */,
+				16F93AF8285339B500281A81 /* InputURLViewController.swift */,
+				16F93AFA285339BA00281A81 /* DownloadTableViewCell.swift */,
+				16F93AFC285339BF00281A81 /* DownloadTask.swift */,
+				16F93AFE28533B1900281A81 /* DownloadManager.swift */,
+			);
+			path = Download;
 			sourceTree = "<group>";
 		};
 		28D47D7F285222AE00CE0994 = {
@@ -1302,6 +1334,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				16F93A9C2852D88700281A81 /* M13ProgressViewMetroDotPolygon.m in Sources */,
+				16F93AFF28533B1900281A81 /* DownloadManager.swift in Sources */,
+				16F93B0128533BA200281A81 /* Client.swift in Sources */,
 				16F93A5E2852D03900281A81 /* NSCache+BlocksKit.m in Sources */,
 				16F93AA02852D88700281A81 /* M13ProgressViewBorderedBar.m in Sources */,
 				16F939042852CFC300281A81 /* FileManager+DirectorySize.swift in Sources */,
@@ -1342,6 +1376,7 @@
 				16F93AA82852D88800281A81 /* M13ProgressViewSegmentedBar.m in Sources */,
 				16F93ABB2852DD9000281A81 /* MoveFolderViewController.swift in Sources */,
 				16F93AAA2852D88800281A81 /* M13ProgressConsole.m in Sources */,
+				16F93AF9285339B500281A81 /* InputURLViewController.swift in Sources */,
 				16F93AA32852D88800281A81 /* M13ProgressViewImage.m in Sources */,
 				16F93A412852D03900281A81 /* GCDWebServerDataRequest.m in Sources */,
 				16F93A692852D12900281A81 /* ViewController.swift in Sources */,
@@ -1357,14 +1392,17 @@
 				16F93A352852D03900281A81 /* GCDWebUploader.m in Sources */,
 				16F939072852CFC300281A81 /* FileManager+SharedDirectories.swift in Sources */,
 				16F939052852CFC300281A81 /* UITableViewCell+Utilities.swift in Sources */,
+				16F93B0528533CAA00281A81 /* WebViewController.swift in Sources */,
 				16F9390F2852CFC300281A81 /* String+Additions.swift in Sources */,
 				16F93AE72852E10C00281A81 /* ioapi.c in Sources */,
 				16F93A492852D03900281A81 /* NSSet+BlocksKit.m in Sources */,
+				16F93B0328533C5300281A81 /* API.swift in Sources */,
 				16F93AE62852E10C00281A81 /* zip.c in Sources */,
 				16F93A572852D03900281A81 /* UIActionSheet+BlocksKit.m in Sources */,
 				16F93A3A2852D03900281A81 /* GCDWebServerConnection.m in Sources */,
 				16F93A382852D03900281A81 /* GCDWebServerFunctions.m in Sources */,
 				16F93ABF2852DDA100281A81 /* ImportViewController.swift in Sources */,
+				16F93AF72853398500281A81 /* DownloadViewController.swift in Sources */,
 				16F93AB72852DD5E00281A81 /* File.swift in Sources */,
 				16F93A5C2852D03900281A81 /* MFMessageComposeViewController+BlocksKit.m in Sources */,
 				16F938EE2852CF9000281A81 /* EmptyDataSet.swift in Sources */,
@@ -1373,9 +1411,11 @@
 				16F93A402852D03900281A81 /* GCDWebServerMultiPartFormRequest.m in Sources */,
 				16F93AD42852E0B200281A81 /* ALTApplication.mm in Sources */,
 				16F93A6B2852D12900281A81 /* NavigationController.swift in Sources */,
+				16F93AFD285339BF00281A81 /* DownloadTask.swift in Sources */,
 				16F93A3E2852D03900281A81 /* GCDWebServerStreamedResponse.m in Sources */,
 				16F93ABD2852DD9400281A81 /* PlistPreviewController.swift in Sources */,
 				16F93A602852D03900281A81 /* NSObject+A2BlockDelegate.m in Sources */,
+				16F93AFB285339BA00281A81 /* DownloadTableViewCell.swift in Sources */,
 				16F939102852CFC300281A81 /* UIScrollView+EmptyDataSet.m in Sources */,
 				16F93A442852D03900281A81 /* NSMutableArray+BlocksKit.m in Sources */,
 				16F9390E2852CFC300281A81 /* UIImage+Utilities.swift in Sources */,
