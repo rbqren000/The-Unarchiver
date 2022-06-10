@@ -120,6 +120,12 @@ class File: NSObject {
         }
         
         if thumbnails == nil {
+            if let image = UIImage(named: self.type) {
+                thumbnails = image
+            }
+        }
+        
+        if thumbnails == nil {
             if self.isWord {
                 thumbnails = UIImage(named: "word")
             } else if self.isExcel {
@@ -129,16 +135,11 @@ class File: NSObject {
             } else if self.isCode {
                 thumbnails = UIImage(named: "code")
             } else if self.isArchiver {
-                thumbnails = UIImage(named: "box")
-
+                thumbnails = UIImage(named: "archive")
             }
         }
         
-        if thumbnails == nil {
-            if let image = UIImage(named: self.type) {
-                thumbnails = image
-            }
-        }
+    
         
         if thumbnails == nil {
             thumbnails = UIImage(named: "unknown")

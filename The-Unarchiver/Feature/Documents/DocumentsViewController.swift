@@ -497,26 +497,26 @@ extension DocumentsViewController {
         if file.isArchiver {
             let alertController = QMUIAlertController.init(title: "是否解压？", message: file.url.lastPathComponent, preferredStyle: .alert)
             alertController.addAction(QMUIAlertAction.init(title: "确定", style: .destructive, handler: { _, _ in
-//                QMUITips.showLoading(in: self.view).whiteStyle()
-//                let xadHelper = XADHelper()
-//                let destPath = file.url.deletingLastPathComponent().appendingPathComponent(file.url.deletingPathExtension().lastPathComponent).path
-//                Async.background {
-//                    let result = xadHelper.unarchiver(withPath: file.url.path, dest: destPath)
-//                    Async.main {
-//                        QMUITips.hideAllTips()
-//                        if result == 0 {
-//                            self.getFolderFiles()
-//                            kAlert("解压成功！")
-//                        } else {
-//                            if let message = XADException.describeXADError(result) {
-//                                kAlert("解压失败！\(message)")
-//
-//                            } else {
-//                                kAlert("解压失败！")
-//                            }
-//                        }
-//                    }
-//                }
+                QMUITips.showLoading(in: self.view).whiteStyle()
+                let xadHelper = XADHelper()
+                let destPath = file.url.deletingLastPathComponent().appendingPathComponent(file.url.deletingPathExtension().lastPathComponent).path
+                Async.background {
+                    let result = xadHelper.unarchiver(withPath: file.url.path, dest: destPath)
+                    Async.main {
+                        QMUITips.hideAllTips()
+                        if result == 0 {
+                            self.getFolderFiles()
+                            kAlert("解压成功！")
+                        } else {
+                            if let message = XADException.describeXADError(result) {
+                                kAlert("解压失败！\(message)")
+
+                            } else {
+                                kAlert("解压失败！")
+                            }
+                        }
+                    }
+                }
             }))
             alertController.addCancelAction()
             alertController.showWith(animated: true)

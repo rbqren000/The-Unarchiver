@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XADHelper : NSObject
 
-//- (int)unarchiverWithPath:(NSString *)path dest:(NSString *)destpath;
+- (int)unarchiverWithPath:(NSString *)path dest:(NSString *)destpath;
 
 @end
 

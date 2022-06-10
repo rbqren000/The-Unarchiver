@@ -2,8 +2,7 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
-//#import "XADHelper.h"
-//#import "XADException.h"
+
 #import "GCDWebUploader.h"
 #import "GCDWebServer.h"
 #import "GCDWebServerDataResponse.h"
@@ -41,3 +40,6 @@
 // Categories
 #import "NSFileManager+Zip.h"
 #import "NSError+ALTErrors.h"
+
+#import "XADHelper.h"
+#import "XADException.h"
