@@ -12,4 +12,9 @@ target 'The-Unarchiver' do
   pod 'AsyncSwift'
   pod 'RxSwift', '~> 5'
   pod 'RxCocoa', '~> 5'
+  pod 'Material', '~> 2.0'
+  pod 'SwiftDate'
+  pod 'SSZipArchive'
+  pod 'STPopup'
+
 end

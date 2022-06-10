@@ -1,6 +1,13 @@
 PODS:
   - AsyncSwift (2.0.4)
+  - Material (2.16.4):
+    - Material/Core (= 2.16.4)
+  - Material/Core (2.16.4):
+    - Motion (~> 1.4.3)
   - MJRefresh (3.7.5)
+  - Motion (1.4.3):
+    - Motion/Core (= 1.4.3)
+  - Motion/Core (1.4.3)
   - QMUIKit (4.4.3):
     - QMUIKit/QMUIComponents (= 4.4.3)
     - QMUIKit/QMUICore (= 4.4.3)
@@ -304,38 +311,55 @@ PODS:
     - RxSwift (~> 5)
   - RxSwift (5.1.3)
   - SnapKit (5.6.0)
+  - SSZipArchive (2.4.3)
+  - STPopup (1.8.7)
+  - SwiftDate (6.3.1)
   - TZImagePickerController (3.8.1)
 
 DEPENDENCIES:
   - AsyncSwift
+  - Material (~> 2.0)
   - MJRefresh
   - QMUIKit
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
   - SnapKit (~> 5.6.0)
+  - SSZipArchive
+  - STPopup
+  - SwiftDate
   - TZImagePickerController
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AsyncSwift
+    - Material
     - MJRefresh
+    - Motion
     - QMUIKit
     - RxCocoa
     - RxRelay
     - RxSwift
     - SnapKit
+    - SSZipArchive
+    - STPopup
+    - SwiftDate
     - TZImagePickerController
 
 SPEC CHECKSUMS:
   AsyncSwift: 65775a7b32e740609b24969ece3de58723b9dc3e
+  Material: 4ed78690b09ffd148b5ffab6b4367fb1d8da1cd3
   MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
+  Motion: 153ba49692997888556c7a95207278a8b1f8be95
   QMUIKit: 5da6e59d5d312681ee45706af42fd3af7b4f55eb
   RxCocoa: e2ed092d5432e4296aa818021d27de4090ac0354
   RxRelay: 5a18c2eb2d68326ebaf0112f80d837ae41b92b97
   RxSwift: 915abbdfb62214aa89ccd0b194d44fb478019b27
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
+  STPopup: a9045557bc48a0df51fbb7bf0544447c5fe84d34
+  SwiftDate: 72d28954e8e1c6c1c0f917ccc8005e4f83c7d4b2
   TZImagePickerController: 943511626019431372cf908f24c114521e484f0e
 
-PODFILE CHECKSUM: d847d7a50137b9ef7347c351c1054515477d3f0c
+PODFILE CHECKSUM: 1797e7ff81e3df7ecd9ead9b31c7b41e509396e1
 
 COCOAPODS: 1.11.3
