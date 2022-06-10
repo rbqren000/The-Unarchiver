@@ -109,7 +109,7 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return section == 0 ? nil : "\(kAppDisPlayName!)：\(kAppVersion!)(\(kAppBuildVersion!))\n编译日期：\(NSString.bulidDate())"
+        return section == 0 ? nil : "\(kAppDisPlayName!)：\(kAppVersion!)\n编译日期：\(NSString.bulidDate())"
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -135,7 +135,7 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
                 
             }
         } else if item.0 == "服务及隐私协议" {
-            self.openURLWithSafari(privateURL)
+            self.openURLWithWebView(privateURL)
         } else if item.0 == "关于我们" {
             let controller = AboutUSViewController()
             controller.hidesBottomBarWhenPushed = true

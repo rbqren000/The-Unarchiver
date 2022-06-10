@@ -54,7 +54,7 @@ class WebUploaderController: ViewController {
     }
     
     @objc
-    func dismissController() {
+    override func dismissController() {
         if webUploaderRunning {
             let alertController = QMUIAlertController.init(title: "关闭此页面将导致Wi-Fi文件传输关闭", message: nil, preferredStyle: .alert)
             alertController.addAction(QMUIAlertAction(title: "取消", style: .cancel, handler: nil))

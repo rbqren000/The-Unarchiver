@@ -435,11 +435,7 @@ extension DocumentsViewController {
         self.present(nav, animated: true, completion: nil)
     }
     
-    @objc
-    public func dismissController() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
+
     @objc
     func getFolderFiles() {
         Async.background {

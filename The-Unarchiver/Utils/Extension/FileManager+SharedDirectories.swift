@@ -62,15 +62,6 @@ public extension FileManager {
         }
     }
     
-    func clearSignedAppData() {
-        if FileManager.default.fileExists(atPath: FileManager.default.unzipIPADirectory.path) {
-            do {
-                print(message: "清理ipa解压文件夹")
-                try FileManager.default.removeItem(at: FileManager.default.unzipIPADirectory)
-            } catch let error {
-                print(message: "清理ipa解压文件夹失败，\(error.localizedDescription)")
-            }
-        }
-    }
+
 }
 

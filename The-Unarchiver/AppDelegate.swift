@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import SwiftDate
+import Alamofire
+import Async
+import QMUIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        configureApp()
         configureAppearance()
         application.isIdleTimerDisabled = true
         window = UIWindow.init(frame: UIScreen.main.bounds)
@@ -29,6 +34,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate {
+    func configureApp() {
+
+        SwiftDate.defaultRegion = Region.local
+        Async.background {
+            FileManager.default.createDefaultDirectory()
+        }
+    }
     func configureAppearance() {
         if #available(iOS 15.0, *) {
             let tabbarAppearance = UITabBarAppearance()

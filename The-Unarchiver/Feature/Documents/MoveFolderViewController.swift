@@ -38,12 +38,6 @@ class MoveFolderViewController: ViewController {
             
     
     @objc
-    func dismissController() {
-        self.dismiss(animated: true, completion: nil)
-    }
-        
-    
-    @objc
     func getFolders() {
         let fileManger = FileManager.default
         do {

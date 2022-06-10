@@ -20,11 +20,11 @@ extension UIViewController {
     }
     
     func openURLWithWebView(_ url: URL) {
-        let safariVC = SFSafariViewController(url: url)
-        safariVC.configuration.entersReaderIfAvailable = false
-        safariVC.configuration.barCollapsingEnabled = false
-        safariVC.dismissButtonStyle = .close
-        self.present(safariVC, animated: true, completion: nil)
+        let webVC = WebViewController(url: url)
+        webVC.hidesBottomBarWhenPushed = true
+        webVC.navigationItem.leftBarButtonItem = UIBarButtonItem.init(title: "关闭", style: .plain, target: webVC, action: #selector(webVC.dismissController))
+        let nav = NavigationController(rootViewController: webVC)
+        self.present(nav, animated: true, completion: nil)
     }
     
 }

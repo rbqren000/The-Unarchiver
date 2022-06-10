@@ -32,6 +32,12 @@ class ViewController: QMUICommonViewController {
         return true
     }
     
+    @objc
+    public func dismissController() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
 }
 
 
