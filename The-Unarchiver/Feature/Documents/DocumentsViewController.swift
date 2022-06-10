@@ -14,11 +14,8 @@ class DocumentsViewController: ViewController {
     
     public var indexFileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     public var isRootViewController = false
-    public var hideImportButton = false
-    public var hideCreateFolderButton = false
     public var selectFileCallback: ((File) -> ())?
     
-    private let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     private let tableView = QMUITableView.init(frame: CGRect.zero, style: .grouped)
     private var segmentIndex = 0
     private var segmentedControl: UISegmentedControl!
@@ -27,16 +24,19 @@ class DocumentsViewController: ViewController {
     private var files: [File] = []
     private var recycleBinFile = File()
     private var previewItem: QLPreviewItem?
-    private var importButton = Button()
     private var flag = false
+    private let menuPopupView = QMUIPopupMenuView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         print(message: indexFileURL)
         self.tableView.isHidden = true
         self.showEmptyViewWithLoading()
         getFolderFiles()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,22 +49,14 @@ class DocumentsViewController: ViewController {
     
     override func setupNavigationItems() {
         super.setupNavigationItems()
-        if isRootViewController {
-            let importFileButton = UIBarButtonItem(image: UIImage(named: "icon_import"), style: .done, target: self, action: #selector(importFile))
-            self.navigationItem.leftBarButtonItem = importFileButton
-        }
-        if hideCreateFolderButton == false {
-            let createFolderButton = UIBarButtonItem.init(image: UIImage(named: "icon_add_folder"), style: .done, target: self, action: #selector(createFolder))
-            self.navigationItem.rightBarButtonItem = createFolderButton
-        }
+
+        
     }
     
     override func initSubviews() {
         super.initSubviews()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        //self.tableView.showsVerticalScrollIndicator = false
-        //self.tableView.showsHorizontalScrollIndicator = false
         self.tableView.setEmptyDataSet(title: nil, descriptionString: nil, image: UIImage(named: "file-storage"))
         self.tableView.register(QMUITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         self.tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(getFolderFiles))
@@ -89,17 +81,31 @@ class DocumentsViewController: ViewController {
         filesDescLabel.textAlignment = .right
         filesDescLabel.adjustsFontSizeToFitWidth = true
         tableHeaderView.addSubview(self.filesDescLabel)
+                
         
-        if hideImportButton == false {
-            importButton.frame = CGRect(x: kUIScreenWidth - 70, y: kUIScreenHeight - 170, width: 55, height: 55)
-            importButton.backgroundColor = kButtonColor
-            importButton.layer.cornerRadius = 27.5
-            importButton.setImage(Icon.add?.qmui_image(withTintColor: .white), for: .normal)
-            importButton.addTarget(self, action: #selector(dragMoving(control:event:)), for: .touchDragInside)
-            importButton.addTarget(self, action: #selector(dragEnded(control:event:)), for: .touchDragOutside)
-            importButton.addTarget(self, action: #selector(importFile), for: .touchUpInside)
-            self.view.addSubview(importButton)
+        let menuButton = UIBarButtonItem.init(image: UIImage(named: "more-information"), style: .done, target: self, action: #selector(menuButtonTapped))
+        self.navigationItem.rightBarButtonItem = menuButton
+        
+        self.menuPopupView.automaticallyHidesWhenUserTap = true
+        self.menuPopupView.shouldShowItemSeparator = true
+        self.menuPopupView.tintColor = .black
+        self.menuPopupView.itemConfigurationHandler = { aMenuView, aItem, section, index in
+            if let item = aItem as? QMUIPopupMenuButtonItem {
+                item.button.setTitleColor(.black, for: .normal)
+            }
         }
+        
+        let importFilePopupItem = QMUIPopupMenuButtonItem.init(image: UIImage.init(named: "icon_import"), title: "导入文件") {[unowned self] _ in
+            self.menuPopupView.hideWith(animated: true)
+            self.importFile()
+        }
+        let createFolderPopupItem = QMUIPopupMenuButtonItem.init(image: UIImage.init(named: "icon_add_folder"), title: "新建文件夹") { [unowned self] _ in
+            self.menuPopupView.hideWith(animated: true)
+            self.createFolder()
+        }
+    
+        self.menuPopupView.items = [importFilePopupItem, createFolderPopupItem]
+        self.menuPopupView.sourceBarItem = menuButton
         
     }
     
@@ -115,6 +121,11 @@ class DocumentsViewController: ViewController {
         if let center = event.allTouches?.first?.location(in: self.view) {
             control.center = center
         }
+    }
+    
+    @objc
+    func menuButtonTapped() {
+        self.menuPopupView.showWith(animated: true)
     }
 }
 
@@ -495,22 +506,40 @@ extension DocumentsViewController {
     
     func openFile(_ file: File) {
         if file.isArchiver {
-            let alertController = QMUIAlertController.init(title: "是否解压？", message: file.url.lastPathComponent, preferredStyle: .alert)
-            alertController.addAction(QMUIAlertAction.init(title: "确定", style: .destructive, handler: { _, _ in
-                QMUITips.showLoading(in: self.view).whiteStyle()
-                let xadHelper = XADHelper()
-                let destPath = file.url.deletingLastPathComponent().appendingPathComponent(file.url.deletingPathExtension().lastPathComponent).path
+            let xadHelper = XADHelper()
+            let encrypted = xadHelper.archiverIsEncrypted(withPath: file.url.path)
+            let alertController = QMUIAlertController.init(title: "是否解压该文件？", message: file.url.lastPathComponent, preferredStyle: .alert)
+            if encrypted {
+                alertController.addTextField { textField in
+                    textField.keyboardType = .asciiCapable
+                    textField.placeholder = "请输入解压密码"
+                    textField.isSecureTextEntry = true
+                }
+            }
+        
+            alertController.addAction(QMUIAlertAction.init(title: "确定", style: .destructive, handler: { controller, action in
+                var password = ""
+                if encrypted {
+                    if let textField = controller.textFields?.first {
+                        password = textField.text!
+                    }
+                    if encrypted && password.count <= 0 {
+                        kAlert("请输入解压密码")
+                        return
+                    }
+                }
+                QMUITips.showLoading("正在解压...", detailText: file.name, in: self.view).whiteStyle()
                 Async.background {
-                    let result = xadHelper.unarchiver(withPath: file.url.path, dest: destPath)
+                    let destURL = file.url.deletingLastPathComponent().appendingPathComponent(file.url.deletingPathExtension().lastPathComponent)
+                    let result = xadHelper.unarchiver(withPath: file.url.path, dest: destURL.path, password: password)
                     Async.main {
                         QMUITips.hideAllTips()
                         if result == 0 {
                             self.getFolderFiles()
-                            kAlert("解压成功！")
+                            self.showSuccessAlert(alertTitle: "解压\(file.name)成功！", fileURL: destURL)
                         } else {
                             if let message = XADException.describeXADError(result) {
                                 kAlert("解压失败！\(message)")
-
                             } else {
                                 kAlert("解压失败！")
                             }
@@ -521,18 +550,14 @@ extension DocumentsViewController {
             alertController.addCancelAction()
             alertController.showWith(animated: true)
         } else if file.isAppBundle {
-            let application = ALTApplication.init(fileURL: file.url)!
             let alertController = QMUIAlertController.init(title: file.url.lastPathComponent, message: nil, preferredStyle: .actionSheet)
-//            alertController.addAction(QMUIAlertAction.init(title: "签名", style: .destructive, handler: { _, _ in
-//                if let application = ALTApplication.init(fileURL: file.url) {
-//                    let controller = ReSignAppViewController.init(application: application, appSigner: AppSigner())
-//                    controller.hidesBottomBarWhenPushed = true
-//                    self.navigationController?.pushViewController(controller, animated: true)
-//                } else {
-//                    kAlert("无效资源！")
-//                }
-//            }))
-            
+            alertController.addAction(QMUIAlertAction.init(title: "打包IPA", style: .destructive, handler: { _, _ in
+                do {
+                    try FileManager.default.zipAppBundle(at: file.url)
+                } catch let error {
+                    kAlert(error.localizedDescription)
+                }
+            }))
             alertController.addAction(QMUIAlertAction.init(title: "查看文件", style: .default, handler: { _, _ in
                 let controller = DocumentsViewController()
                 controller.indexFileURL = file.url
@@ -551,40 +576,17 @@ extension DocumentsViewController {
             controller.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(controller, animated: true)
         } else if file.isIPA {
-            if self.indexFileURL.absoluteString == FileManager.default.signedAppsDirectory.absoluteString {
-                let alertController = QMUIAlertController.init(title: file.name, message: "安装期间请不要退出对话框，否则可能会导致安装失败", preferredStyle: .actionSheet)
-                alertController.addAction(QMUIAlertAction.init(title: "安装", style: .default, handler: { _, _ in
-                    AppManager.default.installApp(ipaURL: file.url)
-                }))
-                alertController.addAction(QMUIAlertAction.init(title: "取消", style: .cancel, handler: nil))
-                alertController.showWith(animated: true)
-            } else {
-                self.openIPA(url: file.url) { [unowned self] success, outputDirectoryURL in
-                    if success {
-                        self.getFolderFiles()
-                        self.showSuccessAlert(alertTitle: "解压\(file.name)成功", fileURL: outputDirectoryURL)
-                    } else {
-                        QMUITips.showInfo("解压失败", in: self.view)
-                    }
-                }
-            }
-        } else if file.isMobileProvision {
-//            if let profile = ALTProvisioningProfile.init(url: file.url) {
-//                let alertController = QMUIAlertController.init(title: "描述文件", message: file.name, preferredStyle: .actionSheet)
-//                alertController.addAction(QMUIAlertAction.init(title: "查看", style: .default, handler: { _, _ in
-//                    let controller = CertificateInfoViewController()
-//                    controller.title = file.name
-//                    controller.profile = profile
-//                    self.navigationController?.pushViewController(controller, animated: true)
-//                }))
-//                alertController.addAction(QMUIAlertAction.init(title: "取消", style: .cancel, handler: nil))
-//                alertController.showWith(animated: true)
-//            } else {
-//                self.quickLook(url: file.url)
-//            }
+            let alertController = QMUIAlertController.init(title: file.name, message: "安装期间请不要退出对话框，否则可能会导致安装失败。", preferredStyle: .actionSheet)
+            alertController.addAction(QMUIAlertAction.init(title: "解压", style: .default, handler: { _, _ in
+                self.unZip(file)
+            }))
             
-        } else if file.isCertificate {
-//            AppManager.default.importCertificate(url: file.url)
+            alertController.addAction(QMUIAlertAction.init(title: "安装", style: .destructive, handler: { _, _ in
+                AppManager.default.installApp(ipaURL: file.url)
+            }))
+
+            alertController.addAction(QMUIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+            alertController.showWith(animated: true)
         } else if file.isPlist {
             if let dictionary = NSMutableDictionary.init(contentsOf: file.url) {
                 let controller = PlistPreviewController.init(dictionary: dictionary)
@@ -593,37 +595,8 @@ extension DocumentsViewController {
                 controller.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(controller, animated: true)
             } else {
-                kAlert("格式错误")
+                self.quickLook(url: file.url)
             }
-        } else if file.isZip {
-            let alertController = QMUIAlertController.init(title: "解压\(file.name)？", message: nil, preferredStyle: .alert)
-            alertController.addAction(QMUIAlertAction.init(title: "解压", style: .default, handler: { _, _ in
-                self.unZip(file)
-            }))
-            alertController.addAction(QMUIAlertAction.init(title: "取消", style: .cancel, handler: nil))
-            alertController.showWith(animated: true)
-        } else if file.isDylib {
-            let alertController = QMUIAlertController.init(title: file.name, message: nil, preferredStyle: .actionSheet)
-            alertController.addAction(QMUIAlertAction(title: "修改依赖", style: .default, handler: { _, _ in
-//                let controller = DylibPathViewController()
-//                controller.hidesBottomBarWhenPushed = true
-//                controller.executableURL = file.url
-//                controller.title = file.name
-//                self.navigationController?.pushViewController(controller, animated: true)
-            }))
-            alertController.addAction(QMUIAlertAction(title: "查看MachO信息", style: .default, handler: { _, _ in
-//                let machOInfo = AppSigner.printMachOInfo(withFileURL: file.url)
-//                let controller = TextViewController.init(text: machOInfo)
-//                controller.title = file.name
-//                controller.hidesBottomBarWhenPushed = true
-//                self.navigationController?.pushViewController(controller, animated: true)
-            }))
-            alertController.addAction(QMUIAlertAction.init(title: "Class Dump", style: .destructive, handler: { _, _ in
-                let outputURL = FileManager.default.classdumpDirectory.appendingPathComponent(file.name)
-                self.classdump(executableURL: file.url, outputURL: outputURL)
-            }))
-            alertController.addCancelAction()
-            alertController.showWith(animated: true)
         } else {
             self.quickLook(url: file.url)
         }
@@ -699,7 +672,7 @@ extension DocumentsViewController {
         dialogViewController.addSubmitButton(withText: "确定") { [unowned self] d in
             d.hide()
             let name = dialogViewController.textFields![0].text!
-            let path = self.indexFileURL.path + "/" + name
+            let path = self.indexFileURL.appendingPathComponent(name).path
             if FileManager.default.fileExists(atPath: path) {
                 kAlert("文件夹已存在")
             } else {
@@ -729,7 +702,7 @@ extension DocumentsViewController {
             hud.removeFromSuperview()
             if succeeded {
                 self.getFolderFiles()
-                let unzipFileURL = URL(fileURLWithPath: path)
+                let unzipFileURL = URL(fileURLWithPath: path).deletingPathExtension()
                 self.showSuccessAlert(alertTitle: "解压\(file.name)成功", fileURL: unzipFileURL)
             } else {
                 QMUITips.showInfo("解压失败\n\(error == nil ? "" : error!.localizedDescription)", in: self.view)
@@ -755,18 +728,21 @@ extension DocumentsViewController {
     }
     
     func showSuccessAlert(alertTitle: String, fileURL: URL) {
+        print(message: "fileURL:\(fileURL.path)")
         let alertController = QMUIAlertController.init(title: alertTitle, message: nil, preferredStyle: .alert)
-        alertController.addAction(QMUIAlertAction.init(title: "查看", style: .default, handler: { _, _ in
-            let controller = DocumentsViewController()
-            controller.indexFileURL = fileURL
-            controller.selectFileCallback = self.selectFileCallback
-            controller.title = fileURL.lastPathComponent
-            controller.navigationItem.leftBarButtonItem = UIBarButtonItem.init(title: "关闭", style: .plain, target: controller, action: #selector(controller.dismissController))
-            let nav = QMUINavigationController.init(rootViewController: controller)
-            nav.modalPresentationStyle = .fullScreen
-            self.present(nav, animated: true, completion: nil)
-        }))
-        alertController.addAction(QMUIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+        if FileManager.default.fileExists(atPath: fileURL.path) {
+            alertController.addAction(QMUIAlertAction.init(title: "查看", style: .default, handler: { _, _ in
+                let controller = DocumentsViewController()
+                controller.indexFileURL = fileURL
+                controller.selectFileCallback = self.selectFileCallback
+                controller.title = fileURL.lastPathComponent
+                controller.navigationItem.leftBarButtonItem = UIBarButtonItem.init(title: "关闭", style: .plain, target: controller, action: #selector(controller.dismissController))
+                let nav = QMUINavigationController.init(rootViewController: controller)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
+            }))
+        }
+        alertController.addAction(QMUIAlertAction.init(title: "确定", style: .cancel, handler: nil))
         alertController.showWith(animated: true)
     }
 }

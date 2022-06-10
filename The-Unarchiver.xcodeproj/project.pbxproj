@@ -116,6 +116,8 @@
 		16F93AE82852E10C00281A81 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 16F93ADF2852E10C00281A81 /* mztools.c */; };
 		16F93AED2852E94C00281A81 /* libUniversalDetector.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F93AEB2852E94C00281A81 /* libUniversalDetector.ios.a */; };
 		16F93AEE2852E94C00281A81 /* libXADMaster.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F93AEC2852E94C00281A81 /* libXADMaster.ios.a */; };
+		16F93AF12852ECDE00281A81 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AF02852ECDE00281A81 /* SettingsViewController.swift */; };
+		16F93AF42853346000281A81 /* FileExchangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AF32853346000281A81 /* FileExchangeController.swift */; };
 		28D47D8C285222AE00CE0994 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D47D8B285222AE00CE0994 /* AppDelegate.swift */; };
 		28D47D93285222AE00CE0994 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28D47D91285222AE00CE0994 /* Main.storyboard */; };
 		28D47D95285222B300CE0994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28D47D94285222B300CE0994 /* Assets.xcassets */; };
@@ -492,6 +494,8 @@
 		16F93AE42852E10C00281A81 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
 		16F93AEB2852E94C00281A81 /* libUniversalDetector.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUniversalDetector.ios.a; sourceTree = "<group>"; };
 		16F93AEC2852E94C00281A81 /* libXADMaster.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libXADMaster.ios.a; sourceTree = "<group>"; };
+		16F93AF02852ECDE00281A81 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		16F93AF32853346000281A81 /* FileExchangeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExchangeController.swift; sourceTree = "<group>"; };
 		28D47D88285222AE00CE0994 /* The-Unarchiver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The-Unarchiver.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28D47D8B285222AE00CE0994 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28D47D92285222AE00CE0994 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -539,17 +543,17 @@
 		16F938F22852CFB000281A81 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				16F938FB2852CFC200281A81 /* NSString+Utilities.h */,
+				16F938F32852CFC100281A81 /* NSString+Utilities.m */,
+				16F938F42852CFC200281A81 /* UIScrollView+EmptyDataSet.h */,
+				16F939022852CFC300281A81 /* UIScrollView+EmptyDataSet.m */,
 				16F938F52852CFC200281A81 /* FileManager+DirectorySize.swift */,
 				16F938F82852CFC200281A81 /* FileManager+SharedDirectories.swift */,
 				16F938F92852CFC200281A81 /* Font+Utilities.swift */,
-				16F938FB2852CFC200281A81 /* NSString+Utilities.h */,
-				16F938F32852CFC100281A81 /* NSString+Utilities.m */,
 				16F938FA2852CFC200281A81 /* QMUITips+Extension.swift */,
 				16F939012852CFC300281A81 /* String+Additions.swift */,
 				16F939002852CFC200281A81 /* UIImage+Utilities.swift */,
 				16F938FC2852CFC200281A81 /* UIImageView+Extension.swift */,
-				16F938F42852CFC200281A81 /* UIScrollView+EmptyDataSet.h */,
-				16F939022852CFC300281A81 /* UIScrollView+EmptyDataSet.m */,
 				16F938F62852CFC200281A81 /* UITableViewCell+Utilities.swift */,
 				16F938FE2852CFC200281A81 /* UIViewController+Utilities.swift */,
 				16F938FF2852CFC200281A81 /* URL+Utilities.swift */,
@@ -571,13 +575,13 @@
 			children = (
 				16F93AEB2852E94C00281A81 /* libUniversalDetector.ios.a */,
 				16F93AEC2852E94C00281A81 /* libXADMaster.ios.a */,
+				16F939162852D02200281A81 /* XADMaster */,
 				16F93ADA2852E10C00281A81 /* minizip */,
 				16F93AC22852E0B200281A81 /* AltSign */,
 				16F93A6E2852D88700281A81 /* M13ProgressSuite */,
 				16F939EA2852D03900281A81 /* BlocksKit */,
 				16F939CA2852D03800281A81 /* GCDWebServer */,
 				16F939C62852D03800281A81 /* GCDWebUploader */,
-				16F939162852D02200281A81 /* XADMaster */,
 			);
 			path = Vender;
 			sourceTree = "<group>";
@@ -947,6 +951,7 @@
 		16F93A632852D04E00281A81 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				16F93AEF2852EC8700281A81 /* Settings */,
 				16F93A642852D06500281A81 /* Documents */,
 			);
 			path = Feature;
@@ -957,6 +962,7 @@
 			children = (
 				16F93AB62852DD5E00281A81 /* File.swift */,
 				16F93A6C2852D34E00281A81 /* DocumentsViewController.swift */,
+				16F93AF32853346000281A81 /* FileExchangeController.swift */,
 				16F93AB82852DD8C00281A81 /* WebUploaderController.swift */,
 				16F93ABA2852DD9000281A81 /* MoveFolderViewController.swift */,
 				16F93ABC2852DD9400281A81 /* PlistPreviewController.swift */,
@@ -1110,6 +1116,14 @@
 				16F93AE12852E10C00281A81 /* zip.h */,
 			);
 			path = minizip;
+			sourceTree = "<group>";
+		};
+		16F93AEF2852EC8700281A81 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				16F93AF02852ECDE00281A81 /* SettingsViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		28D47D7F285222AE00CE0994 = {
@@ -1298,6 +1312,7 @@
 				16F939142852D00C00281A81 /* QMUIConfigurationTemplate.m in Sources */,
 				16F93AD82852E0B200281A81 /* NSFileManager+Zip.m in Sources */,
 				16F9390D2852CFC300281A81 /* URL+Utilities.swift in Sources */,
+				16F93AF42853346000281A81 /* FileExchangeController.swift in Sources */,
 				16F93A3C2852D03900281A81 /* GCDWebServerFileResponse.m in Sources */,
 				16F93A372852D03900281A81 /* GCDWebServerRequest.m in Sources */,
 				16F93A5F2852D03900281A81 /* NSURLConnection+BlocksKit.m in Sources */,
@@ -1310,6 +1325,7 @@
 				16F93A4B2852D03900281A81 /* NSOrderedSet+BlocksKit.m in Sources */,
 				16F9390A2852CFC300281A81 /* UIImageView+Extension.swift in Sources */,
 				16F93A9F2852D88700281A81 /* M13ProgressViewRing.m in Sources */,
+				16F93AF12852ECDE00281A81 /* SettingsViewController.swift in Sources */,
 				16F93A5D2852D03900281A81 /* A2BlockInvocation.m in Sources */,
 				16F93AC12852DEB300281A81 /* AppManager.swift in Sources */,
 				16F93A582852D03900281A81 /* UIImagePickerController+BlocksKit.m in Sources */,
@@ -1542,6 +1558,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "The-Unarchiver/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "The Unarchiver";
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要开启“相机”权限以便于拍摄图片";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "需要开启“相册”权限以便于保存图片";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "需要开启“相册”权限以便于导入图片";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1629,6 +1648,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "The-Unarchiver/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "The Unarchiver";
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要开启“相机”权限以便于拍摄图片";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "需要开启“相册”权限以便于保存图片";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "需要开启“相册”权限以便于导入图片";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

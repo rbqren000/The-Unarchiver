@@ -6,42 +6,44 @@
 //
 
 import UIKit
+import Material
 
 class TabBarViewController: QMUITabBarViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        /*
-        let appController = AppsViewController()
-        appController.title = "Apps"
-        let appsNav = QMUINavigationController(rootViewController: appController)
-        appsNav.tabBarItem = UITabBarItem.init(title: "Apps", image: UIImage.init(named: "tabbar_source"), tag: 0)
-        
-        let signedAppController = SignedAppsViewController()
-        signedAppController.title = "已签名"
-        let signedAppNav = QMUINavigationController(rootViewController: signedAppController)
-        signedAppNav.tabBarItem = UITabBarItem.init(title: "已签名", image: UIImage.init(named: "tabbar_app"), tag: 1)
-        */
-        
         let documentsController = DocumentsViewController()
         documentsController.title = "文件"
         documentsController.isRootViewController = true
         let documentsNav = QMUINavigationController(rootViewController: documentsController)
-        documentsNav.tabBarItem = UITabBarItem.init(title: "文件", image: UIImage.init(named: "tabbar_file"), tag: 2)
+        documentsNav.navigationBar.prefersLargeTitles = true
+        documentsNav.navigationItem.largeTitleDisplayMode = .automatic
+        documentsNav.tabBarItem = UITabBarItem.init(title: "文件", image: UIImage.init(named: "tabbar_folders"), tag: 2)
                 
-//        let downloadController = DownloadViewController()
-//        downloadController.title = "下载"
-//        let downloadNav = QMUINavigationController(rootViewController: downloadController)
-//        downloadNav.tabBarItem = UITabBarItem.init(title: "下载", image: UIImage.init(named: "tabbar_download"), tag: 3)
+        let fileExchangeController = FileExchangeController()
+        fileExchangeController.title = "互传"
+        let fileExchangedNav = QMUINavigationController(rootViewController: fileExchangeController)
+        fileExchangedNav.navigationBar.prefersLargeTitles = true
+        fileExchangedNav.navigationItem.largeTitleDisplayMode = .automatic
+        fileExchangedNav.tabBarItem = UITabBarItem.init(title: "互传", image: UIImage.init(named: "tabbar_exchange"), tag: 3)
         
-//        let settingViewController = SettingsViewController()
-//        settingViewController.title = "设置"
-//        let settingsNav = QMUINavigationController(rootViewController: settingViewController)
-//        settingsNav.tabBarItem = UITabBarItem.init(title: "设置", image: UIImage.init(named: "tabbar_setting"), tag: 4)
+        let downloadController = ViewController()
+        downloadController.title = "下载"
+        let downloadNav = QMUINavigationController(rootViewController: downloadController)
+        downloadNav.navigationBar.prefersLargeTitles = true
+        downloadNav.navigationItem.largeTitleDisplayMode = .automatic
+        downloadNav.tabBarItem = UITabBarItem.init(title: "下载", image: UIImage.init(named: "tabbar_download"), tag: 3)
         
-        self.viewControllers = [documentsNav]
-         
+        let settingViewController = SettingsViewController()
+        settingViewController.title = "设置"
+        let settingsNav = QMUINavigationController(rootViewController: settingViewController)
+        settingsNav.tabBarItem = UITabBarItem.init(title: "设置", image: UIImage.init(named: "tabbar_settings"), tag: 4)
+        settingsNav.navigationBar.prefersLargeTitles = true
+        settingsNav.navigationItem.largeTitleDisplayMode = .automatic
+        
+        self.viewControllers = [documentsNav, fileExchangedNav, downloadNav, settingsNav]
+        
     }
 
 }

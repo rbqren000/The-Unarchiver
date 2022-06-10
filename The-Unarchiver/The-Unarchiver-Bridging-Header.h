@@ -20,6 +20,7 @@
 
 #import "BlocksKit.h"
 #import "BlocksKit+UIKit.h"
+#import "NSString+Utilities.h"
 
 #import "M13ProgressViewRing.h"
 #import "M13ProgressHUD.h"

@@ -16,7 +16,6 @@ class AppManager: NSObject {
     private let kInstallWithIconURL = URL(string: "itms-services://?action=download-manifest&url=https://gitee.com/swing1993/manifest/raw/master/ipa.plist")!
     private var installApp = false
 
-    
     func installApp(ipaURL: URL, icon: UIImage? = nil) {
         do {
             let appData = try Data.init(contentsOf: ipaURL, options: .mappedIfSafe)

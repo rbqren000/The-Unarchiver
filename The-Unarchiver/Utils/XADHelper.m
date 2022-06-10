@@ -20,24 +20,29 @@
 
 @implementation XADHelper
 
+- (BOOL)archiverIsEncryptedWithPath:(NSString *)path {
+    XADArchiveParser *archiveParser = [XADArchiveParser archiveParserForPath:path];
+    XADSimpleUnarchiver *unarchiver = [[XADSimpleUnarchiver alloc] initWithArchiveParser:archiveParser];
+    [unarchiver parse];
+    archiveParser = [unarchiver archiveParser];
+    NSLog(@"archiveParser properties:%@",archiveParser.properties);
+    return [archiveParser isEncrypted];
+}
 
-- (int)unarchiverWithPath:(NSString *)path dest:(NSString *)destpath {
+
+- (int)unarchiverWithPath:(NSString *)path dest:(NSString *)destpath password:(NSString *)password {
     NSLog(@"unarchiverWithPath:%@ destpath:%@",path,destpath);
     if ([[NSFileManager defaultManager] fileExistsAtPath:destpath]) {
         [[NSFileManager defaultManager] removeItemAtPath:destpath error:nil];
     }
-    
     self.error = XADNoError;
     XADArchiveParser *archiveParser = [XADArchiveParser archiveParserForPath:path];
     NSLog(@"properties:%@",archiveParser.properties);
-//    [archiveParser setPassword:@"26vv.com1"];
+    [archiveParser setPassword:password];
     XADSimpleUnarchiver *unarchiver = [[XADSimpleUnarchiver alloc] initWithArchiveParser:archiveParser];
     [unarchiver setDelegate:self];
     [unarchiver setDestination:destpath];
     [unarchiver parse];
-    NSLog(@"properties2:%@",[unarchiver archiveParser].properties);
-
-    
     [unarchiver unarchive];
     if (![[NSFileManager defaultManager] fileExistsAtPath:self.lastPath]) {
         self.error = XADUnknownError;

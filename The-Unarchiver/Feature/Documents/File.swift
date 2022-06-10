@@ -99,11 +99,7 @@ class File: NSObject {
         } else {
             self.isFolder = false
             self.type = fileURL.pathExtension.lowercased()
-        }        
-//        if let count = FileManager.default.enumerator(atPath: fileURL.path)?.allObjects.count {
-//            fileCount = count
-//        }
-        
+        }
         if self.isFolder && self.url.pathExtension.lowercased() == "app" {
             let altApplication = ALTApplication.init(fileURL: self.url)
             self.isAppBundle = altApplication == nil ? false: true

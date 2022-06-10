@@ -47,8 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable instancetype)initWithFileURL:(NSURL *)fileURL;
 
-- (BOOL)encrypted;
-
 @end
 
 NS_ASSUME_NONNULL_END

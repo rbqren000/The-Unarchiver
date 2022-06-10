@@ -37,8 +37,11 @@ extension AppDelegate {
             
             let barAppearance =  UINavigationBarAppearance()
             barAppearance.configureWithDefaultBackground()
-            UINavigationBar.appearance().scrollEdgeAppearance = barAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = barAppearance            
         }
-        UITabBar.appearance().tintColor = .black
+        UINavigationBar.appearance().isTranslucent = false
+//        UITabBar.appearance().tintColor = kButtonColor
+        UITabBar.appearance().tintColor = UIColor.black
+
     }
 }

@@ -43,51 +43,13 @@ public extension FileManager {
         return self.cacheDirectory.appendingPathComponent(".UnzipIPA", isDirectory: true)
     }
 
-//    var dylibDirectory: URL {
-//        return self.documentDirectory.appendingPathComponent("Dylibs", isDirectory: true)
-//    }
-    
     var classdumpDirectory: URL {
         return self.documentDirectory.appendingPathComponent("Class-Dump", isDirectory: true)
-    }
-    
-
-    var appsDirectory: URL {
-        return self.documentDirectory.appendingPathComponent("\(pathPrefix)Apps", isDirectory: true)
-    }
-    
-    var profilesDirectory: URL {
-        return self.documentDirectory.appendingPathComponent("\(pathPrefix)Profiles", isDirectory: true)
-    }
-    
-    
-    var certificatesDirectory: URL {
-        return self.documentDirectory.appendingPathComponent("\(pathPrefix)Certificates", isDirectory: true)
-    }
-    
-    
-    var signedAppsDirectory: URL {
-        return self.documentDirectory.appendingPathComponent("\(pathPrefix)SignedApps", isDirectory: true)
-    }
-    
-    var appIconsDirectory: URL {
-        return self.documentDirectory.appendingPathComponent("\(pathPrefix)AppIconsCache", isDirectory: true)
-    }
-    
-    private var pathPrefix: String {
-        return "."
     }
 
     func createDefaultDirectory() {
         let urls = [FileManager.default.importFileDirectory,
-//                    FileManager.default.importPhotoDirectory,
-//                    FileManager.default.importVideoDirectory,
                     FileManager.default.downloadDirectory,
-                    FileManager.default.appsDirectory,
-                    FileManager.default.profilesDirectory,
-                    FileManager.default.certificatesDirectory,
-                    FileManager.default.signedAppsDirectory,
-                    FileManager.default.appIconsDirectory,
                     FileManager.default.recycleBinDirectory]
         for url in urls {
             if !FileManager.default.fileExists(atPath: url.path) {
