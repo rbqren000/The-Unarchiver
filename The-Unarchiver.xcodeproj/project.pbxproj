@@ -114,8 +114,6 @@
 		16F93AE62852E10C00281A81 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 16F93ADC2852E10C00281A81 /* zip.c */; };
 		16F93AE72852E10C00281A81 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 16F93ADE2852E10C00281A81 /* ioapi.c */; };
 		16F93AE82852E10C00281A81 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 16F93ADF2852E10C00281A81 /* mztools.c */; };
-		16F93AED2852E94C00281A81 /* libUniversalDetector.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F93AEB2852E94C00281A81 /* libUniversalDetector.ios.a */; };
-		16F93AEE2852E94C00281A81 /* libXADMaster.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16F93AEC2852E94C00281A81 /* libXADMaster.ios.a */; };
 		16F93AF12852ECDE00281A81 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AF02852ECDE00281A81 /* SettingsViewController.swift */; };
 		16F93AF42853346000281A81 /* FileExchangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AF32853346000281A81 /* FileExchangeController.swift */; };
 		16F93AF72853398500281A81 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AF62853398500281A81 /* DownloadViewController.swift */; };
@@ -131,6 +129,9 @@
 		28D47D93285222AE00CE0994 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28D47D91285222AE00CE0994 /* Main.storyboard */; };
 		28D47D95285222B300CE0994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28D47D94285222B300CE0994 /* Assets.xcassets */; };
 		28D47D98285222B300CE0994 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28D47D96285222B300CE0994 /* LaunchScreen.storyboard */; };
+		28E959EE2854E3AE0005A9FB /* libXADMaster.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E959EC2854E3AD0005A9FB /* libXADMaster.ios.a */; };
+		28E959EF2854E3AE0005A9FB /* libUniversalDetector.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E959ED2854E3AE0005A9FB /* libUniversalDetector.ios.a */; };
+		28E959F12854E79E0005A9FB /* XADMaster.zip in Resources */ = {isa = PBXBuildFile; fileRef = 28E959F02854E79E0005A9FB /* XADMaster.zip */; };
 		38768E520458BD0B8E3D64E3 /* Pods_The_Unarchiver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36489CE615A8197521B0473C /* Pods_The_Unarchiver.framework */; };
 /* End PBXBuildFile section */
 
@@ -501,8 +502,6 @@
 		16F93AE22852E10C00281A81 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
 		16F93AE32852E10C00281A81 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
 		16F93AE42852E10C00281A81 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
-		16F93AEB2852E94C00281A81 /* libUniversalDetector.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUniversalDetector.ios.a; sourceTree = "<group>"; };
-		16F93AEC2852E94C00281A81 /* libXADMaster.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libXADMaster.ios.a; sourceTree = "<group>"; };
 		16F93AF02852ECDE00281A81 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		16F93AF32853346000281A81 /* FileExchangeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExchangeController.swift; sourceTree = "<group>"; };
 		16F93AF62853398500281A81 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
@@ -521,6 +520,9 @@
 		28D47D97285222B300CE0994 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28D47D99285222B300CE0994 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28D47D9F285226A000CE0994 /* The-Unarchiver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "The-Unarchiver-Bridging-Header.h"; sourceTree = "<group>"; };
+		28E959EC2854E3AD0005A9FB /* libXADMaster.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libXADMaster.ios.a; sourceTree = "<group>"; };
+		28E959ED2854E3AE0005A9FB /* libUniversalDetector.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUniversalDetector.ios.a; sourceTree = "<group>"; };
+		28E959F02854E79E0005A9FB /* XADMaster.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = XADMaster.zip; sourceTree = "<group>"; };
 		36489CE615A8197521B0473C /* Pods_The_Unarchiver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_The_Unarchiver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		492880C3480FDDABC6CD3F90 /* Pods-The-Unarchiver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The-Unarchiver.debug.xcconfig"; path = "Target Support Files/Pods-The-Unarchiver/Pods-The-Unarchiver.debug.xcconfig"; sourceTree = "<group>"; };
 		8B8A733A9ADAD2EC060FF193 /* Pods-The-Unarchiver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The-Unarchiver.release.xcconfig"; path = "Target Support Files/Pods-The-Unarchiver/Pods-The-Unarchiver.release.xcconfig"; sourceTree = "<group>"; };
@@ -532,10 +534,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				16F93AB52852DAE000281A81 /* WebKit.framework in Frameworks */,
+				28E959EF2854E3AE0005A9FB /* libUniversalDetector.ios.a in Frameworks */,
 				16F93AB02852D9C400281A81 /* libbz2.tbd in Frameworks */,
-				16F93AED2852E94C00281A81 /* libUniversalDetector.ios.a in Frameworks */,
+				28E959EE2854E3AE0005A9FB /* libXADMaster.ios.a in Frameworks */,
 				16F93AAF2852D9BB00281A81 /* libz.tbd in Frameworks */,
-				16F93AEE2852E94C00281A81 /* libXADMaster.ios.a in Frameworks */,
 				38768E520458BD0B8E3D64E3 /* Pods_The_Unarchiver.framework in Frameworks */,
 				16F93AB32852DAD700281A81 /* Security.framework in Frameworks */,
 			);
@@ -593,8 +595,8 @@
 		16F939152852D01600281A81 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
-				16F93AEB2852E94C00281A81 /* libUniversalDetector.ios.a */,
-				16F93AEC2852E94C00281A81 /* libXADMaster.ios.a */,
+				28E959ED2854E3AE0005A9FB /* libUniversalDetector.ios.a */,
+				28E959EC2854E3AD0005A9FB /* libXADMaster.ios.a */,
 				16F939162852D02200281A81 /* XADMaster */,
 				16F93ADA2852E10C00281A81 /* minizip */,
 				16F93AC22852E0B200281A81 /* AltSign */,
@@ -1193,6 +1195,7 @@
 				28D47D94285222B300CE0994 /* Assets.xcassets */,
 				28D47D96285222B300CE0994 /* LaunchScreen.storyboard */,
 				28D47D99285222B300CE0994 /* Info.plist */,
+				28E959F02854E79E0005A9FB /* XADMaster.zip */,
 			);
 			path = "The-Unarchiver";
 			sourceTree = "<group>";
@@ -1281,6 +1284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28D47D98285222B300CE0994 /* LaunchScreen.storyboard in Resources */,
+				28E959F12854E79E0005A9FB /* XADMaster.zip in Resources */,
 				16F93A342852D03900281A81 /* GCDWebUploader.bundle in Resources */,
 				28D47D95285222B300CE0994 /* Assets.xcassets in Resources */,
 				28D47D93285222AE00CE0994 /* Main.storyboard in Resources */,
