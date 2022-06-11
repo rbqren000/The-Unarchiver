@@ -2,6 +2,31 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>com.swing.The-Unarchiver</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.item</string>
+				<string>public.data</string>
+				<string>public.archive</string>
+				<string>public.content</string>
+				<string>public.text</string>
+				<string>org.gnu.gnu-zip-archve</string>
+				<string>com.apple.application</string>
+				<string>com.apple.application-​bundle</string>
+				<string>com.apple.application-file</string>
+				<string>public.image</string>
+				<string>public.movie</string>
+				<string>public.directory</string>
+				<string>public.folder		</string>
+			</array>
+		</dict>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

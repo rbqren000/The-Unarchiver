@@ -548,11 +548,14 @@ extension DocumentsViewController {
         } else if file.isAppBundle {
             let alertController = QMUIAlertController.init(title: file.url.lastPathComponent, message: nil, preferredStyle: .actionSheet)
             alertController.addAction(QMUIAlertAction.init(title: "打包IPA", style: .destructive, handler: { _, _ in
+                QMUITips.showLoading(in: self.view).whiteStyle()
                 do {
                     try FileManager.default.zipAppBundle(at: file.url)
                 } catch let error {
                     kAlert(error.localizedDescription)
                 }
+                QMUITips.hideAllTips()
+                self.getFolderFiles()
             }))
             alertController.addAction(QMUIAlertAction.init(title: "查看文件", style: .default, handler: { _, _ in
                 let controller = DocumentsViewController()
@@ -602,16 +605,18 @@ extension DocumentsViewController {
         let alertController = QMUIAlertController.init(title: "确定删除\(file.name)吗？", message: nil, preferredStyle: .alert)
         alertController.addAction(QMUIAlertAction(title: "取消", style: .cancel, handler: nil))
         alertController.addAction(QMUIAlertAction(title: "确定", style: .default, handler: { [unowned self] _, _ in
-            QMUITips.showLoading(in: self.view)
+            QMUITips.showLoading(in: self.view).whiteStyle()
             /// 移动到回收站
             do {
-                let newPath = FileManager.default.recycleBinDirectory.path
-                let moveToPath = newPath + "/" + file.name
-                let moveURL = URL(fileURLWithPath: moveToPath)
-                if FileManager.default.fileExists(atPath: moveToPath) {
-                    try FileManager.default.removeItem(at: moveURL)
+                if self.indexFileURL.path == FileManager.default.recycleBinDirectory.path {
+                    try FileManager.default.removeItem(at: file.url)
+                } else {
+                    let moveURL = FileManager.default.recycleBinDirectory.appendingPathComponent(file.name)
+                    if FileManager.default.fileExists(atPath: moveURL.path) {
+                        try FileManager.default.removeItem(at: moveURL)
+                    }
+                    try FileManager.default.moveItem(at: file.url, to: moveURL)
                 }
-                try FileManager.default.moveItem(at: file.url, to: moveURL)
                 self.files.remove(at: index)
                 self.recycleBinFile = File(fileURL: FileManager.default.recycleBinDirectory)
                 self.tableView.reloadData()
@@ -620,6 +625,7 @@ extension DocumentsViewController {
                 kAlert(error.localizedDescription)
                 QMUITips.hideAllTips()
             }
+ 
         }))
         alertController.showWith(animated: true)
     }
@@ -706,23 +712,7 @@ extension DocumentsViewController {
 
         }
     }
-    
-    func classdump(executableURL: URL, outputURL: URL) {
-//        QMUITips.showLoading(executableURL.lastPathComponent, detailText: "Class Dump", in: self.view).whiteStyle()
-//        Async.background {
-//            let result = ClassDumpUtils.classDump(withExecutablePath: executableURL.path, withOutput: outputURL.path)
-//            Async.main {
-//                if result == 0 {
-//                    QMUITips.hideAllTips()
-//                    self.showSuccessAlert(alertTitle: "Class Dump成功", fileURL: outputURL)
-//                } else {
-//                    QMUITips.hideAllTips()
-//                    kAlert("classdump失败")
-//                }
-//            }
-//        }
-    }
-    
+
     func showSuccessAlert(alertTitle: String, fileURL: URL) {
         print(message: "fileURL:\(fileURL.path)")
         let alertController = QMUIAlertController.init(title: alertTitle, message: nil, preferredStyle: .alert)
