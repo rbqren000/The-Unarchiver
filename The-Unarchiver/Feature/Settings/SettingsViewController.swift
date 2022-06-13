@@ -49,7 +49,6 @@ class SettingsViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     override func initSubviews() {

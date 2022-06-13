@@ -7,44 +7,52 @@
 
 import UIKit
 
+
+class UnarchiverSetting {
+    var unarchiverOverwrite = false
+    var unarchiverRename = false
+    var unarchiverSkip = false
+    var unarchiverExtractsubarchives = false
+    var unarchiverCopydatetoenclosing = false
+    var unarchiverCopydatetosolo = false
+    var unarchiverResetsolodate = false
+    var unarchiverPropagatemetadata = false
+}
+
 class UnarchiverSettingViewController: ViewController {
 
     var tableView = QMUITableView.init(frame: CGRect.zero, style: .grouped)
 
-    let cellIdentifier = "LicensesCell"
-    let cellData = [(name: "XADMaster",
-                     desc: "file unarchiving and extraction",
-                     url: "https://github.com/MacPaw/XADMaster/blob/master/LICENSE"),
-                    (name: "SSZipArchive",
-                     desc: "a simple utility class for zipping and unzipping files.",
-                     url: "https://github.com/wuhaiwei/SSZipArchive/blob/master/LICENSE"),
-                    (name: "Alamofire",
-                     desc: "Elegant HTTP Networking in Swift",
-                     url: "https://github.com/Alamofire/Alamofire/blob/master/LICENSE"),
-                    (name: "MJRefresh",
-                     desc: "An easy way to use pull-to-refresh",
-                     url: "https://github.com/CoderMJLee/MJRefresh/blob/master/LICENSE"),
-                    (name: "SnapKit",
-                     desc: "A Swift Autolayout DSL",
-                     url: "https://github.com/SnapKit/SnapKit/blob/develop/LICENSE"),
-                    (name: "Async",
-                     desc: "Syntactic sugar in Swift for asynchronous dispatches in Grand Central Dispatch",
-                     url: "https://github.com/duemunk/Async/blob/master/LICENSE.txt"),
-                    (name: "RxSwift",
-                     desc: "Reactive Programming in Swift",
-                     url: "https://github.com/ReactiveX/RxSwift/blob/main/LICENSE.md"),
-                    (name: "HandyJSON",
-                     desc: "A handy swift json-object serialization/deserialization library",
-                     url: "https://github.com/alibaba/HandyJSON/blob/master/LICENSE"),
-                    (name: "FMDB",
-                     desc: "an Objective-C wrapper around SQLite",
-                     url: "https://github.com/ccgus/fmdb/blob/master/LICENSE.txt")]
+    let cellIdentifier = "UnarchiverSettingCell"
+    var cellData = [(name: "始终覆盖文件",
+                     desc: "alwaysOverwritesFiles",
+                     value: AppDefaults.shared.unarchiverOverwrite!),
+                    (name: "始终重命名文件",
+                     desc: "alwaysRenamesFiles",
+                     value: AppDefaults.shared.unarchiverRename!),
+                    (name: "始终跳过文件",
+                     desc: "alwaysSkipsFiles",
+                     value: AppDefaults.shared.unarchiverSkip!),
+                    (name: "自动解压子存档",
+                     desc: "extractsSubArchives",
+                     value: AppDefaults.shared.unarchiverExtractsubarchives!),
+//                    (name: "修改存档时间到目录",
+//                     desc: "copiesArchiveModificationTimeToEnclosingDirectory",
+//                     value: AppDefaults.shared.unarchiverCopydatetoenclosing!),
+//                    (name: "副本存档修改时间到独奏项",
+//                     desc: "copiesArchiveModificationTimeToSoloItems",
+//                     value: AppDefaults.shared.unarchiverCopydatetosolo!),
+//                    (name: "重置单个项的日期",
+//                     desc: "resetsDateForSoloItems",
+//                     value: AppDefaults.shared.unarchiverResetsolodate!),
+                    (name: "自动设置相关元数据",
+                     desc: "propagatesRelevantMetadata",
+                     value: AppDefaults.shared.unarchiverPropagatemetadata!)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        self.title = "Licenses"
+        self.title = "解压设置"
     }
     
     override func initSubviews() {
@@ -62,6 +70,40 @@ class UnarchiverSettingViewController: ViewController {
     }
     
   
+    func cofingSwitchView(tag: Int, isOn: Bool) -> UISwitch {
+        let switchView = UISwitch()
+        switchView.tag = tag
+        switchView.isOn = isOn
+        switchView.addTarget(self, action: #selector(switchValueChanged(sender:)), for: .valueChanged)
+        return switchView
+    }
+    
+    @objc
+    func switchValueChanged(sender: UISwitch) {
+        print(message: "isOn:\(sender.isOn)")
+        switch sender.tag {
+        case 0:
+            AppDefaults.shared.unarchiverOverwrite = sender.isOn
+        case 1:
+            AppDefaults.shared.unarchiverRename = sender.isOn
+        case 2:
+            AppDefaults.shared.unarchiverSkip = sender.isOn
+        case 3:
+            AppDefaults.shared.unarchiverExtractsubarchives = sender.isOn
+//        case 4:
+//            AppDefaults.shared.unarchiverCopydatetoenclosing = sender.isOn
+//        case 5:
+//            AppDefaults.shared.unarchiverCopydatetosolo = sender.isOn
+//        case 6:
+//            AppDefaults.shared.unarchiverResetsolodate = sender.isOn
+//        case 7:
+//            AppDefaults.shared.unarchiverPropagatemetadata = sender.isOn
+        default:
+            AppDefaults.shared.unarchiverPropagatemetadata = sender.isOn
+        }
+
+    }
+    
 }
 
 
@@ -94,7 +136,9 @@ extension UnarchiverSettingViewController: QMUITableViewDelegate, QMUITableViewD
         cell?.accessoryType = .disclosureIndicator
         let item = self.cellData[indexPath.row]
         cell?.textLabel?.text = item.name
-        cell?.detailTextLabel?.text = item.desc
+        cell?.detailTextLabel?.text = ""
+//        cell?.detailTextLabel?.text = item.desc
+        cell?.accessoryView = self.cofingSwitchView(tag: indexPath.row, isOn: item.value)
         return cell!
     }
     
@@ -106,12 +150,4 @@ extension UnarchiverSettingViewController: QMUITableViewDelegate, QMUITableViewD
         return 0.01
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = self.cellData[indexPath.row]
-        self.openURLWithSafari(URL(string: item.url)!)
-
-    }
-    
-
-
 }

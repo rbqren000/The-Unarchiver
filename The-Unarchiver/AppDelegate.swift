@@ -64,7 +64,15 @@ extension AppDelegate {
         Async.background {
             FileManager.default.createDefaultDirectory()
         }
+        
+        if AppDefaults.shared.alreadyInstalled! == false {
+            AppDefaults.shared.reset()
+            AppDefaults.shared.alreadyInstalled = true
+        }
+    
     }
+    
+    
     func configureAppearance() {
         if #available(iOS 15.0, *) {
             let tabbarAppearance = UITabBarAppearance()

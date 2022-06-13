@@ -35,11 +35,42 @@ public struct UserDefaultsItem<Value> {
 class AppDefaults: UserDefaults {
     
     public static let shared = AppDefaults()
-        
-    @UserDefaultsItem(key: "impactFeedback")
-    public var impactFeedback: Bool?
     
+    @UserDefaultsItem(key: "alreadyInstalled")
+    public var alreadyInstalled: Bool?
+        
+    @UserDefaultsItem(key: "unarchiverExtractsubarchives")
+    public var unarchiverExtractsubarchives: Bool?
+    
+//    @UserDefaultsItem(key: "unarchiverRemovesolo")
+//    public var unarchiverRemovesolo: Bool?
+    
+    @UserDefaultsItem(key: "unarchiverOverwrite")
+    public var unarchiverOverwrite: Bool?
+    
+    @UserDefaultsItem(key: "unarchiverRename")
+    public var unarchiverRename: Bool?
+    
+    @UserDefaultsItem(key: "unarchiverSkip")
+    public var unarchiverSkip: Bool?
+    
+//    @UserDefaultsItem(key: "unarchiverCopydatetoenclosing")
+//    public var unarchiverCopydatetoenclosing: Bool?
+//
+//    @UserDefaultsItem(key: "unarchiverCopydatetosolo")
+//    public var unarchiverCopydatetosolo: Bool?
+//
+//    @UserDefaultsItem(key: "unarchiverResetsolodate")
+//    public var unarchiverResetsolodate: Bool?
+    
+    @UserDefaultsItem(key: "unarchiverPropagatemetadata")
+    public var unarchiverPropagatemetadata: Bool?
+
     public func reset() {
-       
+        self.unarchiverExtractsubarchives = true
+        self.unarchiverOverwrite = false
+        self.unarchiverRename = false
+        self.unarchiverSkip = false
+        self.unarchiverPropagatemetadata = true
     }
 }

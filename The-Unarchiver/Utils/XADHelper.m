@@ -37,11 +37,40 @@
     }
     self.error = XADNoError;
     XADArchiveParser *archiveParser = [XADArchiveParser archiveParserForPath:path];
-    NSLog(@"properties:%@",archiveParser.properties);
     [archiveParser setPassword:password];
     XADSimpleUnarchiver *unarchiver = [[XADSimpleUnarchiver alloc] initWithArchiveParser:archiveParser];
     [unarchiver setDelegate:self];
     [unarchiver setDestination:destpath];
+    
+    BOOL extractsubarchives = [[NSUserDefaults standardUserDefaults] boolForKey:@"unarchiverExtractsubarchives"];
+    [unarchiver setExtractsSubArchives:extractsubarchives];
+
+    BOOL overwrite = [[NSUserDefaults standardUserDefaults] boolForKey:@"unarchiverOverwrite"];
+    [unarchiver setAlwaysOverwritesFiles:overwrite];
+    
+    BOOL rename = [[NSUserDefaults standardUserDefaults] boolForKey:@"unarchiverRename"];
+    [unarchiver setAlwaysRenamesFiles:rename];
+    
+    BOOL skip = [[NSUserDefaults standardUserDefaults] boolForKey:@"unarchiverSkip"];
+    [unarchiver setAlwaysSkipsFiles:skip];
+    
+    /*
+    BOOL removesolo = [[NSUserDefaults standardUserDefaults] boolForKey:@"unarchiverRemovesolo"];
+    [unarchiver setRemovesEnclosingDirectoryForSoloItems:removesolo];
+     
+    BOOL copydatetoenclosing = [[NSUserDefaults standardUserDefaults] boolForKey:@"unarchiverCopydatetoenclosing"];
+    [unarchiver setCopiesArchiveModificationTimeToEnclosingDirectory:copydatetoenclosing];
+    
+    BOOL copydatetosolo = [[NSUserDefaults standardUserDefaults] boolForKey:@"unarchiverCopydatetosolo"];
+    [unarchiver setCopiesArchiveModificationTimeToSoloItems:copydatetosolo];
+    
+    BOOL resetsolodate = [[NSUserDefaults standardUserDefaults] boolForKey:@"unarchiverResetsolodate"];
+    [unarchiver setResetsDateForSoloItems:resetsolodate];
+    */
+    
+    BOOL propagatemetadata = [[NSUserDefaults standardUserDefaults] boolForKey:@"unarchiverPropagatemetadata"];
+    [unarchiver setPropagatesRelevantMetadata:propagatemetadata];
+
     [unarchiver parse];
     [unarchiver unarchive];
     if (![[NSFileManager defaultManager] fileExistsAtPath:self.lastPath]) {
