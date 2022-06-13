@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16B552402856CC1200179006 /* libXADMaster.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B5523E2856CC1200179006 /* libXADMaster.ios.a */; };
+		16B552412856CC1200179006 /* libUniversalDetector.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B5523F2856CC1200179006 /* libUniversalDetector.ios.a */; };
 		16F938EA2852CF8400281A81 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F938E92852CF8400281A81 /* Utils.swift */; };
 		16F938EC2852CF8900281A81 /* AppDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F938EB2852CF8900281A81 /* AppDefaults.swift */; };
 		16F938EE2852CF9000281A81 /* EmptyDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F938ED2852CF9000281A81 /* EmptyDataSet.swift */; };
@@ -129,13 +131,12 @@
 		28D47D93285222AE00CE0994 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28D47D91285222AE00CE0994 /* Main.storyboard */; };
 		28D47D95285222B300CE0994 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28D47D94285222B300CE0994 /* Assets.xcassets */; };
 		28D47D98285222B300CE0994 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28D47D96285222B300CE0994 /* LaunchScreen.storyboard */; };
-		28E959EE2854E3AE0005A9FB /* libXADMaster.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E959EC2854E3AD0005A9FB /* libXADMaster.ios.a */; };
-		28E959EF2854E3AE0005A9FB /* libUniversalDetector.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E959ED2854E3AE0005A9FB /* libUniversalDetector.ios.a */; };
-		28E959F12854E79E0005A9FB /* XADMaster.zip in Resources */ = {isa = PBXBuildFile; fileRef = 28E959F02854E79E0005A9FB /* XADMaster.zip */; };
 		38768E520458BD0B8E3D64E3 /* Pods_The_Unarchiver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36489CE615A8197521B0473C /* Pods_The_Unarchiver.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16B5523E2856CC1200179006 /* libXADMaster.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libXADMaster.ios.a; path = "XADMaster/Release-iphoneos/libXADMaster.ios.a"; sourceTree = SOURCE_ROOT; };
+		16B5523F2856CC1200179006 /* libUniversalDetector.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUniversalDetector.ios.a; path = "XADMaster/Release-iphoneos/libUniversalDetector.ios.a"; sourceTree = SOURCE_ROOT; };
 		16F938E92852CF8400281A81 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		16F938EB2852CF8900281A81 /* AppDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDefaults.swift; sourceTree = "<group>"; };
 		16F938ED2852CF9000281A81 /* EmptyDataSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDataSet.swift; sourceTree = "<group>"; };
@@ -520,9 +521,6 @@
 		28D47D97285222B300CE0994 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		28D47D99285222B300CE0994 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28D47D9F285226A000CE0994 /* The-Unarchiver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "The-Unarchiver-Bridging-Header.h"; sourceTree = "<group>"; };
-		28E959EC2854E3AD0005A9FB /* libXADMaster.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libXADMaster.ios.a; sourceTree = "<group>"; };
-		28E959ED2854E3AE0005A9FB /* libUniversalDetector.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUniversalDetector.ios.a; sourceTree = "<group>"; };
-		28E959F02854E79E0005A9FB /* XADMaster.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = XADMaster.zip; sourceTree = "<group>"; };
 		36489CE615A8197521B0473C /* Pods_The_Unarchiver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_The_Unarchiver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		492880C3480FDDABC6CD3F90 /* Pods-The-Unarchiver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The-Unarchiver.debug.xcconfig"; path = "Target Support Files/Pods-The-Unarchiver/Pods-The-Unarchiver.debug.xcconfig"; sourceTree = "<group>"; };
 		8B8A733A9ADAD2EC060FF193 /* Pods-The-Unarchiver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-The-Unarchiver.release.xcconfig"; path = "Target Support Files/Pods-The-Unarchiver/Pods-The-Unarchiver.release.xcconfig"; sourceTree = "<group>"; };
@@ -534,9 +532,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				16F93AB52852DAE000281A81 /* WebKit.framework in Frameworks */,
-				28E959EF2854E3AE0005A9FB /* libUniversalDetector.ios.a in Frameworks */,
+				16B552412856CC1200179006 /* libUniversalDetector.ios.a in Frameworks */,
 				16F93AB02852D9C400281A81 /* libbz2.tbd in Frameworks */,
-				28E959EE2854E3AE0005A9FB /* libXADMaster.ios.a in Frameworks */,
+				16B552402856CC1200179006 /* libXADMaster.ios.a in Frameworks */,
 				16F93AAF2852D9BB00281A81 /* libz.tbd in Frameworks */,
 				38768E520458BD0B8E3D64E3 /* Pods_The_Unarchiver.framework in Frameworks */,
 				16F93AB32852DAD700281A81 /* Security.framework in Frameworks */,
@@ -595,8 +593,8 @@
 		16F939152852D01600281A81 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
-				28E959ED2854E3AE0005A9FB /* libUniversalDetector.ios.a */,
-				28E959EC2854E3AD0005A9FB /* libXADMaster.ios.a */,
+				16B5523F2856CC1200179006 /* libUniversalDetector.ios.a */,
+				16B5523E2856CC1200179006 /* libXADMaster.ios.a */,
 				16F939162852D02200281A81 /* XADMaster */,
 				16F93ADA2852E10C00281A81 /* minizip */,
 				16F93AC22852E0B200281A81 /* AltSign */,
@@ -1195,7 +1193,6 @@
 				28D47D94285222B300CE0994 /* Assets.xcassets */,
 				28D47D96285222B300CE0994 /* LaunchScreen.storyboard */,
 				28D47D99285222B300CE0994 /* Info.plist */,
-				28E959F02854E79E0005A9FB /* XADMaster.zip */,
 			);
 			path = "The-Unarchiver";
 			sourceTree = "<group>";
@@ -1284,7 +1281,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				28D47D98285222B300CE0994 /* LaunchScreen.storyboard in Resources */,
-				28E959F12854E79E0005A9FB /* XADMaster.zip in Resources */,
 				16F93A342852D03900281A81 /* GCDWebUploader.bundle in Resources */,
 				28D47D95285222B300CE0994 /* Assets.xcassets in Resources */,
 				28D47D93285222AE00CE0994 /* Main.storyboard in Resources */,
@@ -1623,6 +1619,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/The-Unarchiver/Vender",
+					"$(PROJECT_DIR)/XADMaster/Release-iphoneos",
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
@@ -1673,7 +1670,7 @@
 					"\"UIKit\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.swing.The-Unarchiver";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swing1993.The-Unarchiver";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "The-Unarchiver/The-Unarchiver-Bridging-Header.h";
@@ -1713,6 +1710,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/The-Unarchiver/Vender",
+					"$(PROJECT_DIR)/XADMaster/Release-iphoneos",
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
@@ -1763,7 +1761,7 @@
 					"\"UIKit\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.swing.The-Unarchiver";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.swing1993.The-Unarchiver";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "The-Unarchiver/The-Unarchiver-Bridging-Header.h";

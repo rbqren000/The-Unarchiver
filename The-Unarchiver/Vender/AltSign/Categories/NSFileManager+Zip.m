@@ -471,4 +471,26 @@ char ALTDirectoryDeliminator = '/';
     return YES;
 }
 
+- (void)setFilePosixPermissions:(NSURL *)fileURL {
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:0777],NSFilePosixPermissions,nil];
+    NSError *error = nil;
+    BOOL isDirectory = NO;
+    [[NSFileManager defaultManager] fileExistsAtPath:fileURL.path isDirectory:&isDirectory];
+    if (isDirectory) {
+        NSArray *directoryArray = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:fileURL.path error:&error];
+        for (NSString *fileName in directoryArray) {
+            NSURL *url = [fileURL URLByAppendingPathComponent:fileName];
+            [self setFilePosixPermissions:url];
+        }
+    } else {
+        BOOL result = [[NSFileManager defaultManager] setAttributes:attributes ofItemAtPath:fileURL.path error:&error];
+        if (!result) {
+            NSLog(@"设置%@的文件权限%@",fileURL.lastPathComponent, result ? @"成功" : @"失败");
+        }
+        if (error != nil) {
+            NSLog(@"设置%@的文件权限Error:%@",fileURL.lastPathComponent, error);
+        }
+    }
+}
+
 @end

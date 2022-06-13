@@ -458,6 +458,7 @@ extension DocumentsViewController {
                     }
                     let subPath: URL = self.indexFileURL.appendingPathComponent(name)
                     let file = File.init(fileURL: subPath)
+                    FileManager.default.setFilePosixPermissions(file.url)
                     self.files.append(file)
                 }
                 self.files.sort { (file1, file2) -> Bool in
@@ -512,7 +513,6 @@ extension DocumentsViewController {
                     textField.isSecureTextEntry = true
                 }
             }
-        
             alertController.addAction(QMUIAlertAction.init(title: "确定", style: .destructive, handler: { controller, action in
                 var password = ""
                 if encrypted {
@@ -524,23 +524,10 @@ extension DocumentsViewController {
                         return
                     }
                 }
-                QMUITips.showLoading("正在解压...", detailText: file.name, in: self.view).whiteStyle()
-                Async.background {
-                    let destURL = file.url.deletingLastPathComponent().appendingPathComponent(file.url.deletingPathExtension().lastPathComponent)
-                    let result = xadHelper.unarchiver(withPath: file.url.path, dest: destURL.path, password: password)
-                    Async.main {
-                        QMUITips.hideAllTips()
-                        if result == 0 {
-                            self.getFolderFiles()
-                            self.showSuccessAlert(alertTitle: "解压\(file.name)成功！", fileURL: destURL)
-                        } else {
-                            if let message = XADException.describeXADError(result) {
-                                kAlert("解压失败！\(message)")
-                            } else {
-                                kAlert("解压失败！")
-                            }
-                        }
-                    }
+                if file.isZip && password.count <= 0 {
+                    self.unZip(file)
+                } else {
+                    self.unArchiver(file, password: password)
                 }
             }))
             alertController.addCancelAction()
@@ -548,14 +535,21 @@ extension DocumentsViewController {
         } else if file.isAppBundle {
             let alertController = QMUIAlertController.init(title: file.url.lastPathComponent, message: nil, preferredStyle: .actionSheet)
             alertController.addAction(QMUIAlertAction.init(title: "打包IPA", style: .destructive, handler: { _, _ in
-                QMUITips.showLoading(in: self.view).whiteStyle()
-                do {
-                    try FileManager.default.zipAppBundle(at: file.url)
-                } catch let error {
-                    kAlert(error.localizedDescription)
+                QMUITips.showLoading("正在打包IPA...", detailText: file.name, in: self.view).whiteStyle()
+                Async.background {
+                    do {
+                        try FileManager.default.zipAppBundle(at: file.url)
+                        Async.main {
+                            QMUITips.hideAllTips()
+                            self.getFolderFiles()
+                        }
+                    } catch let error {
+                        Async.main {
+                            QMUITips.hideAllTips()
+                            kAlert(error.localizedDescription)
+                        }
+                    }
                 }
-                QMUITips.hideAllTips()
-                self.getFolderFiles()
             }))
             alertController.addAction(QMUIAlertAction.init(title: "查看文件", style: .default, handler: { _, _ in
                 let controller = DocumentsViewController()
@@ -691,25 +685,52 @@ extension DocumentsViewController {
     }
     
     func unZip(_ file: File) {
-
         let hud = QMUITips.showProgressView(self.view, status: "正在解压...")
         var toDirectoryURL = file.url.deletingPathExtension()
         if FileManager.default.fileExists(atPath: toDirectoryURL.path) {
-            toDirectoryURL = URL(fileURLWithPath: toDirectoryURL.path + "_\(UInt.random(in: 1...100000))")
+            toDirectoryURL = URL(fileURLWithPath: toDirectoryURL.path + "_\(UInt.random(in: 1...1000000))")
         }
         print(message: "\(file.name)的解压文件夹：\(toDirectoryURL.absoluteString)")
-        SSZipArchive.unzipFile(atPath: file.url.path, toDestination: toDirectoryURL.path) { entry, zipInfo, entryNumber, total in
-            hud.setProgress(CGFloat(entryNumber)/CGFloat(total), animated: true)
-        } completionHandler: { path, succeeded, error in
-            hud.removeFromSuperview()
-            if succeeded {
-                self.getFolderFiles()
-                let unzipFileURL = URL(fileURLWithPath: path).deletingPathExtension()
-                self.showSuccessAlert(alertTitle: "解压\(file.name)成功", fileURL: unzipFileURL)
-            } else {
-                QMUITips.showInfo("解压失败\n\(error == nil ? "" : error!.localizedDescription)", in: self.view)
+        Async.background {
+            SSZipArchive.unzipFile(atPath: file.url.path, toDestination: toDirectoryURL.path) { entry, zipInfo, entryNumber, total in
+                Async.main {
+                    hud.setProgress(CGFloat(entryNumber)/CGFloat(total), animated: true)
+                }
+            } completionHandler: { path, succeeded, error in
+                Async.main {
+                    hud.removeFromSuperview()
+                    if succeeded {
+                        self.getFolderFiles()
+                        let unzipFileURL = URL(fileURLWithPath: path).deletingPathExtension()
+                        self.showSuccessAlert(alertTitle: "解压\(file.name)成功", fileURL: unzipFileURL)
+                    } else {
+                        QMUITips.showInfo("解压失败\n\(error == nil ? "" : error!.localizedDescription)", in: self.view)
+                    }
+                }
             }
+        }
 
+    }
+    
+    func unArchiver(_ file: File, password: String) {
+
+        QMUITips.showLoading("正在解压...", detailText: file.name, in: self.view).whiteStyle()
+        Async.background {
+            let destURL = file.url.deletingLastPathComponent().appendingPathComponent(file.url.deletingPathExtension().lastPathComponent)
+            let result = XADHelper().unarchiver(withPath: file.url.path, dest: destURL.path, password: password)
+            Async.main {
+                QMUITips.hideAllTips()
+                if result == 0 {
+                    self.getFolderFiles()
+                    self.showSuccessAlert(alertTitle: "解压\(file.name)成功！", fileURL: destURL)
+                } else {
+                    if let message = XADException.describeXADError(result) {
+                        kAlert("解压失败！\(message)")
+                    } else {
+                        kAlert("解压失败！")
+                    }
+                }
+            }
         }
     }
 

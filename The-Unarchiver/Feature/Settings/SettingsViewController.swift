@@ -16,20 +16,19 @@ class SettingsViewController: ViewController {
     
     var tableView = QMUITableView.init(frame: CGRect.zero, style: .grouped)
     let cellIdentifier = "settingsCell"
-    let privateURL = URL(string: "https://abox.swing1993.cn/private.html")!
-    let tutorialURL = URL(string: "https://swing1993.cn/aboxshi-yong-jiao-cheng/")!
-    let aboxReleaseURL = URL(string: "https://github.com/SWING1993/ABox_iOS/releases")!
+    let privateURL = URL(string: "https://abox.swing1993.cn/privacycn.html")!
     let aboxGitHubURL = URL(string: "https://github.com/SWING1993/ABox_iOS")!
     let aboxIssuesURL = URL(string: "https://github.com/SWING1993/ABox_iOS/issues")!
 
     //  ("关于我们", "ic_aboutus")
-    let cellData = [[("解压设置", "rar-setting")],
-                    [("问题反馈", "feedback"),
-                     ("分享给好友", "ic_share"),
-                     ("清理缓存", "ic_helper"),
-                     ("服务及隐私协议", "ic_unlock"),
-                     ("GitHub仓库", "github-logo"),
-                     ("关于我们", "ic_aboutus")]]
+    let cellData = [[("解压设置", "", "rar-setting")],
+                    [("问题反馈", "", "feedback"),
+                     ("分享给好友", "", "ic_share"),
+                     ("清理缓存", "", "ic_helper"),
+                     ("服务及隐私协议", "", "ic_unlock"),
+                     ("Licenses", "Libraries", "license"),
+                     ("GitHub仓库", "", "github-logo"),
+                     ("关于我们", "", "ic_aboutus")]]
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -84,19 +83,19 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
         let identifier = "cell"
         var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
         if cell == nil {
-            cell = QMUITableViewCell(for: tableView, with: .value1, reuseIdentifier: identifier)
+            cell = QMUITableViewCell(for: tableView, with: .subtitle, reuseIdentifier: identifier)
             cell?.selectionStyle = .none
             cell?.textLabel?.font = UIFont.medium(aSize: 14)
             cell?.textLabel?.textColor = kTextColor
-            cell?.detailTextLabel?.font = UIFont.regular(aSize: 13)
-            cell?.detailTextLabel?.textColor = kTextColor
+            cell?.detailTextLabel?.font = UIFont.regular(aSize: 12)
+            cell?.detailTextLabel?.textColor = kSubtextColor
         }
         
         cell?.accessoryType = .disclosureIndicator
         let item = self.cellData[indexPath.section][indexPath.row]
         cell?.textLabel?.text = item.0
-        cell?.imageView?.image = UIImage(named: item.1)?.qmui_image(withTintColor: kTextColor)
-        cell?.detailTextLabel?.text = nil
+        cell?.detailTextLabel?.text = item.1
+        cell?.imageView?.image = UIImage(named: item.2)?.qmui_image(withTintColor: kTextColor)
         return cell!
     }
     

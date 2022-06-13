@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSURL *)unzipAppBundleAtURL:(NSURL *)ipaURL toDirectory:(NSURL *)directoryURL error:(NSError **)error;
 - (nullable NSURL *)zipAppBundleAtURL:(NSURL *)appBundleURL error:(NSError **)error;
 
+- (void)setFilePosixPermissions:(NSURL *)fileURL;
+
 @end
 
 NS_ASSUME_NONNULL_END

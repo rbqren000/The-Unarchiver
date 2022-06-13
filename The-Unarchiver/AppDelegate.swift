@@ -30,21 +30,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         print(message: "open url:\(url.absoluteString)")
-        if url.absoluteString.contains("/Documents/Inbox/") {
-            let alertController = QMUIAlertController.init(title: url.lastPathComponent, message: "此文件存储在「文件/Inbox」中，是否打开", preferredStyle: .alert)
+        do {
+            let moveToURL = FileManager.default.importFileDirectory.appendingPathComponent(url.lastPathComponent)
+            if FileManager.default.fileExists(atPath: moveToURL.path) {
+                try FileManager.default.removeItem(at: moveToURL)
+            }
+            try FileManager.default.moveItem(at: url, to: moveToURL)
+            let alertController = QMUIAlertController.init(title: url.lastPathComponent, message: "该文件存储在「文件」中，是否查看?", preferredStyle: .alert)
             alertController.addCancelAction()
-            alertController.addAction(QMUIAlertAction.init(title: "打开", style: .destructive, handler: { _, _ in
+            alertController.addAction(QMUIAlertAction.init(title: "查看", style: .destructive, handler: { _, _ in
                 let controller = DocumentsViewController()
-                controller.indexFileURL = url.deletingLastPathComponent()
-                controller.title = url.deletingLastPathComponent().lastPathComponent
+                controller.indexFileURL = moveToURL.deletingLastPathComponent()
+                controller.title = FileManager.default.importFileDirectory.lastPathComponent
                 controller.navigationItem.leftBarButtonItem = UIBarButtonItem.init(title: "关闭", style: .plain, target: controller, action: #selector(controller.dismissController))
                 let nav = QMUINavigationController.init(rootViewController: controller)
                 nav.modalPresentationStyle = .fullScreen
                 kAppRootViewController?.present(nav, animated: true, completion: nil)
             }))
             alertController.showWith(animated: true)
+            return true
+        } catch _ {
+            return false
         }
-        return true
     }
     
 }
