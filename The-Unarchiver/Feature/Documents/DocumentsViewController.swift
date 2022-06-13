@@ -49,8 +49,6 @@ class DocumentsViewController: ViewController {
     
     override func setupNavigationItems() {
         super.setupNavigationItems()
-
-        
     }
     
     override func initSubviews() {
@@ -59,7 +57,6 @@ class DocumentsViewController: ViewController {
         self.tableView.dataSource = self
         self.tableView.setEmptyDataSet(title: nil, descriptionString: nil, image: UIImage(named: "file-storage"))
         self.tableView.register(QMUITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        self.tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(getFolderFiles))
         self.view.addSubview(tableView)
         tableView.snp.makeConstraints { maker in
             maker.left.top.right.equalTo(0)
@@ -216,11 +213,13 @@ extension DocumentsViewController: QMUITableViewDelegate, QMUITableViewDataSourc
         if indexPath.section == 0 {
             let file = self.files[indexPath.row]
             let moveAction = UITableViewRowAction.init(style: .default, title: "移动") { [unowned self] _, i in
+                UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
                 self.moveFile(file)
             }
             moveAction.backgroundColor = kRGBColor(250, 188, 4)
             
             let renameAction = UITableViewRowAction.init(style: .default, title: "重命名") { [unowned self] _, i in
+                UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
                 //            let fileName = file.name
                 let dialogViewController = QMUIDialogTextFieldViewController()
                 dialogViewController.title = "重命名"
@@ -243,12 +242,14 @@ extension DocumentsViewController: QMUITableViewDelegate, QMUITableViewDataSourc
             renameAction.backgroundColor = kRGBColor(80, 168, 80)
             
             let deleteAction = UITableViewRowAction.init(style: .destructive, title: "删除") { [unowned self] _, i in
+                UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
                 self.deleteFile(file, index: i.row)
             }
             deleteAction.backgroundColor = kRGBColor(243, 64, 54)
             
             if file.isFolder == false {
                 let shareAction = UITableViewRowAction.init(style: .default, title: "分享") { [unowned self] _, i in
+                    UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
                     self.shareFile(file)
                 }
                 shareAction.backgroundColor = kButtonColor
@@ -257,6 +258,7 @@ extension DocumentsViewController: QMUITableViewDelegate, QMUITableViewDataSourc
             return [deleteAction, moveAction, renameAction]
         } else {
             let deleteAction = UITableViewRowAction.init(style: .destructive, title: "清空") { [unowned self] _, i in
+                UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
                 QMUITips.showLoading(in: self.view).whiteStyle()
                 Async.background {
                     do {
@@ -478,7 +480,6 @@ extension DocumentsViewController {
             Async.main {
                 self.tableView.isHidden = false
                 self.hideEmptyView()
-                self.tableView.mj_header?.endRefreshing()
                 self.reloadTableData()
 
             }
@@ -521,6 +522,7 @@ extension DocumentsViewController {
                     }
                     if encrypted && password.count <= 0 {
                         kAlert("请输入解压密码")
+                        UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
                         return
                     }
                 }

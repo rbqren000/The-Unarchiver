@@ -39,18 +39,11 @@ class API {
 
     static func httpRqeusetHeaders() -> HTTPHeaders {
         var headers: HTTPHeaders = [:]
-        //设置防盗链
-        headers["Referer"] = "https://swing1993.cn"
         headers["osVersion"] = "\(kVersion)"
         if let appVersion: String = kAppVersion! as? String {
             if let appBuildVersion: String = kAppBuildVersion! as? String {
                 headers["version"] = "\(appVersion)(\(appBuildVersion))"
             }
-        }
-        if let udid = AppDefaults.shared.deviceUDID {
-            headers["udid"] = udid
-        } else {
-            headers["udid"] = ""
         }
         return headers
     }

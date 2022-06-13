@@ -137,6 +137,7 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
                 let result = self.clearCache()
                 if result {
                     Async.main {
+                        UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
                         self.cacheSize = 0
                         self.tableView.reloadData()
                         QMUITips.hideAllTips(in: self.view)
@@ -162,11 +163,13 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
             let controller = LicensesViewController()
             controller.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(controller, animated: true)
+        } else if item.0 == "解压设置" {
+            let controller = UnarchiverSettingViewController()
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
         }
         
     }
-    
-
 
 }
 

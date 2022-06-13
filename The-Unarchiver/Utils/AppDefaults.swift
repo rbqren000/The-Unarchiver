@@ -35,39 +35,11 @@ public struct UserDefaultsItem<Value> {
 class AppDefaults: UserDefaults {
     
     public static let shared = AppDefaults()
-    
-    @UserDefaultsItem(key: "deviceUDID")
-    public var deviceUDID: String?
-    
-    @UserDefaultsItem(key: "deviceInfo")
-    public var deviceInfo: String?
-    
-    @UserDefaultsItem(key: "aggreUserAgreement")
-    public var aggreUserAgreement: Bool?
-    
-    @UserDefaultsItem(key: "signingCertificate")
-    public var signingCertificate: Data?
-    
-    @UserDefaultsItem(key: "signingCertificateName")
-    public var signingCertificateName: String?
-    
-    @UserDefaultsItem(key: "signingCertificateSerialNumber")
-    public var signingCertificateSerialNumber: String?
-
-    @UserDefaultsItem(key: "signingCertificatePassword")
-    public var signingCertificatePassword: String?
-    
-    @UserDefaultsItem(key: "signingProvisioningProfile")
-    public var signingProvisioningProfile: Data?
+        
+    @UserDefaultsItem(key: "impactFeedback")
+    public var impactFeedback: Bool?
     
     public func reset() {
-        self.deviceUDID = nil
-        self.deviceInfo = nil
-        self.aggreUserAgreement = nil
-        self.signingCertificateName = nil
-        self.signingCertificateSerialNumber = nil
-        self.signingCertificate = nil
-        self.signingCertificatePassword = nil
-        self.signingProvisioningProfile = nil
+       
     }
 }

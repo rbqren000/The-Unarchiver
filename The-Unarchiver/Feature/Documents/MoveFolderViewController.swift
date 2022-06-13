@@ -65,7 +65,6 @@ class MoveFolderViewController: ViewController {
         } catch let error {
             print(message: error.localizedDescription)
         }
-        self.tableView.mj_header?.endRefreshing()
     }
 
     override func initSubviews() {
@@ -76,7 +75,6 @@ class MoveFolderViewController: ViewController {
         self.tableView.showsHorizontalScrollIndicator = false
         self.tableView.setEmptyDataSet(title: nil, descriptionString: nil, image: UIImage(named: "file-storage"))
         self.tableView.register(QMUITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        self.tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(getFolders))
         self.view.addSubview(tableView)
         tableView.snp.makeConstraints { maker in
             maker.left.top.right.equalTo(0)

@@ -10,6 +10,7 @@
 		16B552402856CC1200179006 /* libXADMaster.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B5523E2856CC1200179006 /* libXADMaster.ios.a */; };
 		16B552412856CC1200179006 /* libUniversalDetector.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B5523F2856CC1200179006 /* libUniversalDetector.ios.a */; };
 		16B552432856DE7E00179006 /* LicensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B552422856DE7D00179006 /* LicensesViewController.swift */; };
+		16B552452856F96600179006 /* UnarchiverSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B552442856F96600179006 /* UnarchiverSettingViewController.swift */; };
 		16F938EA2852CF8400281A81 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F938E92852CF8400281A81 /* Utils.swift */; };
 		16F938EC2852CF8900281A81 /* AppDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F938EB2852CF8900281A81 /* AppDefaults.swift */; };
 		16F938EE2852CF9000281A81 /* EmptyDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F938ED2852CF9000281A81 /* EmptyDataSet.swift */; };
@@ -139,6 +140,7 @@
 		16B5523E2856CC1200179006 /* libXADMaster.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libXADMaster.ios.a; path = "XADMaster/Release-iphoneos/libXADMaster.ios.a"; sourceTree = SOURCE_ROOT; };
 		16B5523F2856CC1200179006 /* libUniversalDetector.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUniversalDetector.ios.a; path = "XADMaster/Release-iphoneos/libUniversalDetector.ios.a"; sourceTree = SOURCE_ROOT; };
 		16B552422856DE7D00179006 /* LicensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensesViewController.swift; sourceTree = "<group>"; };
+		16B552442856F96600179006 /* UnarchiverSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnarchiverSettingViewController.swift; sourceTree = "<group>"; };
 		16F938E92852CF8400281A81 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		16F938EB2852CF8900281A81 /* AppDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDefaults.swift; sourceTree = "<group>"; };
 		16F938ED2852CF9000281A81 /* EmptyDataSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDataSet.swift; sourceTree = "<group>"; };
@@ -1148,6 +1150,7 @@
 				16F93AF02852ECDE00281A81 /* SettingsViewController.swift */,
 				16F93B062853440E00281A81 /* AboutUSViewController.swift */,
 				16B552422856DE7D00179006 /* LicensesViewController.swift */,
+				16B552442856F96600179006 /* UnarchiverSettingViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1395,6 +1398,7 @@
 				16F938EA2852CF8400281A81 /* Utils.swift in Sources */,
 				16F93A432852D03900281A81 /* NSDictionary+BlocksKit.m in Sources */,
 				16F93A622852D03900281A81 /* NSObject+A2DynamicDelegate.m in Sources */,
+				16B552452856F96600179006 /* UnarchiverSettingViewController.swift in Sources */,
 				16F939082852CFC300281A81 /* Font+Utilities.swift in Sources */,
 				16F93A4A2852D03900281A81 /* NSMutableOrderedSet+BlocksKit.m in Sources */,
 				16F93A352852D03900281A81 /* GCDWebUploader.m in Sources */,

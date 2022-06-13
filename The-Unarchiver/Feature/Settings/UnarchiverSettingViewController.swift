@@ -1,5 +1,5 @@
 //
-//  LicensesViewController.swift
+//  UnarchiverSettingViewController.swift
 //  The-Unarchiver
 //
 //  Created by SWING on 2022/6/13.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LicensesViewController: ViewController {
+class UnarchiverSettingViewController: ViewController {
 
     var tableView = QMUITableView.init(frame: CGRect.zero, style: .grouped)
 
@@ -21,9 +21,9 @@ class LicensesViewController: ViewController {
                     (name: "Alamofire",
                      desc: "Elegant HTTP Networking in Swift",
                      url: "https://github.com/Alamofire/Alamofire/blob/master/LICENSE"),
-//                    (name: "MJRefresh",
-//                     desc: "An easy way to use pull-to-refresh",
-//                     url: "https://github.com/CoderMJLee/MJRefresh/blob/master/LICENSE"),
+                    (name: "MJRefresh",
+                     desc: "An easy way to use pull-to-refresh",
+                     url: "https://github.com/CoderMJLee/MJRefresh/blob/master/LICENSE"),
                     (name: "SnapKit",
                      desc: "A Swift Autolayout DSL",
                      url: "https://github.com/SnapKit/SnapKit/blob/develop/LICENSE"),
@@ -65,7 +65,7 @@ class LicensesViewController: ViewController {
 }
 
 
-extension LicensesViewController: QMUITableViewDelegate, QMUITableViewDataSource {
+extension UnarchiverSettingViewController: QMUITableViewDelegate, QMUITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
@@ -111,6 +111,7 @@ extension LicensesViewController: QMUITableViewDelegate, QMUITableViewDataSource
         self.openURLWithSafari(URL(string: item.url)!)
 
     }
+    
+
 
 }
-
