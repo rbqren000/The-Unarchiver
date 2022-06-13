@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16B552402856CC1200179006 /* libXADMaster.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B5523E2856CC1200179006 /* libXADMaster.ios.a */; };
-		16B552412856CC1200179006 /* libUniversalDetector.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B5523F2856CC1200179006 /* libUniversalDetector.ios.a */; };
 		16B552432856DE7E00179006 /* LicensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B552422856DE7D00179006 /* LicensesViewController.swift */; };
 		16B552452856F96600179006 /* UnarchiverSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B552442856F96600179006 /* UnarchiverSettingViewController.swift */; };
+		16B552492857323A00179006 /* libXADMaster.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B552472857323A00179006 /* libXADMaster.ios.a */; };
+		16B5524A2857323A00179006 /* libUniversalDetector.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B552482857323A00179006 /* libUniversalDetector.ios.a */; };
 		16F938EA2852CF8400281A81 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F938E92852CF8400281A81 /* Utils.swift */; };
 		16F938EC2852CF8900281A81 /* AppDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F938EB2852CF8900281A81 /* AppDefaults.swift */; };
 		16F938EE2852CF9000281A81 /* EmptyDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F938ED2852CF9000281A81 /* EmptyDataSet.swift */; };
@@ -137,10 +137,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		16B5523E2856CC1200179006 /* libXADMaster.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libXADMaster.ios.a; path = "XADMaster/Release-iphoneos/libXADMaster.ios.a"; sourceTree = SOURCE_ROOT; };
-		16B5523F2856CC1200179006 /* libUniversalDetector.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libUniversalDetector.ios.a; path = "XADMaster/Release-iphoneos/libUniversalDetector.ios.a"; sourceTree = SOURCE_ROOT; };
 		16B552422856DE7D00179006 /* LicensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensesViewController.swift; sourceTree = "<group>"; };
 		16B552442856F96600179006 /* UnarchiverSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnarchiverSettingViewController.swift; sourceTree = "<group>"; };
+		16B552472857323A00179006 /* libXADMaster.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libXADMaster.ios.a; sourceTree = "<group>"; };
+		16B552482857323A00179006 /* libUniversalDetector.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUniversalDetector.ios.a; sourceTree = "<group>"; };
 		16F938E92852CF8400281A81 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		16F938EB2852CF8900281A81 /* AppDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDefaults.swift; sourceTree = "<group>"; };
 		16F938ED2852CF9000281A81 /* EmptyDataSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDataSet.swift; sourceTree = "<group>"; };
@@ -536,9 +536,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				16F93AB52852DAE000281A81 /* WebKit.framework in Frameworks */,
-				16B552412856CC1200179006 /* libUniversalDetector.ios.a in Frameworks */,
+				16B5524A2857323A00179006 /* libUniversalDetector.ios.a in Frameworks */,
 				16F93AB02852D9C400281A81 /* libbz2.tbd in Frameworks */,
-				16B552402856CC1200179006 /* libXADMaster.ios.a in Frameworks */,
+				16B552492857323A00179006 /* libXADMaster.ios.a in Frameworks */,
 				16F93AAF2852D9BB00281A81 /* libz.tbd in Frameworks */,
 				38768E520458BD0B8E3D64E3 /* Pods_The_Unarchiver.framework in Frameworks */,
 				16F93AB32852DAD700281A81 /* Security.framework in Frameworks */,
@@ -597,8 +597,8 @@
 		16F939152852D01600281A81 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
-				16B5523F2856CC1200179006 /* libUniversalDetector.ios.a */,
-				16B5523E2856CC1200179006 /* libXADMaster.ios.a */,
+				16B552482857323A00179006 /* libUniversalDetector.ios.a */,
+				16B552472857323A00179006 /* libXADMaster.ios.a */,
 				16F939162852D02200281A81 /* XADMaster */,
 				16F93ADA2852E10C00281A81 /* minizip */,
 				16F93AC22852E0B200281A81 /* AltSign */,
@@ -1605,12 +1605,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = WPXQYZSK2Q;
+				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "The-Unarchiver/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "The Unarchiver";
 				INFOPLIST_KEY_NSCameraUsageDescription = "需要开启“相机”权限以便于拍摄图片";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要您同意才能获得您的地理位置，允许吗?";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "需要开启“相册”权限以便于保存图片";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "需要开启“相册”权限以便于导入图片";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1619,6 +1621,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1696,12 +1699,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = WPXQYZSK2Q;
+				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "The-Unarchiver/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "The Unarchiver";
 				INFOPLIST_KEY_NSCameraUsageDescription = "需要开启“相机”权限以便于拍摄图片";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要您同意才能获得您的地理位置，允许吗?";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "需要开启“相册”权限以便于保存图片";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "需要开启“相册”权限以便于导入图片";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1710,6 +1715,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
