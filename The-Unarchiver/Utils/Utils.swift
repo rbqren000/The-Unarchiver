@@ -254,6 +254,7 @@ var showingAlert = false
 
 func kAlert(_ text: String, showCancel: Bool = false, preferredStyle: QMUIAlertControllerStyle = .alert,  callBack: (()->())? = nil) {
     guard showingAlert else {
+        UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
         let alertController = QMUIAlertController.init(title: text, message: nil, preferredStyle: preferredStyle)
         if showCancel {
             alertController.addAction(QMUIAlertAction(title: "取消", style: .cancel, handler: { _, _ in

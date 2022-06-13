@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         print(message: "open url:\(url.absoluteString)")
+        UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
         do {
             let moveToURL = FileManager.default.importFileDirectory.appendingPathComponent(url.lastPathComponent)
             if FileManager.default.fileExists(atPath: moveToURL.path) {

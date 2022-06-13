@@ -504,6 +504,7 @@ extension DocumentsViewController {
     
     func openFile(_ file: File) {
         if file.isArchiver {
+            UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
             let xadHelper = XADHelper()
             let encrypted = xadHelper.archiverIsEncrypted(withPath: file.url.path)
             let alertController = QMUIAlertController.init(title: "是否解压该文件？", message: file.url.lastPathComponent, preferredStyle: .alert)
@@ -535,6 +536,7 @@ extension DocumentsViewController {
             alertController.addCancelAction()
             alertController.showWith(animated: true)
         } else if file.isAppBundle {
+            UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
             let alertController = QMUIAlertController.init(title: file.url.lastPathComponent, message: nil, preferredStyle: .actionSheet)
             alertController.addAction(QMUIAlertAction.init(title: "打包IPA", style: .destructive, handler: { _, _ in
                 QMUITips.showLoading("正在打包IPA...", detailText: file.name, in: self.view).whiteStyle()
@@ -571,6 +573,7 @@ extension DocumentsViewController {
             controller.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(controller, animated: true)
         } else if file.isIPA {
+            UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
             let alertController = QMUIAlertController.init(title: file.name, message: "安装期间请不要退出对话框，否则可能会导致安装失败。", preferredStyle: .actionSheet)
             alertController.addAction(QMUIAlertAction.init(title: "解压", style: .default, handler: { _, _ in
                 self.unZip(file)
@@ -598,6 +601,7 @@ extension DocumentsViewController {
     }
     
     func deleteFile(_ file: File, index: Int) {
+        UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
         let alertController = QMUIAlertController.init(title: "确定删除\(file.name)吗？", message: nil, preferredStyle: .alert)
         alertController.addAction(QMUIAlertAction(title: "取消", style: .cancel, handler: nil))
         alertController.addAction(QMUIAlertAction(title: "确定", style: .default, handler: { [unowned self] _, _ in
@@ -738,6 +742,7 @@ extension DocumentsViewController {
 
     func showSuccessAlert(alertTitle: String, fileURL: URL) {
         print(message: "fileURL:\(fileURL.path)")
+        UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
         let alertController = QMUIAlertController.init(title: alertTitle, message: nil, preferredStyle: .alert)
         if FileManager.default.fileExists(atPath: fileURL.path) {
             alertController.addAction(QMUIAlertAction.init(title: "查看", style: .default, handler: { _, _ in

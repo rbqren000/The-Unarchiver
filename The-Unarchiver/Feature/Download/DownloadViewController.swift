@@ -48,6 +48,7 @@ class DownloadViewController: ViewController {
     
     @objc
     func addTaskButtonTapped() {
+        UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
         let alertController = QMUIAlertController.init(title: "选择下载方式", message: nil, preferredStyle: .actionSheet)
         alertController.addAction(QMUIAlertAction.init(title: "从网络下载", style: .default, handler: { [unowned self] _, _ in
             self.showInputURLViewController(type: 0)
