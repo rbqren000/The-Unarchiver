@@ -27,13 +27,14 @@ class AboutUSViewController: ViewController {
         }
         
         versionLabel.textAlignment = .center
-        versionLabel.text = "\(kAppDisPlayName!) v\(kAppVersion!)"
+        versionLabel.text = "\(kAppDisPlayName!) v\(kAppVersion!)\n\(NSString.bulidDate())"
         versionLabel.font = UIFont.medium(aSize: 18)
+        versionLabel.numberOfLines = 2
         versionLabel.textColor = kTextColor
         self.view.addSubview(versionLabel)
         versionLabel.snp.makeConstraints { maker in
             maker.left.right.equalTo(0)
-            maker.height.equalTo(30)
+            maker.height.equalTo(100)
             maker.top.equalTo(appIcon.snp.bottom).offset(5)
         }
     }

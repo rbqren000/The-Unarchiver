@@ -15,6 +15,7 @@ import Async
 class SettingsViewController: ViewController {
     
     var tableView = QMUITableView.init(frame: CGRect.zero, style: .grouped)
+    var cacheSize: Int = 0
     let cellIdentifier = "settingsCell"
     let privateURL = URL(string: "https://abox.swing1993.cn/privacycn.html")!
     let aboxGitHubURL = URL(string: "https://github.com/SWING1993/ABox_iOS")!
@@ -22,17 +23,23 @@ class SettingsViewController: ViewController {
 
     //  ("关于我们", "ic_aboutus")
     let cellData = [[("解压设置", "", "rar-setting")],
-                    [("问题反馈", "", "feedback"),
-                     ("分享给好友", "", "ic_share"),
+                    [//("问题反馈", "", "feedback"),
+                     //("分享给好友", "", "ic_share"),
                      ("清理缓存", "", "ic_helper"),
                      ("服务及隐私协议", "", "ic_unlock"),
                      ("Licenses", "Libraries", "license"),
-                     ("GitHub仓库", "", "github-logo"),
+                     //("GitHub仓库", "", "github-logo"),
                      ("关于我们", "", "ic_aboutus")]]
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tableView.reloadData()
+        Async.background {
+            self.cacheSize = self.fileSizeOfCache()
+            Async.main {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func setupNavigationItems() {
@@ -42,6 +49,7 @@ class SettingsViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
     }
     
     override func initSubviews() {
@@ -83,7 +91,7 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
         let identifier = "cell"
         var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
         if cell == nil {
-            cell = QMUITableViewCell(for: tableView, with: .subtitle, reuseIdentifier: identifier)
+            cell = QMUITableViewCell(for: tableView, with: .value1, reuseIdentifier: identifier)
             cell?.selectionStyle = .none
             cell?.textLabel?.font = UIFont.medium(aSize: 14)
             cell?.textLabel?.textColor = kTextColor
@@ -96,6 +104,9 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
         cell?.textLabel?.text = item.0
         cell?.detailTextLabel?.text = item.1
         cell?.imageView?.image = UIImage(named: item.2)?.qmui_image(withTintColor: kTextColor)
+        if item.0 == "清理缓存" {
+            cell?.detailTextLabel?.text = String.fileSizeDesc(self.cacheSize)
+        }
         return cell!
     }
     
@@ -104,11 +115,11 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 0 ? 0.01 : 60
+        return section == 0 ? 0.01 : 30
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return section == 0 ? nil : "\(kAppDisPlayName!)：\(kAppVersion!)\n编译日期：\(NSString.bulidDate())"
+        return section == 0 ? nil : "\(kAppDisPlayName!)：\(kAppVersion!)"
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -121,20 +132,24 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
             let activityVC = UIActivityViewController.init(activityItems: items, applicationActivities: nil)
             self.present(activityVC, animated: true, completion: nil)
         } else if item.0 == "清理缓存" {
-            QMUITips.showLoading("清理中...", in: self.view).whiteStyle()
+            QMUITips.showLoading("正在清理缓存...", in: self.view).whiteStyle()
             Async.background {
-                self.clearCache()
-            } .main {
-                self.tableView.reloadData()
-                QMUITips.hideAllTips(in: self.view)
-                kAlert("已清除全部缓存")
+                let result = self.clearCache()
+                if result {
+                    Async.main {
+                        self.cacheSize = 0
+                        self.tableView.reloadData()
+                        QMUITips.hideAllTips(in: self.view)
+                        QMUITips.showSucceed("已清除全部缓存", in: self.view).whiteStyle()
+                    }
+                }
             }
         } else if item.0 == "问题反馈" {
             UIApplication.shared.open(aboxIssuesURL, options: [:]) { completion in
                 
             }
         } else if item.0 == "服务及隐私协议" {
-            self.openURLWithWebView(privateURL)
+            self.openURLWithSafari(privateURL)
         } else if item.0 == "关于我们" {
             let controller = AboutUSViewController()
             controller.hidesBottomBarWhenPushed = true
@@ -143,6 +158,10 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
             UIApplication.shared.open(aboxGitHubURL, options: [:]) { completion in
                 
             }
+        } else if item.0 == "Licenses" {
+            let controller = LicensesViewController()
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
         }
         
     }
@@ -179,23 +198,14 @@ extension SettingsViewController {
         return size
     }
     
-    func clearCache() {
+    func clearCache() -> Bool {
         URLCache.shared.removeAllCachedResponses()
-        // 取出cache文件夹目录 缓存文件都在这个目录下
-        let cacheURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-        // 取出文件夹下所有文件数组
-        if let fileArr = FileManager.default.subpaths(atPath: cacheURL.path) {
-            // 遍历删除
-            for file in fileArr {
-                let path = cacheURL.appendingPathComponent(file).path
-                do {
-                    try FileManager.default.removeItem(atPath: path)
-                    print(message: "清理\(path)")
-                } catch let error {
-                    print(message: "清理\(path)失败，\(error.localizedDescription)")
-                }
-            }
+        do {
+            try FileManager.default.removeItem(atPath: FileManager.default.cacheDirectory.path)
+        } catch let error {
+            print(message: "清理失败，\(error.localizedDescription)")
         }
+        return true
     }
 }
 

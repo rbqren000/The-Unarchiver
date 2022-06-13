@@ -57,20 +57,20 @@
 }
 
 -(void)simpleUnarchiverNeedsPassword:(XADSimpleUnarchiver *)unarchiver {
-    NSLog(@"unarchiverNeedsPassword");
+//    NSLog(@"unarchiverNeedsPassword");
 }
 
 - (BOOL)simpleUnarchiver:(XADSimpleUnarchiver *)unarchiver shouldExtractEntryWithDictionary:(NSDictionary *)dict to:(NSString *)path {
-    NSLog(@"shouldExtractEntryWithDictionary\ndict:%@\nto:%@",dict, path);
+//    NSLog(@"shouldExtractEntryWithDictionary\ndict:%@\nto:%@",dict, path);
     return YES;
 }
 
 - (void)simpleUnarchiver:(XADSimpleUnarchiver *)unarchiver willExtractEntryWithDictionary:(NSDictionary *)dict to:(NSString *)path {
-    NSLog(@"willExtractEntryWithDictionary\ndict:%@\nto:%@",dict, path);
+//    NSLog(@"willExtractEntryWithDictionary\ndict:%@\nto:%@",dict, path);
 }
 
 - (void)simpleUnarchiver:(XADSimpleUnarchiver *)unarchiver didExtractEntryWithDictionary:(NSDictionary *)dict to:(NSString *)path error:(XADError)error {
-    NSLog(@"didExtractEntryWithDictionary\ndict:%@\nto:%@\nerror:%d",dict, path, error);
+//    NSLog(@"didExtractEntryWithDictionary\ndict:%@\nto:%@\nerror:%d",dict, path, error);
     self.lastPath = path;
     if (error != XADNoError) {
         self.error = error;
