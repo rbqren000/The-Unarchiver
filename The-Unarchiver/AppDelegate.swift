@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } catch let error {
                 print(message: error.localizedDescription)
                 kAlert(error.localizedDescription)
-                return false
+                return true
             }
         }
         return false
