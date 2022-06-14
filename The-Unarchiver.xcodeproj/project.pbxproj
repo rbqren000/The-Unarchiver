@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16778B312858602400A9005B /* GCDWebDAVServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 16778B302858602400A9005B /* GCDWebDAVServer.m */; };
+		16778B33285864A100A9005B /* WebDAVServerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16778B32285864A100A9005B /* WebDAVServerController.swift */; };
 		16B552432856DE7E00179006 /* LicensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B552422856DE7D00179006 /* LicensesViewController.swift */; };
 		16B552452856F96600179006 /* UnarchiverSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B552442856F96600179006 /* UnarchiverSettingViewController.swift */; };
 		16B552492857323A00179006 /* libXADMaster.ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B552472857323A00179006 /* libXADMaster.ios.a */; };
@@ -133,6 +135,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16778B2F2858602400A9005B /* GCDWebDAVServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebDAVServer.h; sourceTree = "<group>"; };
+		16778B302858602400A9005B /* GCDWebDAVServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebDAVServer.m; sourceTree = "<group>"; };
+		16778B32285864A100A9005B /* WebDAVServerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDAVServerController.swift; sourceTree = "<group>"; };
 		16B552422856DE7D00179006 /* LicensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensesViewController.swift; sourceTree = "<group>"; };
 		16B552442856F96600179006 /* UnarchiverSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnarchiverSettingViewController.swift; sourceTree = "<group>"; };
 		16B552472857323A00179006 /* libXADMaster.ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libXADMaster.ios.a; sourceTree = "<group>"; };
@@ -536,6 +541,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16778B2E2858602400A9005B /* GCDWebDAVServer */ = {
+			isa = PBXGroup;
+			children = (
+				16778B2F2858602400A9005B /* GCDWebDAVServer.h */,
+				16778B302858602400A9005B /* GCDWebDAVServer.m */,
+			);
+			path = GCDWebDAVServer;
+			sourceTree = "<group>";
+		};
 		16F938E82852CF7100281A81 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,12 +600,13 @@
 			children = (
 				16B552482857323A00179006 /* libUniversalDetector.ios.a */,
 				16B552472857323A00179006 /* libXADMaster.ios.a */,
+				16F939CA2852D03800281A81 /* GCDWebServer */,
+				16F939C62852D03800281A81 /* GCDWebUploader */,
+				16778B2E2858602400A9005B /* GCDWebDAVServer */,
 				16F939162852D02200281A81 /* XADMaster */,
 				16F93ADA2852E10C00281A81 /* minizip */,
 				16F93A6E2852D88700281A81 /* M13ProgressSuite */,
 				16F939EA2852D03900281A81 /* BlocksKit */,
-				16F939CA2852D03800281A81 /* GCDWebServer */,
-				16F939C62852D03800281A81 /* GCDWebUploader */,
 			);
 			path = Vender;
 			sourceTree = "<group>";
@@ -975,6 +990,7 @@
 				16F93A6C2852D34E00281A81 /* DocumentsViewController.swift */,
 				16F93AF32853346000281A81 /* FileExchangeController.swift */,
 				16F93AB82852DD8C00281A81 /* WebUploaderController.swift */,
+				16778B32285864A100A9005B /* WebDAVServerController.swift */,
 				16F93ABA2852DD9000281A81 /* MoveFolderViewController.swift */,
 				16F93ABC2852DD9400281A81 /* PlistPreviewController.swift */,
 				16F93ABE2852DDA100281A81 /* ImportViewController.swift */,
@@ -1336,6 +1352,7 @@
 				16F93AC12852DEB300281A81 /* AppManager.swift in Sources */,
 				16F93A582852D03900281A81 /* UIImagePickerController+BlocksKit.m in Sources */,
 				16F93AA12852D88800281A81 /* M13ProgressViewMetro.m in Sources */,
+				16778B312858602400A9005B /* GCDWebDAVServer.m in Sources */,
 				16F938EC2852CF8900281A81 /* AppDefaults.swift in Sources */,
 				16F93AA62852D88800281A81 /* M13ProgressViewFilteredImage.m in Sources */,
 				16F93A4D2852D03900281A81 /* NSArray+BlocksKit.m in Sources */,
@@ -1390,6 +1407,7 @@
 				16F93ABD2852DD9400281A81 /* PlistPreviewController.swift in Sources */,
 				16F93A602852D03900281A81 /* NSObject+A2BlockDelegate.m in Sources */,
 				16F93AFB285339BA00281A81 /* DownloadTableViewCell.swift in Sources */,
+				16778B33285864A100A9005B /* WebDAVServerController.swift in Sources */,
 				16F939102852CFC300281A81 /* UIScrollView+EmptyDataSet.m in Sources */,
 				16F93A442852D03900281A81 /* NSMutableArray+BlocksKit.m in Sources */,
 				16F9390E2852CFC300281A81 /* UIImage+Utilities.swift in Sources */,

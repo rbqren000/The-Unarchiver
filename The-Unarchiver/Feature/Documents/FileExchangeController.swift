@@ -39,12 +39,19 @@ class FileExchangeController: ViewController {
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true, completion: nil)
     }
+    
+    func startWebDAV() {
+        let controller = WebDAVServerController()
+        let nav = NavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true, completion: nil)
+    }
 }
 
 extension FileExchangeController: QMUITableViewDelegate, QMUITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,14 +75,19 @@ extension FileExchangeController: QMUITableViewDelegate, QMUITableViewDataSource
             cell?.detailTextLabel?.textColor = kSubtextColor
             cell?.accessoryType = .disclosureIndicator
         }
-        cell?.textLabel?.text = "WiFi传输"
-        cell?.imageView?.image = UIImage.init(named: "wifi-signal")?.resize(toWidth: 35)
+        if indexPath.section == 0 {
+            cell?.textLabel?.text = "WiFi传输"
+            cell?.imageView?.image = UIImage.init(named: "wifi-signal")?.resize(toWidth: 35)
+        } else {
+            cell?.textLabel?.text = "WebDAV"
+            cell?.imageView?.image = UIImage.init(named: "webdav")?.resize(toWidth: 35)
+        }
         return cell!
     }
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "与电脑互传文件"
+        return section == 0 ? "与电脑互传文件" : "WebDAV Server"
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -87,7 +99,11 @@ extension FileExchangeController: QMUITableViewDelegate, QMUITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        startWebUploader()
+        if indexPath.section == 0 {
+            startWebUploader()
+        } else {
+            startWebDAV()
+        }
     }
 
 }
