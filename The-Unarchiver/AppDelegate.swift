@@ -80,14 +80,16 @@ extension AppDelegate {
     
     
     func configureAppearance() {
+        if #available(iOS 13.0, *) {
+            let barAppearance =  UINavigationBarAppearance()
+            barAppearance.configureWithDefaultBackground()
+            barAppearance.backgroundImage = UIImage.qmui_image(with: UIColor.white)
+            UINavigationBar.appearance().scrollEdgeAppearance = barAppearance
+        }
         if #available(iOS 15.0, *) {
             let tabbarAppearance = UITabBarAppearance()
             tabbarAppearance.configureWithDefaultBackground()
             UITabBar.appearance().scrollEdgeAppearance = tabbarAppearance
-            
-            let barAppearance =  UINavigationBarAppearance()
-            barAppearance.configureWithDefaultBackground()
-            UINavigationBar.appearance().scrollEdgeAppearance = barAppearance            
         }
         UINavigationBar.appearance().isTranslucent = false
 //        UITabBar.appearance().tintColor = kButtonColor

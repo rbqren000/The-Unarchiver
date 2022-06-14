@@ -126,9 +126,7 @@ class File: NSObject {
                 thumbnails = UIImage(named: "archive")
             }
         }
-        
-    
-        
+
         if thumbnails == nil {
             thumbnails = UIImage(named: "unknown")
         }

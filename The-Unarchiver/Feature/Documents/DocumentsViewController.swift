@@ -707,8 +707,7 @@ extension DocumentsViewController {
                     hud.removeFromSuperview()
                     if succeeded {
                         self.getFolderFiles()
-                        let unzipFileURL = URL(fileURLWithPath: path).deletingPathExtension()
-                        self.showSuccessAlert(alertTitle: "解压\(file.name)成功", fileURL: unzipFileURL)
+                        self.showSuccessAlert(alertTitle: "解压\(file.name)成功", fileURL: toDirectoryURL)
                     } else {
                         QMUITips.showInfo("解压失败\n\(error == nil ? "" : error!.localizedDescription)", in: self.view)
                     }
