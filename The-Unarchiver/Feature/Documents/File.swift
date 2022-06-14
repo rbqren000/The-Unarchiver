@@ -23,14 +23,6 @@ class File: NSObject {
     var isArchiver: Bool {
         return archiverTypes.contains(self.type)
     }
-
-    var isCertificate: Bool {
-        return self.type == "p12"
-    }
-    
-    var isMobileProvision: Bool {
-        return self.type == "mobileprovision"
-    }
     
     var isCode: Bool {
         return codeTypes.contains(self.type)
@@ -101,7 +93,7 @@ class File: NSObject {
             self.type = fileURL.pathExtension.lowercased()
         }
         if self.isFolder && self.url.pathExtension.lowercased() == "app" {
-            let altApplication = ALTApplication.init(fileURL: self.url)
+            let altApplication = TUApplication.init(fileURL: self.url)
             self.isAppBundle = altApplication == nil ? false: true
         } else {
             self.isAppBundle = false

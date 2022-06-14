@@ -1,35 +1,21 @@
 //
-//  ALTApplication.m
-//  AltSign
+//  TUApplication.m
+//  The-Unarchiver
 //
-//  Created by Riley Testut on 6/24/19.
-//  Copyright © 2019 Riley Testut. All rights reserved.
+//  Created by SWING on 2022/6/14.
 //
 
-#import "ALTApplication.h"
-#import "ALTProvisioningProfile.h"
+#import "TUApplication.h"
 
-ALTDeviceType ALTDeviceTypeFromUIDeviceFamily(NSInteger deviceFamily)
-{
-    switch (deviceFamily)
-    {
-        case 1: return ALTDeviceTypeiPhone;
-        case 2: return ALTDeviceTypeiPad;
-        case 3: return ALTDeviceTypeAppleTV;
-        default: return ALTDeviceTypeNone;
-    }
-}
 
-@interface ALTApplication ()
+
+@interface TUApplication ()
 
 @property (nonatomic, copy, nullable, readonly) NSString *iconName;
 
 @end
 
-@implementation ALTApplication
-@synthesize entitlements = _entitlements;
-@synthesize entitlementsString = _entitlementsString;
-@synthesize provisioningProfile = _provisioningProfile;
+@implementation TUApplication
 
 - (instancetype)initWithFileURL:(NSURL *)fileURL
 {
@@ -76,26 +62,7 @@ ALTDeviceType ALTDeviceTypeFromUIDeviceFamily(NSInteger deviceFamily)
         minimumVersion.minorVersion = minorVersion;
         minimumVersion.patchVersion = patchVersion;
         
-        NSArray<NSNumber *> *deviceFamilies = infoDictionary[@"UIDeviceFamily"];
-        ALTDeviceType supportedDeviceTypes = ALTDeviceTypeNone;
-        
-        if ([deviceFamilies isKindOfClass:[NSNumber class]])
-        {
-            NSInteger rawDeviceFamily = [(NSNumber *)deviceFamilies integerValue];
-            supportedDeviceTypes = ALTDeviceTypeFromUIDeviceFamily(rawDeviceFamily);
-        }
-        else if ([deviceFamilies isKindOfClass:[NSArray class]] && deviceFamilies.count > 0)
-        {
-            for (NSNumber *deviceFamily in deviceFamilies)
-            {
-                NSInteger rawDeviceFamily = [deviceFamily integerValue];
-                supportedDeviceTypes |= ALTDeviceTypeFromUIDeviceFamily(rawDeviceFamily);
-            }
-        }
-        else
-        {
-            supportedDeviceTypes = ALTDeviceTypeiPhone;
-        }
+
         
         NSDictionary *icons = infoDictionary[@"CFBundleIcons"];
         NSDictionary *primaryIcon = icons[@"CFBundlePrimaryIcon"];
@@ -127,7 +94,6 @@ ALTDeviceType ALTDeviceTypeFromUIDeviceFamily(NSInteger deviceFamily)
         _bundleIdentifier = [bundleIdentifier copy];
         _version = [version copy];
         _minimumiOSVersion = minimumVersion;
-        _supportedDeviceTypes = supportedDeviceTypes;
         _iconName = [iconName copy];
         _executableName = [executableName copy];
         _executableFileURL = [executableFileURL copy];
@@ -136,7 +102,6 @@ ALTDeviceType ALTDeviceTypeFromUIDeviceFamily(NSInteger deviceFamily)
     return self;
 }
 
-#if TARGET_OS_IPHONE
 - (UIImage *)icon
 {
     NSString *iconName = self.iconName;
@@ -148,49 +113,9 @@ ALTDeviceType ALTDeviceTypeFromUIDeviceFamily(NSInteger deviceFamily)
     UIImage *icon = [UIImage imageNamed:iconName inBundle:self.bundle compatibleWithTraitCollection:nil];
     return icon;
 }
-#endif
 
-- (NSDictionary<ALTEntitlement,id> *)entitlements
-{
-    if (_entitlements == nil)
-    {
-        NSDictionary<NSString *, id> *appEntitlements = @{};
-        
-        if (self.entitlementsString.length != 0)
-        {
-            NSData *entitlementsData = [self.entitlementsString dataUsingEncoding:NSUTF8StringEncoding];
-            
-            NSError *error = nil;
-            NSDictionary *entitlements = [NSPropertyListSerialization propertyListWithData:entitlementsData options:0 format:nil error:&error];
-            
-            if (entitlements != nil)
-            {
-                appEntitlements = entitlements;
-            }
-            else
-            {
-                NSLog(@"Error parsing entitlements: %@", error);
-            }
-        }
-        
-        _entitlements = appEntitlements;
-    }
-    
-    return _entitlements;
-}
 
-- (ALTProvisioningProfile *)provisioningProfile
-{
-    if (_provisioningProfile == nil)
-    {
-        NSURL *provisioningProfileURL = [self.fileURL URLByAppendingPathComponent:@"embedded.mobileprovision"];
-        _provisioningProfile = [[ALTProvisioningProfile alloc] initWithURL:provisioningProfileURL];
-    }
-    
-    return _provisioningProfile;
-}
-
-- (NSSet<ALTApplication *> *)appExtensions
+- (NSSet<TUApplication *> *)appExtensions
 {
     NSMutableSet *appExtensions = [NSMutableSet set];
     
@@ -202,7 +127,7 @@ ALTDeviceType ALTDeviceTypeFromUIDeviceFamily(NSInteger deviceFamily)
             continue;
         }
         
-        ALTApplication *appExtension = [[ALTApplication alloc] initWithFileURL:fileURL];
+        TUApplication *appExtension = [[TUApplication alloc] initWithFileURL:fileURL];
         if (appExtension == nil)
         {
             continue;

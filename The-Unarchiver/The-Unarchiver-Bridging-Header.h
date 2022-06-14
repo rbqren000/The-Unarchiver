@@ -30,19 +30,10 @@
 #import "YTKKeyValueStore.h"
 #import "TZImagePickerController.h"
 
-/// ALTSign
 
-// Model
-#import "ALTApplication.h"
-#import "ALTDevice.h"
-#import "ALTProvisioningProfile.h"
-
-// Capabilities
-#import "ALTCapabilities.h"
+#import "TUApplication.h"
 
 // Categories
 #import "NSFileManager+Zip.h"
-#import "NSError+ALTErrors.h"
-
 #import "XADHelper.h"
 #import "XADException.h"

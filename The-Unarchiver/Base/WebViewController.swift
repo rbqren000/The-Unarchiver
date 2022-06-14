@@ -100,7 +100,7 @@ extension WebViewController: WKUIDelegate, WKNavigationDelegate {
                     self.downloadManifest(urlStr: plistURLStr)
                 }
                 decisionHandler(.cancel)
-            } else if url.isIPA {
+            } else if url.pathExtension.lowercased() == "ipa" {
                 self.downloadIPA(urlStr: url.absoluteString)
                 decisionHandler(.cancel)
             } else {

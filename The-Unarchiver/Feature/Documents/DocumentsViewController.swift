@@ -156,7 +156,7 @@ extension DocumentsViewController: QMUITableViewDelegate, QMUITableViewDataSourc
         if indexPath.section == 0 {
             let file = files[indexPath.row]
             if file.isAppBundle {
-                let application = ALTApplication.init(fileURL: file.url)!
+                let application = TUApplication.init(fileURL: file.url)!
                 cell?.imageView?.image = application.icon?.resize(toWidth: 40)?.qmui_image(withClippedCornerRadius: 10)
                 cell?.textLabel?.text = "\(application.name) - v\(application.version)"
                 cell?.detailTextLabel?.text = "\(file.name) - \(application.bundleIdentifier)"
@@ -580,7 +580,7 @@ extension DocumentsViewController {
             }))
             
             alertController.addAction(QMUIAlertAction.init(title: "安装", style: .destructive, handler: { _, _ in
-                AppManager.default.installApp(ipaURL: file.url)
+                AppManager.default.requestFile(file.url)
             }))
 
             alertController.addAction(QMUIAlertAction.init(title: "取消", style: .cancel, handler: nil))

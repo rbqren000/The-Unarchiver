@@ -16,9 +16,11 @@ class AppManager: NSObject {
     private let kInstallWithIconURL = URL(string: "itms-services://?action=download-manifest&url=https://gitee.com/swing1993/manifest/raw/master/ipa.plist")!
     private var installApp = false
 
-    func installApp(ipaURL: URL, icon: UIImage? = nil) {
+//    func installApp(ipaURL: URL, icon: UIImage? = nil) {
+
+    func requestFile(_ fileURL: URL, icon: UIImage? = nil) {
         do {
-            let appData = try Data.init(contentsOf: ipaURL, options: .mappedIfSafe)
+            let appData = try Data.init(contentsOf: fileURL, options: .mappedIfSafe)
             self.initWebServer()
             self.startAppInstallWebServer(appData: appData, icon: icon)
         } catch _ {
@@ -26,7 +28,7 @@ class AppManager: NSObject {
         }
     }
 
-    fileprivate func initWebServer() {
+    private func initWebServer() {
         if let webServer = self.webServer {
             if webServer.isRunning {
                 print(message: "webServer isRunning... STOP")
@@ -38,7 +40,7 @@ class AppManager: NSObject {
         self.webServer?.delegate = self
     }
     
-    fileprivate func startAppInstallWebServer(appData: Data, icon: UIImage?) {
+    private func startAppInstallWebServer(appData: Data, icon: UIImage?) {
         var installURL = kInstallURL
         
         if let iconData = icon?.pngData() {

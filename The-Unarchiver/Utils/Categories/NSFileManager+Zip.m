@@ -7,7 +7,6 @@
 //
 
 #import "NSFileManager+Zip.h"
-#import "NSError+ALTErrors.h"
 
 #include "zip.h"
 #include "unzip.h"
@@ -285,7 +284,7 @@ char ALTDirectoryDeliminator = '/';
         }
     }
     
-    *error = [NSError errorWithDomain:AltSignErrorDomain code:ALTErrorMissingAppBundle userInfo:@{NSURLErrorKey: ipaURL}];
+    *error = [NSError errorWithDomain:@"ErrorMissingAppBundle" code:1 userInfo:@{NSURLErrorKey: ipaURL}];
     return nil;
 }
 

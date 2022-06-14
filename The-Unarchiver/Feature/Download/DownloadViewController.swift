@@ -49,15 +49,16 @@ class DownloadViewController: ViewController {
     @objc
     func addTaskButtonTapped() {
         UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
-        let alertController = QMUIAlertController.init(title: "选择下载方式", message: nil, preferredStyle: .actionSheet)
-        alertController.addAction(QMUIAlertAction.init(title: "从网络下载", style: .default, handler: { [unowned self] _, _ in
-            self.showInputURLViewController(type: 0)
-        }))
-        alertController.addAction(QMUIAlertAction.init(title: "提取网页资源", style: .default, handler: { [unowned self] _, _ in
-            self.showInputURLViewController(type: 1)
-        }))
-        alertController.addAction(QMUIAlertAction.init(title: "取消", style: .cancel, handler: nil))
-        alertController.showWith(animated: true)
+        self.showInputURLViewController(type: 0)
+//        let alertController = QMUIAlertController.init(title: "选择下载方式", message: nil, preferredStyle: .actionSheet)
+//        alertController.addAction(QMUIAlertAction.init(title: "从网络下载", style: .default, handler: { [unowned self] _, _ in
+//            self.showInputURLViewController(type: 0)
+//        }))
+//        alertController.addAction(QMUIAlertAction.init(title: "提取网页资源", style: .default, handler: { [unowned self] _, _ in
+//            self.showInputURLViewController(type: 1)
+//        }))
+//        alertController.addAction(QMUIAlertAction.init(title: "取消", style: .cancel, handler: nil))
+//        alertController.showWith(animated: true)
     }
     
     func showInputURLViewController(type: Int) {
