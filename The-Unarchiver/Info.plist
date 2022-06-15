@@ -6,7 +6,7 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeName</key>
-			<string>File</string>
+			<string>com.swing1993.The-Unarchiver</string>
 			<key>LSHandlerRank</key>
 			<string>Alternate</string>
 			<key>LSItemContentTypes</key>
@@ -24,6 +24,17 @@
 				<string>public.movie</string>
 				<string>public.directory</string>
 				<string>public.folder</string>
+				<string>org.7-zip.7-zip-archive</string>
+				<string>public.xml</string>
+				<string>org.openxmlformats.wordprocessingml.document</string>
+				<string>com.microsoft.word.doc</string>
+				<string>org.7-zip.7-zip-archive</string>
+				<string>com.rarlab.rar-archive</string>
+				<string>public.archive.apk</string>
+				<string>public.tar-archive</string>
+				<string>com.pkware.zip-archive</string>
+				<string>org.gnu.gnu-zip-archive</string>
+				<string>org.gnu.gnu-zip-tar-archive</string>
 			</array>
 		</dict>
 		<dict>
