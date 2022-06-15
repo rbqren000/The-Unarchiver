@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1633A8112859AF0900DD8AEF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1633A8102859AF0900DD8AEF /* CloudKit.framework */; };
 		16778B312858602400A9005B /* GCDWebDAVServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 16778B302858602400A9005B /* GCDWebDAVServer.m */; };
 		16778B33285864A100A9005B /* WebDAVServerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16778B32285864A100A9005B /* WebDAVServerController.swift */; };
 		16B552432856DE7E00179006 /* LicensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B552422856DE7D00179006 /* LicensesViewController.swift */; };
@@ -135,6 +136,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1633A80F2859AECB00DD8AEF /* The-Unarchiver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "The-Unarchiver.entitlements"; sourceTree = "<group>"; };
+		1633A8102859AF0900DD8AEF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		16778B2F2858602400A9005B /* GCDWebDAVServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebDAVServer.h; sourceTree = "<group>"; };
 		16778B302858602400A9005B /* GCDWebDAVServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebDAVServer.m; sourceTree = "<group>"; };
 		16778B32285864A100A9005B /* WebDAVServerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDAVServerController.swift; sourceTree = "<group>"; };
@@ -533,6 +536,7 @@
 				16F93AB02852D9C400281A81 /* libbz2.tbd in Frameworks */,
 				16B552492857323A00179006 /* libXADMaster.ios.a in Frameworks */,
 				16F93AAF2852D9BB00281A81 /* libz.tbd in Frameworks */,
+				1633A8112859AF0900DD8AEF /* CloudKit.framework in Frameworks */,
 				38768E520458BD0B8E3D64E3 /* Pods_The_Unarchiver.framework in Frameworks */,
 				16F93AB32852DAD700281A81 /* Security.framework in Frameworks */,
 			);
@@ -1168,6 +1172,7 @@
 		28D47D8A285222AE00CE0994 /* The-Unarchiver */ = {
 			isa = PBXGroup;
 			children = (
+				1633A80F2859AECB00DD8AEF /* The-Unarchiver.entitlements */,
 				28D47D8B285222AE00CE0994 /* AppDelegate.swift */,
 				28D47D9F285226A000CE0994 /* The-Unarchiver-Bridging-Header.h */,
 				16F93A652852D12000281A81 /* Base */,
@@ -1186,6 +1191,7 @@
 		2E8BF8005EEC63FE1A374E76 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1633A8102859AF0900DD8AEF /* CloudKit.framework */,
 				16F93AB42852DAE000281A81 /* WebKit.framework */,
 				16F93AB22852DAD700281A81 /* Security.framework */,
 				16F93AB12852D9D800281A81 /* libsqlite3.tbd */,
@@ -1582,16 +1588,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "The-Unarchiver/The-Unarchiver.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = VTA4Y6H8RZ;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "The-Unarchiver/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Unarchiver;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要您同意才能获得您的地理位置，允许吗?";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "需要开启“相册”权限以便于保存图片";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "需要开启“相册”权限以便于导入图片";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "帮助您快速找到需要连接的设备，以便传输文件";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "为用户管理手机相册照片,Unarchiver需要访问你的照片";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "为用户管理手机相册照片,Unarchiver需要访问你的照片";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1676,16 +1684,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "The-Unarchiver/The-Unarchiver.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = VTA4Y6H8RZ;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "The-Unarchiver/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Unarchiver;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "需要您同意才能获得您的地理位置，允许吗?";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "需要开启“相册”权限以便于保存图片";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "需要开启“相册”权限以便于导入图片";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "帮助您快速找到需要连接的设备，以便传输文件";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "为用户管理手机相册照片,Unarchiver需要访问你的照片";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "为用户管理手机相册照片,Unarchiver需要访问你的照片";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

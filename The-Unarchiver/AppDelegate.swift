@@ -18,9 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        application.isIdleTimerDisabled = true
         configureApp()
         configureAppearance()
-        application.isIdleTimerDisabled = true
         window = UIWindow.init(frame: UIScreen.main.bounds)
         window?.backgroundColor = .white
         window?.rootViewController = TabBarViewController()
@@ -31,14 +31,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         print(message: "open url:\(url.absoluteString)")
         UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
+        return true
         if url.absoluteString.hasPrefix("file://") {
             do {
+                let data = NSData.init(contentsOf: url)
+                print(message: data)
                 let moveToURL = FileManager.default.importFileDirectory.appendingPathComponent(url.lastPathComponent)
+                print(message: "moveToURL:\(moveToURL.path)")
                 if FileManager.default.fileExists(atPath: moveToURL.path) {
                     try FileManager.default.removeItem(at: moveToURL)
                 }
-                
-                try FileManager.default.moveItem(at: url, to: moveToURL)
+                try FileManager.default.copyItem(at: url, to: moveToURL)
                 let alertController = QMUIAlertController.init(title: url.lastPathComponent, message: "该文件存储在「文件」中，是否查看?", preferredStyle: .alert)
                 alertController.addCancelAction()
                 alertController.addAction(QMUIAlertAction.init(title: "查看", style: .destructive, handler: { _, _ in
@@ -53,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 alertController.showWith(animated: true)
                 return true
             } catch let error {
-                print(message: error.localizedDescription)
+                print(message: error)
                 kAlert(error.localizedDescription)
                 return true
             }

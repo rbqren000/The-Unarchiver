@@ -27,7 +27,7 @@ class SettingsViewController: ViewController {
                      //("分享给好友", "", "ic_share"),
                      ("清理缓存", "", "ic_helper"),
                      ("服务及隐私协议", "", "ic_unlock"),
-                     ("Licenses", "Libraries", "license"),
+                     ("Licenses", "", "license"),
                      //("GitHub仓库", "", "github-logo"),
                      ("关于我们", "", "ic_aboutus")]]
     
