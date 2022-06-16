@@ -61,6 +61,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        LocationManager.shared.startLocation()
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        LocationManager.shared.stopLocation()
+    }
+    
 }
 
 extension AppDelegate {
@@ -75,7 +85,12 @@ extension AppDelegate {
             AppDefaults.shared.reset()
             AppDefaults.shared.alreadyInstalled = true
         }
-    
+        
+        if CLLocationManager.authorizationStatus() == .denied {
+            AppDefaults.shared.webDAVRunInBackground = false
+            AppDefaults.shared.backgroundTaskEnable = false
+        }
+
     }
     
     

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1633A8112859AF0900DD8AEF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1633A8102859AF0900DD8AEF /* CloudKit.framework */; };
+		1633A813285ACF8500DD8AEF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1633A812285ACF8500DD8AEF /* LocationManager.swift */; };
 		16778B312858602400A9005B /* GCDWebDAVServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 16778B302858602400A9005B /* GCDWebDAVServer.m */; };
 		16778B33285864A100A9005B /* WebDAVServerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16778B32285864A100A9005B /* WebDAVServerController.swift */; };
 		16B552432856DE7E00179006 /* LicensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B552422856DE7D00179006 /* LicensesViewController.swift */; };
@@ -138,6 +139,7 @@
 /* Begin PBXFileReference section */
 		1633A80F2859AECB00DD8AEF /* The-Unarchiver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "The-Unarchiver.entitlements"; sourceTree = "<group>"; };
 		1633A8102859AF0900DD8AEF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		1633A812285ACF8500DD8AEF /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		16778B2F2858602400A9005B /* GCDWebDAVServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDWebDAVServer.h; sourceTree = "<group>"; };
 		16778B302858602400A9005B /* GCDWebDAVServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDWebDAVServer.m; sourceTree = "<group>"; };
 		16778B32285864A100A9005B /* WebDAVServerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebDAVServerController.swift; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 				16F938EB2852CF8900281A81 /* AppDefaults.swift */,
 				16F93AC02852DEB300281A81 /* AppManager.swift */,
 				16F938ED2852CF9000281A81 /* EmptyDataSet.swift */,
+				1633A812285ACF8500DD8AEF /* LocationManager.swift */,
 				16B5524B2858159400179006 /* TUApplication.h */,
 				16B5524C2858159400179006 /* TUApplication.mm */,
 				16F93ACE2852E0B200281A81 /* Categories */,
@@ -1335,6 +1338,7 @@
 				16F93AA02852D88700281A81 /* M13ProgressViewBorderedBar.m in Sources */,
 				16F939042852CFC300281A81 /* FileManager+DirectorySize.swift in Sources */,
 				16F93A502852D03900281A81 /* NSMutableDictionary+BlocksKit.m in Sources */,
+				1633A813285ACF8500DD8AEF /* LocationManager.swift in Sources */,
 				16F93A3B2852D03900281A81 /* GCDWebServerErrorResponse.m in Sources */,
 				16F93A482852D03900281A81 /* NSInvocation+BlocksKit.m in Sources */,
 				16F93A542852D03900281A81 /* UIView+BlocksKit.m in Sources */,
@@ -1591,12 +1595,13 @@
 				CODE_SIGN_ENTITLEMENTS = "The-Unarchiver/The-Unarchiver.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
-				DEVELOPMENT_TEAM = WPXQYZSK2Q;
+				DEVELOPMENT_TEAM = VTA4Y6H8RZ;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "The-Unarchiver/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Unarchiver;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "帮助您快速找到需要连接的设备，以便传输文件";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "帮助您快速找到需要连接的设备，以便传输文件";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "为用户管理手机相册照片,Unarchiver需要访问你的照片";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "为用户管理手机相册照片,Unarchiver需要访问你的照片";
@@ -1687,12 +1692,13 @@
 				CODE_SIGN_ENTITLEMENTS = "The-Unarchiver/The-Unarchiver.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
-				DEVELOPMENT_TEAM = WPXQYZSK2Q;
+				DEVELOPMENT_TEAM = VTA4Y6H8RZ;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "The-Unarchiver/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Unarchiver;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "帮助您快速找到需要连接的设备，以便传输文件";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "帮助您快速找到需要连接的设备，以便传输文件";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "为用户管理手机相册照片,Unarchiver需要访问你的照片";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "为用户管理手机相册照片,Unarchiver需要访问你的照片";

@@ -14,6 +14,7 @@ import Async
 
 class SettingsViewController: ViewController {
     
+    let backgroundTaskSwitch = UISwitch()
     var tableView = QMUITableView.init(frame: CGRect.zero, style: .grouped)
     var cacheSize: Int = 0
     let cellIdentifier = "settingsCell"
@@ -22,7 +23,8 @@ class SettingsViewController: ViewController {
     let aboxIssuesURL = URL(string: "https://github.com/SWING1993/ABox_iOS/issues")!
 
     //  ("关于我们", "ic_aboutus")
-    let cellData = [[("解压设置", "", "rar-setting")],
+    let cellData = [[("解压设置", "", "rar-setting"),
+                     ("保持后台", "", "background")],
                     [//("问题反馈", "", "feedback"),
                      //("分享给好友", "", "ic_share"),
                      ("清理缓存", "", "ic_helper"),
@@ -53,6 +55,8 @@ class SettingsViewController: ViewController {
     
     override func initSubviews() {
         super.initSubviews()
+        
+        backgroundTaskSwitch.addTarget(self, action: #selector(switchValueChanged(sender:)), for: .valueChanged)
         if #available(iOS 13.0, *) {
             self.tableView = QMUITableView.init(frame: .zero, style: .insetGrouped)
         }
@@ -69,6 +73,21 @@ class SettingsViewController: ViewController {
     }
     
   
+    @objc
+    func switchValueChanged(sender: UISwitch) {
+        print(message: CLLocationManager.authorizationStatus())
+        if sender.isOn {
+            if CLLocationManager.authorizationStatus() == .denied  {
+                kAlert("请开启定位权限以便与WebDAV在后台运行。")
+                backgroundTaskSwitch.isOn = false
+                return
+            }
+            if CLLocationManager.authorizationStatus() != .authorizedAlways {
+                LocationManager.shared.requestAuthority()
+            }
+        }
+        AppDefaults.shared.backgroundTaskEnable = sender.isOn
+    }
 }
 
 
@@ -105,7 +124,11 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
         cell?.imageView?.image = UIImage(named: item.2)?.qmui_image(withTintColor: kTextColor)
         if item.0 == "清理缓存" {
             cell?.detailTextLabel?.text = String.fileSizeDesc(self.cacheSize)
+        } else if item.0 == "保持后台" {
+            backgroundTaskSwitch.isOn = AppDefaults.shared.backgroundTaskEnable!
+            cell?.accessoryView = backgroundTaskSwitch
         }
+        
         return cell!
     }
     

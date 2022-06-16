@@ -42,6 +42,9 @@ class FileExchangeController: ViewController {
     
     func startWebDAV() {
         let controller = WebDAVServerController()
+        controller.dismissBlock = { [unowned self] in
+            self.tableView.reloadData()
+        }
         let nav = NavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true, completion: nil)
@@ -66,7 +69,7 @@ extension FileExchangeController: QMUITableViewDelegate, QMUITableViewDataSource
         let identifier = "cell"
         var cell = tableView.dequeueReusableCell(withIdentifier: identifier)
         if (cell == nil) {
-            cell = QMUITableViewCell(for: tableView, with: .subtitle, reuseIdentifier: identifier)
+            cell = QMUITableViewCell(for: tableView, with: .value1, reuseIdentifier: identifier)
             cell?.backgroundColor = .white
             cell?.selectionStyle = .none
             cell?.textLabel?.font = UIFont.medium(aSize: 15)
@@ -75,12 +78,22 @@ extension FileExchangeController: QMUITableViewDelegate, QMUITableViewDataSource
             cell?.detailTextLabel?.textColor = kSubtextColor
             cell?.accessoryType = .disclosureIndicator
         }
+        
+        cell?.imageView?.image = nil
+        cell?.textLabel?.text = nil
+        cell?.detailTextLabel?.text = nil
+        
         if indexPath.section == 0 {
             cell?.textLabel?.text = "WiFi传输"
             cell?.imageView?.image = UIImage.init(named: "wifi-signal")?.resize(toWidth: 35)
         } else {
             cell?.textLabel?.text = "WebDAV"
             cell?.imageView?.image = UIImage.init(named: "webdav")?.resize(toWidth: 35)
+            if let davServer = Client.shared.davServer {
+                if davServer.isRunning && davServer.serverURL != nil {
+                    cell?.detailTextLabel?.text = davServer.serverURL?.absoluteString
+                }
+            }
         }
         return cell!
     }

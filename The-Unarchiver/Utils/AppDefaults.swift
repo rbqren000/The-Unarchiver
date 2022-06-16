@@ -16,6 +16,7 @@ public struct UserDefaultsItem<Value> {
         get {
             switch Value.self {
             case is Data.Type: return AppDefaults.shared.data(forKey: self.key) as? Value
+            case is Int.Type: return AppDefaults.shared.integer(forKey: self.key) as? Value
             case is String.Type: return AppDefaults.shared.string(forKey: self.key) as? Value
             case is Bool.Type: return AppDefaults.shared.bool(forKey: self.key) as? Value
             default: return nil
@@ -38,7 +39,12 @@ class AppDefaults: UserDefaults {
     
     @UserDefaultsItem(key: "alreadyInstalled")
     public var alreadyInstalled: Bool?
-        
+    
+    @UserDefaultsItem(key: "backgroundTaskEnable")
+    public var backgroundTaskEnable: Bool?
+
+    
+    /// unarchiver
     @UserDefaultsItem(key: "unarchiverExtractsubarchives")
     public var unarchiverExtractsubarchives: Bool?
     
@@ -65,6 +71,17 @@ class AppDefaults: UserDefaults {
     
     @UserDefaultsItem(key: "unarchiverPropagatemetadata")
     public var unarchiverPropagatemetadata: Bool?
+    
+    
+    /// webDAV
+    @UserDefaultsItem(key: "webDAVPort")
+    public var webDAVPort: Int?
+    
+    @UserDefaultsItem(key: "webDAVBonjourName")
+    public var webDAVBonjourName: String?
+    
+    @UserDefaultsItem(key: "webDAVRunInBackground")
+    public var webDAVRunInBackground: Bool?
 
     public func reset() {
         self.unarchiverExtractsubarchives = true

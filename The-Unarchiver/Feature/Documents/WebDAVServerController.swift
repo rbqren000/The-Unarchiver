@@ -6,20 +6,20 @@
 //
 
 import UIKit
-
+import CoreLocation
 
 class WebDAVServerSettings {
-    var port: UInt = 8080
+    var port: UInt = 8081
     var bonjourName: String = "The-Unarchiver"
+    var runInBackground: Bool = false
 }
 
 class WebDAVServerController: ViewController {
 
     var dismissBlock: (() -> ())?
-
-    var devServer: GCDWebDAVServer!
     let webDAVSettings = WebDAVServerSettings()
-    let webDAVSwitch = UISwitch.init()
+    let webDAVSwitch = UISwitch()
+    let webDAVBackgroundSwitch = UISwitch()
     
     private var tableView = QMUITableView.init(frame: .zero, style: .grouped)
     private let cellIdentifier = "WebDAVCell"
@@ -28,16 +28,40 @@ class WebDAVServerController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "WebDAV Server"
-
         // Do any additional setup after loading the view.
-        devServer = GCDWebDAVServer.init(uploadDirectory: FileManager.default.documentDirectory.path)
-        devServer.delegate = self
+        configWebDAVServerSettings()
+        if let davServer = Client.shared.davServer {
+            webDAVSwitch.isOn = davServer.isRunning && davServer.serverURL != nil
+        }
+        self.tableView.reloadData()
+        print(message: CLLocationManager.authorizationStatus())
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
+    
+    func configWebDAVServerSettings() {
+        if let port: Int = AppDefaults.shared.webDAVPort {
+            if port > 0 {
+                self.webDAVSettings.port = UInt(port)
+            }
+        }
+        if let runInBackground = AppDefaults.shared.webDAVRunInBackground {
+            self.webDAVSettings.runInBackground = runInBackground
+        }
+        webDAVBackgroundSwitch.isOn = self.webDAVSettings.runInBackground
+        print(message: webDAVSettings.runInBackground)
     }
 
     override func initSubviews() {
         super.initSubviews()
         
-        webDAVSwitch.addTarget(self, action: #selector(switchValueChanged(sender:)), for: .valueChanged)
+        webDAVSwitch.addTarget(self, action: #selector(webDAVServer(sender:)), for: .valueChanged)
+        webDAVBackgroundSwitch.addTarget(self, action: #selector(webDAVRunInBackground(sender:)), for: .valueChanged)
+        
         if #available(iOS 13.0, *) {
             self.tableView = QMUITableView.init(frame: .zero, style: .insetGrouped)
         }
@@ -57,44 +81,36 @@ class WebDAVServerController: ViewController {
     
     @objc
     override func dismissController() {
-        if devServer.isRunning {
-            UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
-            let alertController = QMUIAlertController.init(title: "是否关闭WebDAVServer？", message: nil, preferredStyle: .alert)
-            alertController.addAction(QMUIAlertAction(title: "取消", style: .cancel, handler: nil))
-            alertController.addAction(QMUIAlertAction(title: "确定", style: .default, handler: { [unowned self] _, _ in
-                self.devServer.stop()
-                self.dismissBlock?()
-                self.dismiss(animated: true, completion: nil)
-            }))
-            alertController.showWith(animated: true)
-        } else {
-            self.dismissBlock?()
-            self.dismiss(animated: true, completion: nil)
-        }
+        self.dismissBlock?()
+        self.dismiss(animated: true, completion: nil)
     }
+    
     @objc
-    func switchValueChanged(sender: UISwitch) {
-        self.webDAVServer(isOn: sender.isOn)
+    func webDAVRunInBackground(sender: UISwitch) {
+     
+        print(message: CLLocationManager.authorizationStatus())
+        if sender.isOn {
+            if CLLocationManager.authorizationStatus() == .denied  {
+                kAlert("请开启定位权限以便与WebDAV在后台运行。")
+                webDAVBackgroundSwitch.isOn = false
+                return
+            }
+            if CLLocationManager.authorizationStatus() != .authorizedAlways {
+                LocationManager.shared.requestAuthority()
+            }
+        }
+        self.webDAVSettings.runInBackground = sender.isOn
+        AppDefaults.shared.webDAVRunInBackground = self.webDAVSettings.runInBackground
+        print(message: AppDefaults.shared.webDAVRunInBackground)
     }
 
-    func webDAVServer(isOn: Bool) {
-        if devServer.isRunning {
-            if isOn == false {
-                devServer.stop()
-            }
-        } else {
-            if isOn {
-                let started = devServer.start(withPort: webDAVSettings.port, bonjourName: webDAVSettings.bonjourName)
-                self.webDAVSwitch.isOn = started
-                if started && devServer.serverURL != nil {
-                    print(message: "Visit \(devServer.serverURL?.absoluteString) in your WebDAV client")
-                } else {
-                    webDAVSwitch.isOn = false
-                    kAlert("暂时无法开启WebDAV，请稍后再试。")
-                }
-            }
+    @objc
+    func webDAVServer(sender: UISwitch) {
+        let isOn = sender.isOn
+        Client.shared.webDAVServer(start: isOn, port: webDAVSettings.port)
+        if let davServer = Client.shared.davServer {
+            webDAVSwitch.isOn = davServer.isRunning && davServer.serverURL != nil
         }
-        
         self.tableView.reloadData()
     }
 }
@@ -102,7 +118,7 @@ class WebDAVServerController: ViewController {
 extension WebDAVServerController: QMUITableViewDelegate, QMUITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return devServer.isRunning && devServer.serverURL != nil ? 2 : 1
+        return webDAVSwitch.isOn ? 3 : 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -137,25 +153,26 @@ extension WebDAVServerController: QMUITableViewDelegate, QMUITableViewDataSource
             if indexPath.row == 0 {
                 cell?.textLabel?.text = "WebDAV Server"
                 cell?.accessoryView = webDAVSwitch
-            } else {
+            } else if indexPath.row == 1 {
                 cell?.textLabel?.text = "Port"
                 cell?.detailTextLabel?.text = String.init(format: "%d", webDAVSettings.port)
-                cell?.accessoryType = self.devServer.isRunning ? .none : .disclosureIndicator
+                cell?.accessoryType = webDAVSwitch.isOn ? .none : .disclosureIndicator
             }
+        } else if indexPath.section == 1 {
+            cell?.textLabel?.text = "后台运行"
+            cell?.accessoryView = webDAVBackgroundSwitch
         } else {
             cell?.textLabel?.text = "URL"
-            cell?.detailTextLabel?.text = devServer.serverURL?.absoluteString
+            cell?.detailTextLabel?.text = Client.shared.davServer?.serverURL?.absoluteString
             let imageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: 35, height: 35))
             imageView.image =  UIImage.init(named: "export")
             cell?.accessoryView = imageView
         }
-
+        
+        
         return cell!
     }
-    
-    
 
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20
     }
@@ -171,13 +188,14 @@ extension WebDAVServerController: QMUITableViewDelegate, QMUITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 1 {
-                if self.devServer.isRunning {
+                if webDAVSwitch.isOn {
                     return
                 }
                 let alertController = QMUIAlertController.init(title: "设置WebDAVServer端口", message: nil, preferredStyle: .alert)
                 alertController.addTextField { textField in
                     textField.keyboardType = .numberPad
                     textField.placeholder = "请输入端口"
+                    textField.text = "\(self.webDAVSettings.port)"
                 }
                 alertController.addAction(QMUIAlertAction.init(title: "确定", style: .destructive, handler: { controller, action in
                     var portStr = ""
@@ -186,6 +204,7 @@ extension WebDAVServerController: QMUITableViewDelegate, QMUITableViewDataSource
                     }
                     if let port: UInt = UInt(portStr) {
                         self.webDAVSettings.port = port
+                        AppDefaults.shared.webDAVPort = Int(port)
                         self.tableView.reloadData()
                     } else {
                         kAlert("请输入正确的端口，否则无法访问。")
@@ -195,7 +214,7 @@ extension WebDAVServerController: QMUITableViewDelegate, QMUITableViewDataSource
                 alertController.showWith(animated: true)
             }
         } else if indexPath.section == 1 {
-            if let serverURL = self.devServer.serverURL?.absoluteString {
+            if let serverURL = Client.shared.davServer?.serverURL?.absoluteString {
                 let activityVC = UIActivityViewController.init(activityItems: [serverURL], applicationActivities: nil)
                 self.present(activityVC, animated: true, completion: nil)
             }
@@ -205,34 +224,3 @@ extension WebDAVServerController: QMUITableViewDelegate, QMUITableViewDataSource
 }
 
 
-extension WebDAVServerController: GCDWebDAVServerDelegate {
-    
-    func davServer(_ server: GCDWebDAVServer, didDeleteItemAtPath path: String) {
-        print(message: "WebDAVServer didDeleteItemAtPath:\(path)")
-    }
-    
-    func davServer(_ server: GCDWebDAVServer, didUploadFileAtPath path: String) {
-        print(message: "WebDAVServer didUploadFileAtPath:\(path)")
-
-    }
-    
-    func davServer(_ server: GCDWebDAVServer, didDownloadFileAtPath path: String) {
-        print(message: "WebDAVServer didDownloadFileAtPath:\(path)")
-
-    }
-    
-    func davServer(_ server: GCDWebDAVServer, didCreateDirectoryAtPath path: String) {
-        print(message: "WebDAVServer didCreateDirectoryAtPath:\(path)")
-
-    }
-    
-    func davServer(_ server: GCDWebDAVServer, didCopyItemFromPath fromPath: String, toPath: String) {
-        print(message: "WebDAVServer didCopyItemFromPath:\(fromPath) toPath:\(toPath)")
-
-    }
-    
-    func davServer(_ server: GCDWebDAVServer, didMoveItemFromPath fromPath: String, toPath: String) {
-        print(message: "WebDAVServer didMoveItemFromPath:\(fromPath) toPath:\(toPath)")
-
-    }
-}
