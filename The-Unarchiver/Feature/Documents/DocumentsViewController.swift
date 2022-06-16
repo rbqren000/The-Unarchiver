@@ -541,32 +541,6 @@ extension DocumentsViewController {
             controller.title = file.name
             controller.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(controller, animated: true)
-        } else if file.isIPA {
-            UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
-            let alertController = QMUIAlertController.init(title: file.name, message: nil, preferredStyle: .actionSheet)
-            alertController.addAction(QMUIAlertAction.init(title: "解压", style: .default, handler: { _, _ in
-                self.unZip(file)
-            }))
-            
-//            alertController.addAction(QMUIAlertAction.init(title: "安装", style: .destructive, handler: { _, _ in
-//                AppManager.default.requestFile(file.url)
-//            }))
-
-            alertController.addAction(QMUIAlertAction.init(title: "取消", style: .cancel, handler: nil))
-            alertController.showWith(animated: true)
-            /*
-            let alertController = QMUIAlertController.init(title: file.name, message: "安装期间请不要退出对话框，否则可能会导致安装失败。", preferredStyle: .actionSheet)
-            alertController.addAction(QMUIAlertAction.init(title: "解压", style: .default, handler: { _, _ in
-                self.unZip(file)
-            }))
-            
-            alertController.addAction(QMUIAlertAction.init(title: "安装", style: .destructive, handler: { _, _ in
-                AppManager.default.requestFile(file.url)
-            }))
-
-            alertController.addAction(QMUIAlertAction.init(title: "取消", style: .cancel, handler: nil))
-            alertController.showWith(animated: true)
-             */
         } else if file.isPlist {
             if let dictionary = NSMutableDictionary.init(contentsOf: file.url) {
                 let controller = PlistPreviewController.init(dictionary: dictionary)

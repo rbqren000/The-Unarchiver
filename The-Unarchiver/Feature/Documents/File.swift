@@ -31,15 +31,7 @@ class File: NSObject {
     var isDylib: Bool {
         return self.type == "dylib"
     }
-    
-    var isFramework: Bool {
-        return self.isFolder && self.url.pathExtension.lowercased() == "framework"
-    }
-    
-    var isIPA: Bool {
-        return self.type == "ipa"
-    }
-    
+        
     var isWord: Bool {
         return wordTypes.contains(self.type)
     }
