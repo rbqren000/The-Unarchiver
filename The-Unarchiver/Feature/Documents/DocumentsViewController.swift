@@ -155,24 +155,17 @@ extension DocumentsViewController: QMUITableViewDelegate, QMUITableViewDataSourc
         }
         if indexPath.section == 0 {
             let file = files[indexPath.row]
-            if file.isAppBundle {
-                let application = TUApplication.init(fileURL: file.url)!
-                cell?.imageView?.image = application.icon?.resize(toWidth: 40)?.qmui_image(withClippedCornerRadius: 10)
-                cell?.textLabel?.text = "\(application.name) - v\(application.version)"
-                cell?.detailTextLabel?.text = "\(file.name) - \(application.bundleIdentifier)"
+            cell?.textLabel?.text = file.name
+            if file.isFolder {
+                cell?.imageView?.image = UIImage(named: "file_ext_folder")
+                cell?.detailTextLabel?.text = "\(String.timeStr(file.modificationDate))"
                 cell?.accessoryType = .disclosureIndicator
             } else {
-                cell?.textLabel?.text = file.name
-                if file.isFolder {
-                    cell?.imageView?.image = UIImage(named: "file_ext_folder")
-                    cell?.detailTextLabel?.text = "\(String.timeStr(file.modificationDate))"
-                    cell?.accessoryType = .disclosureIndicator
-                } else {
-                    cell?.accessoryType = .none
-                    cell?.imageView?.image = file.getFileThumbnails()
-                    cell?.detailTextLabel?.text = "\(String.timeStr(file.modificationDate)) - \(file.sizeDesc)"
-                }
+                cell?.accessoryType = .none
+                cell?.imageView?.image = file.getFileThumbnails()
+                cell?.detailTextLabel?.text = "\(String.timeStr(file.modificationDate)) - \(file.sizeDesc)"
             }
+
         } else {
             cell?.textLabel?.text = "回收站"
             cell?.imageView?.image = UIImage(named: "file_bin")
@@ -328,9 +321,6 @@ extension DocumentsViewController {
             self.files.sort { (f1, f2) -> Bool in
                 if self.segmentIndex == 0 {
                     if f1.isFolder && f2.isFolder {
-                        if f1.isAppBundle {
-                            return true
-                        }
                         return f1.name < f2.name
                     }
                     return f1.type < f2.type

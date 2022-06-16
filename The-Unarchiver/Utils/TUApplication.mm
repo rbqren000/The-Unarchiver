@@ -62,8 +62,6 @@
         minimumVersion.minorVersion = minorVersion;
         minimumVersion.patchVersion = patchVersion;
         
-
-        
         NSDictionary *icons = infoDictionary[@"CFBundleIcons"];
         NSDictionary *primaryIcon = icons[@"CFBundlePrimaryIcon"];
         
@@ -113,31 +111,5 @@
     UIImage *icon = [UIImage imageNamed:iconName inBundle:self.bundle compatibleWithTraitCollection:nil];
     return icon;
 }
-
-
-- (NSSet<TUApplication *> *)appExtensions
-{
-    NSMutableSet *appExtensions = [NSMutableSet set];
-    
-    NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtURL:self.bundle.builtInPlugInsURL includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsSubdirectoryDescendants errorHandler:nil];
-    for (NSURL *fileURL in enumerator)
-    {
-        if (![fileURL.pathExtension.lowercaseString isEqualToString:@"appex"])
-        {
-            continue;
-        }
-        
-        TUApplication *appExtension = [[TUApplication alloc] initWithFileURL:fileURL];
-        if (appExtension == nil)
-        {
-            continue;
-        }
-        
-        [appExtensions addObject:appExtension];
-    }
-    
-    return appExtensions;
-}
-
 
 @end

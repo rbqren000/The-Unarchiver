@@ -18,7 +18,6 @@ class File: NSObject {
     var fileCount = 0
     var modificationDate: Date?
     var creationDate: Date?
-    var isAppBundle = false
     
     var isArchiver: Bool {
         return archiverTypes.contains(self.type)
@@ -83,12 +82,6 @@ class File: NSObject {
         } else {
             self.isFolder = false
             self.type = fileURL.pathExtension.lowercased()
-        }
-        if self.isFolder && self.url.pathExtension.lowercased() == "app" {
-            let altApplication = TUApplication.init(fileURL: self.url)
-            self.isAppBundle = altApplication == nil ? false: true
-        } else {
-            self.isAppBundle = false
         }
     }
     

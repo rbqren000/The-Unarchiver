@@ -18,8 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *executableName;
 @property (nonatomic, copy, readonly) NSURL *executableFileURL;
 @property (nonatomic, readonly, nullable) UIImage *icon;
-
-@property (nonatomic, readonly) NSSet<TUApplication *> *appExtensions;
 @property (nonatomic, readonly) NSOperatingSystemVersion minimumiOSVersion;
 @property (nonatomic, copy, readonly) NSURL *fileURL;
 @property (nonatomic, readonly) NSBundle *bundle;
