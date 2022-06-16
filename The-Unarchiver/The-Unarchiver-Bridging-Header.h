@@ -34,6 +34,5 @@
 #import "TUApplication.h"
 
 // Categories
-#import "NSFileManager+Zip.h"
 #import "XADHelper.h"
 #import "XADException.h"

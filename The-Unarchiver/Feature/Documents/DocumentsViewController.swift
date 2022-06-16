@@ -460,7 +460,6 @@ extension DocumentsViewController {
                     }
                     let subPath: URL = self.indexFileURL.appendingPathComponent(name)
                     let file = File.init(fileURL: subPath)
-                    FileManager.default.setFilePosixPermissions(file.url)
                     self.files.append(file)
                 }
                 self.files.sort { (file1, file2) -> Bool in
@@ -532,36 +531,6 @@ extension DocumentsViewController {
                 } else {
                     self.unArchiver(file, password: password)
                 }
-            }))
-            alertController.addCancelAction()
-            alertController.showWith(animated: true)
-        } else if file.isAppBundle {
-            UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
-            let alertController = QMUIAlertController.init(title: file.url.lastPathComponent, message: nil, preferredStyle: .actionSheet)
-            alertController.addAction(QMUIAlertAction.init(title: "打包IPA", style: .destructive, handler: { _, _ in
-                QMUITips.showLoading("正在打包IPA...", detailText: file.name, in: self.view).whiteStyle()
-                Async.background {
-                    do {
-                        try FileManager.default.zipAppBundle(at: file.url)
-                        Async.main {
-                            QMUITips.hideAllTips()
-                            self.getFolderFiles()
-                        }
-                    } catch let error {
-                        Async.main {
-                            QMUITips.hideAllTips()
-                            kAlert(error.localizedDescription)
-                        }
-                    }
-                }
-            }))
-            alertController.addAction(QMUIAlertAction.init(title: "查看文件", style: .default, handler: { _, _ in
-                let controller = DocumentsViewController()
-                controller.indexFileURL = file.url
-                controller.selectFileCallback = self.selectFileCallback
-                controller.title = file.name
-                controller.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(controller, animated: true)
             }))
             alertController.addCancelAction()
             alertController.showWith(animated: true)

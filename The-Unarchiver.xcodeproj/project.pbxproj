@@ -113,11 +113,6 @@
 		16F93ABD2852DD9400281A81 /* PlistPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93ABC2852DD9400281A81 /* PlistPreviewController.swift */; };
 		16F93ABF2852DDA100281A81 /* ImportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93ABE2852DDA100281A81 /* ImportViewController.swift */; };
 		16F93AC12852DEB300281A81 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AC02852DEB300281A81 /* AppManager.swift */; };
-		16F93AD82852E0B200281A81 /* NSFileManager+Zip.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F93ACF2852E0B200281A81 /* NSFileManager+Zip.m */; };
-		16F93AE52852E10C00281A81 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 16F93ADB2852E10C00281A81 /* unzip.c */; };
-		16F93AE62852E10C00281A81 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 16F93ADC2852E10C00281A81 /* zip.c */; };
-		16F93AE72852E10C00281A81 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 16F93ADE2852E10C00281A81 /* ioapi.c */; };
-		16F93AE82852E10C00281A81 /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 16F93ADF2852E10C00281A81 /* mztools.c */; };
 		16F93AF12852ECDE00281A81 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AF02852ECDE00281A81 /* SettingsViewController.swift */; };
 		16F93AF42853346000281A81 /* FileExchangeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AF32853346000281A81 /* FileExchangeController.swift */; };
 		16F93AF72853398500281A81 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F93AF62853398500281A81 /* DownloadViewController.swift */; };
@@ -493,18 +488,6 @@
 		16F93ABC2852DD9400281A81 /* PlistPreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistPreviewController.swift; sourceTree = "<group>"; };
 		16F93ABE2852DDA100281A81 /* ImportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportViewController.swift; sourceTree = "<group>"; };
 		16F93AC02852DEB300281A81 /* AppManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
-		16F93ACF2852E0B200281A81 /* NSFileManager+Zip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+Zip.m"; sourceTree = "<group>"; };
-		16F93AD12852E0B200281A81 /* NSFileManager+Zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+Zip.h"; sourceTree = "<group>"; };
-		16F93ADB2852E10C00281A81 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
-		16F93ADC2852E10C00281A81 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
-		16F93ADD2852E10C00281A81 /* iowin32.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iowin32.h; sourceTree = "<group>"; };
-		16F93ADE2852E10C00281A81 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
-		16F93ADF2852E10C00281A81 /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
-		16F93AE02852E10C00281A81 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
-		16F93AE12852E10C00281A81 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
-		16F93AE22852E10C00281A81 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
-		16F93AE32852E10C00281A81 /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
-		16F93AE42852E10C00281A81 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
 		16F93AF02852ECDE00281A81 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		16F93AF32853346000281A81 /* FileExchangeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExchangeController.swift; sourceTree = "<group>"; };
 		16F93AF62853398500281A81 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
@@ -611,7 +594,6 @@
 				16F939C62852D03800281A81 /* GCDWebUploader */,
 				16778B2E2858602400A9005B /* GCDWebDAVServer */,
 				16F939162852D02200281A81 /* XADMaster */,
-				16F93ADA2852E10C00281A81 /* minizip */,
 				16F93A6E2852D88700281A81 /* M13ProgressSuite */,
 				16F939EA2852D03900281A81 /* BlocksKit */,
 			);
@@ -1104,31 +1086,12 @@
 		16F93ACE2852E0B200281A81 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				16F93AD12852E0B200281A81 /* NSFileManager+Zip.h */,
-				16F93ACF2852E0B200281A81 /* NSFileManager+Zip.m */,
 				16F938FB2852CFC200281A81 /* NSString+Utilities.h */,
 				16F938F32852CFC100281A81 /* NSString+Utilities.m */,
 				16F938F42852CFC200281A81 /* UIScrollView+EmptyDataSet.h */,
 				16F939022852CFC300281A81 /* UIScrollView+EmptyDataSet.m */,
 			);
 			path = Categories;
-			sourceTree = "<group>";
-		};
-		16F93ADA2852E10C00281A81 /* minizip */ = {
-			isa = PBXGroup;
-			children = (
-				16F93AE02852E10C00281A81 /* crypt.h */,
-				16F93ADE2852E10C00281A81 /* ioapi.c */,
-				16F93AE42852E10C00281A81 /* ioapi.h */,
-				16F93ADD2852E10C00281A81 /* iowin32.h */,
-				16F93ADF2852E10C00281A81 /* mztools.c */,
-				16F93AE32852E10C00281A81 /* mztools.h */,
-				16F93ADB2852E10C00281A81 /* unzip.c */,
-				16F93AE22852E10C00281A81 /* unzip.h */,
-				16F93ADC2852E10C00281A81 /* zip.c */,
-				16F93AE12852E10C00281A81 /* zip.h */,
-			);
-			path = minizip;
 			sourceTree = "<group>";
 		};
 		16F93AEF2852EC8700281A81 /* Settings */ = {
@@ -1343,7 +1306,6 @@
 				16F93A482852D03900281A81 /* NSInvocation+BlocksKit.m in Sources */,
 				16F93A542852D03900281A81 /* UIView+BlocksKit.m in Sources */,
 				16F939142852D00C00281A81 /* QMUIConfigurationTemplate.m in Sources */,
-				16F93AD82852E0B200281A81 /* NSFileManager+Zip.m in Sources */,
 				16F9390D2852CFC300281A81 /* URL+Utilities.swift in Sources */,
 				16F93AF42853346000281A81 /* FileExchangeController.swift in Sources */,
 				16F93A3C2852D03900281A81 /* GCDWebServerFileResponse.m in Sources */,
@@ -1396,10 +1358,8 @@
 				16F939052852CFC300281A81 /* UITableViewCell+Utilities.swift in Sources */,
 				16F93B0528533CAA00281A81 /* WebViewController.swift in Sources */,
 				16F9390F2852CFC300281A81 /* String+Additions.swift in Sources */,
-				16F93AE72852E10C00281A81 /* ioapi.c in Sources */,
 				16F93A492852D03900281A81 /* NSSet+BlocksKit.m in Sources */,
 				16F93B0328533C5300281A81 /* API.swift in Sources */,
-				16F93AE62852E10C00281A81 /* zip.c in Sources */,
 				16F93A572852D03900281A81 /* UIActionSheet+BlocksKit.m in Sources */,
 				16F93A3A2852D03900281A81 /* GCDWebServerConnection.m in Sources */,
 				16F93A382852D03900281A81 /* GCDWebServerFunctions.m in Sources */,
@@ -1433,14 +1393,12 @@
 				16F93A592852D03900281A81 /* UITextField+BlocksKit.m in Sources */,
 				16F93A4E2852D03900281A81 /* NSObject+BKBlockExecution.m in Sources */,
 				16F93AA42852D88800281A81 /* M13ProgressViewRadiative.m in Sources */,
-				16F93AE82852E10C00281A81 /* mztools.c in Sources */,
 				16F93A9E2852D88700281A81 /* M13ProgressViewLetterpress.m in Sources */,
 				16F93AA52852D88800281A81 /* M13ProgressViewSegmentedRing.m in Sources */,
 				16F93A6A2852D12900281A81 /* TabBarViewController.swift in Sources */,
 				16F9390C2852CFC300281A81 /* UIViewController+Utilities.swift in Sources */,
 				16F93AA22852D88800281A81 /* M13ProgressView.m in Sources */,
 				16F93A422852D03900281A81 /* GCDWebServerFileRequest.m in Sources */,
-				16F93AE52852E10C00281A81 /* unzip.c in Sources */,
 				16F93A3D2852D03900281A81 /* GCDWebServerDataResponse.m in Sources */,
 				16F93A462852D03900281A81 /* NSObject+BKBlockObservation.m in Sources */,
 				16F93A5A2852D03900281A81 /* UIControl+BlocksKit.m in Sources */,
