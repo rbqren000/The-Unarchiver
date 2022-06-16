@@ -78,7 +78,7 @@ class SettingsViewController: ViewController {
         print(message: CLLocationManager.authorizationStatus())
         if sender.isOn {
             if CLLocationManager.authorizationStatus() == .denied  {
-                kAlert("请开启定位权限以便与WebDAV在后台运行。")
+                kAlert("请开启定位权限以便与App在后台也可以解压文件、WiFi文件传输和访问WebDAV服务")
                 backgroundTaskSwitch.isOn = false
                 return
             }
@@ -137,11 +137,11 @@ extension SettingsViewController: QMUITableViewDelegate, QMUITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 0 ? 0.01 : 30
+        return section == 0 ? 50 : 30
     }
     
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return section == 0 ? nil : "\(kAppDisPlayName!)：\(kAppVersion!)"
+        return section == 0 ? "开启「保持后台」以便与App在后台也可以解压文件、WiFi文件传输和访问WebDAV服务" : "\(kAppDisPlayName!)：\(kAppVersion!)"
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
