@@ -30,9 +30,6 @@
 #import "YTKKeyValueStore.h"
 #import "TZImagePickerController.h"
 
-
-#import "TUApplication.h"
-
 // Categories
 #import "XADHelper.h"
 #import "XADException.h"

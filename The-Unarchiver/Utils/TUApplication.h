@@ -12,17 +12,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TUApplication : NSObject
 
-@property (nonatomic, copy, readonly) NSString *name;
-@property (nonatomic, copy, readonly) NSString *bundleIdentifier;
-@property (nonatomic, copy, readonly) NSString *version;
-@property (nonatomic, copy, readonly) NSString *executableName;
-@property (nonatomic, copy, readonly) NSURL *executableFileURL;
-@property (nonatomic, readonly, nullable) UIImage *icon;
-@property (nonatomic, readonly) NSOperatingSystemVersion minimumiOSVersion;
-@property (nonatomic, copy, readonly) NSURL *fileURL;
-@property (nonatomic, readonly) NSBundle *bundle;
+//@property (nonatomic, copy, readonly) NSString *name;
+//@property (nonatomic, copy, readonly) NSString *bundleIdentifier;
+//@property (nonatomic, copy, readonly) NSString *version;
+//@property (nonatomic, copy, readonly) NSString *executableName;
+//@property (nonatomic, copy, readonly) NSURL *executableFileURL;
+//@property (nonatomic, readonly, nullable) UIImage *icon;
+//@property (nonatomic, readonly) NSOperatingSystemVersion minimumiOSVersion;
+//@property (nonatomic, copy, readonly) NSURL *fileURL;
+//@property (nonatomic, readonly) NSBundle *bundle;
 
-- (nullable instancetype)initWithFileURL:(NSURL *)fileURL;
+//- (nullable instancetype)initWithFileURL:(NSURL *)fileURL;
 
 @end
 
