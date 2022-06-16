@@ -13,28 +13,46 @@ class Client: NSObject {
     public static let shared = Client()
 
     let store = YTKKeyValueStore.init(dbWithName: ".Unarchiver.db")
-   
+    var webUploader: GCDWebUploader?
     var davServer: GCDWebDAVServer?
-
-    func webDAVServer(start: Bool, port: UInt = 8080, bonjourName: String = "") {
+    
+    
+    func webUploader(start: Bool, port: UInt = 5050) {
+        if self.webUploader == nil {
+            self.webUploader = GCDWebUploader(uploadDirectory: FileManager.default.documentDirectory.path)
+        }
+        
+        if let webUploader = self.webUploader {
+            if webUploader.isRunning && start == false {
+                webUploader.stop()
+            }
+            if webUploader.isRunning == false && start {
+                let started = webUploader.start(withPort: port, bonjourName: "Unarchiver")
+                if started && webUploader.serverURL != nil {
+                    print(message: "Visit \(webUploader.serverURL?.absoluteString) in your Web client")
+                } else {
+                    print(message: "暂时无法开启WebDAV，请稍后再试。")
+                }
+            }
+        }
+    }
+    
+    func webDAVServer(start: Bool, port: UInt = 8080, bonjourName: String = "Unarchiver") {
         if self.davServer == nil {
             davServer = GCDWebDAVServer.init(uploadDirectory: FileManager.default.documentDirectory.path)
             davServer?.delegate = self
         }
         
         if let davServer = davServer {
-            if davServer.isRunning {
-                if start == false {
-                    davServer.stop()
-                }
-            } else {
-                if start {
-                    let started = davServer.start(withPort: port, bonjourName: bonjourName)
-                    if started && davServer.serverURL != nil {
-                        print(message: "Visit \(davServer.serverURL?.absoluteString) in your WebDAV client")
-                    } else {
-                        print(message: "暂时无法开启WebDAV，请稍后再试。")
-                    }
+            if davServer.isRunning && start == false {
+                davServer.stop()
+            }
+            if davServer.isRunning == false && start {
+                let started = davServer.start(withPort: port, bonjourName: bonjourName)
+                if started && davServer.serverURL != nil {
+                    print(message: "Visit \(davServer.serverURL?.absoluteString) in your WebDAV client")
+                } else {
+                    print(message: "暂时无法开启WebDAV，请稍后再试。")
                 }
             }
         }

@@ -60,11 +60,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
     }
-    
-    
-    
+
     func applicationDidEnterBackground(_ application: UIApplication) {
-        LocationManager.shared.startLocation()
+        if AppDefaults.shared.backgroundTaskEnable! {
+            var startLocation = false
+            if let davServer = Client.shared.davServer {
+                startLocation = davServer.isRunning && davServer.serverURL != nil
+            }
+            
+            if let webUploader = Client.shared.webUploader {
+                startLocation = webUploader.isRunning && webUploader.serverURL != nil
+            }
+            
+            if startLocation {
+                LocationManager.shared.startLocation()
+            }
+        }
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -87,7 +98,6 @@ extension AppDelegate {
         }
         
         if CLLocationManager.authorizationStatus() == .denied {
-            AppDefaults.shared.webDAVRunInBackground = false
             AppDefaults.shared.backgroundTaskEnable = false
         }
 

@@ -11,14 +11,10 @@ class WebUploaderController: ViewController {
     
     let iconView = UIImageView(image: UIImage(named: "icon_wifi"))
     let tipLabel = UILabel()
-    var webUploader: GCDWebUploader!
-    var webUploaderRunning = false
     var dismissBlock: (() -> ())?
     
     deinit {
         print(message: "WebUploaderController deinit")
-        webUploader.stop()
-        webUploader = nil
     }
     
     override func initSubviews() {
@@ -46,23 +42,28 @@ class WebUploaderController: ViewController {
         super.viewDidLoad()
         self.title = "WiFi文件传输"
         self.startWebUploader()
+
+        
     }
     
     override func setupNavigationItems() {
         super.setupNavigationItems()
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(title: "关闭", style: .done, target: self, action: #selector(dismissController))
+        let closeBarButton = UIBarButtonItem.init(title: "关闭", style: .done, target: self, action: #selector(dismissController(sender:)))
+        closeBarButton.tag = 1
+        let backBarButton = UIBarButtonItem.init(title: "返回", style: .done, target: self, action: #selector(dismissController(sender:)))
+        self.navigationItem.leftBarButtonItems = [backBarButton, closeBarButton]
     }
     
     @objc
-    override func dismissController() {
-        
-        if webUploaderRunning {
+    func dismissController(sender: UIBarButtonItem) {
+        if sender.tag == 1 {
             UIImpactFeedbackGenerator.init(style: .medium).impactOccurred()
-            let alertController = QMUIAlertController.init(title: "关闭此页面将导致Wi-Fi文件传输关闭", message: nil, preferredStyle: .alert)
+            let alertController = QMUIAlertController.init(title: "确定关闭WiFi文件传输？", message: nil, preferredStyle: .alert)
             alertController.addAction(QMUIAlertAction(title: "取消", style: .cancel, handler: nil))
-            alertController.addAction(QMUIAlertAction(title: "确定", style: .default, handler: { [weak self] _, _ in
-                self!.dismissBlock?()
-                self?.dismiss(animated: true, completion: nil)
+            alertController.addAction(QMUIAlertAction(title: "确定", style: .default, handler: { [unowned self] _, _ in
+                Client.shared.webUploader(start: false)
+                self.dismissBlock?()
+                self.dismiss(animated: true, completion: nil)
             }))
             alertController.showWith(animated: true)
         } else {
@@ -72,10 +73,8 @@ class WebUploaderController: ViewController {
     }
     
     func startWebUploader() {
-        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].path
-        self.webUploader = GCDWebUploader(uploadDirectory: path)
-        self.webUploader.start(withPort: 5050, bonjourName: "WebUploader")
-        if let url = webUploader.serverURL {
+        Client.shared.webUploader(start: true)
+        if let url = Client.shared.webUploader?.serverURL {
             print(message: "浏览器访问：\(url.absoluteString)")
             let tipStr = "在浏览器输入以下网址：\n\n\(url.absoluteString)\n\n注意：电脑与该设备必须在同一局域网下\n文件传输过程中不能退出此页面或锁屏"
             let tipAttStr = NSMutableAttributedString.init(string: tipStr)
@@ -83,10 +82,8 @@ class WebUploaderController: ViewController {
                 tipAttStr.setAttributes([NSAttributedString.Key.font: UIFont.medium(aSize: 18), NSAttributedString.Key.foregroundColor: kButtonColor], range: NSRange(range, in: tipStr))
             }
             tipLabel.attributedText = tipAttStr
-            webUploaderRunning = true
         } else {
             tipLabel.text = "无法建立文件传输服务器，请在Wi-Fi环境下使用"
-            webUploaderRunning = false
         }
     }
     

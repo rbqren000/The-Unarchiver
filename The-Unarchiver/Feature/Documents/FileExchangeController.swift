@@ -32,9 +32,11 @@ class FileExchangeController: ViewController {
         // Do any additional setup after loading the view.
     }
     
-
     func startWebUploader() {
         let controller = WebUploaderController()
+        controller.dismissBlock = { [unowned self] in
+            self.tableView.reloadData()
+        }
         let nav = NavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true, completion: nil)
@@ -86,6 +88,11 @@ extension FileExchangeController: QMUITableViewDelegate, QMUITableViewDataSource
         if indexPath.section == 0 {
             cell?.textLabel?.text = "WiFi传输"
             cell?.imageView?.image = UIImage.init(named: "wifi-signal")?.resize(toWidth: 35)
+            if let webUploader = Client.shared.webUploader {
+                if webUploader.isRunning && webUploader.serverURL != nil {
+                    cell?.detailTextLabel?.text = webUploader.serverURL?.absoluteString
+                }
+            }
         } else {
             cell?.textLabel?.text = "WebDAV"
             cell?.imageView?.image = UIImage.init(named: "webdav")?.resize(toWidth: 35)

@@ -80,9 +80,6 @@ class AppDefaults: UserDefaults {
     @UserDefaultsItem(key: "webDAVBonjourName")
     public var webDAVBonjourName: String?
     
-    @UserDefaultsItem(key: "webDAVRunInBackground")
-    public var webDAVRunInBackground: Bool?
-
     public func reset() {
         self.unarchiverExtractsubarchives = true
         self.unarchiverOverwrite = false

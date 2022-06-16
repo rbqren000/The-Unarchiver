@@ -11,7 +11,6 @@ import CoreLocation
 class WebDAVServerSettings {
     var port: UInt = 8081
     var bonjourName: String = "The-Unarchiver"
-    var runInBackground: Bool = false
 }
 
 class WebDAVServerController: ViewController {
@@ -19,7 +18,6 @@ class WebDAVServerController: ViewController {
     var dismissBlock: (() -> ())?
     let webDAVSettings = WebDAVServerSettings()
     let webDAVSwitch = UISwitch()
-    let webDAVBackgroundSwitch = UISwitch()
     
     private var tableView = QMUITableView.init(frame: .zero, style: .grouped)
     private let cellIdentifier = "WebDAVCell"
@@ -49,18 +47,13 @@ class WebDAVServerController: ViewController {
                 self.webDAVSettings.port = UInt(port)
             }
         }
-        if let runInBackground = AppDefaults.shared.webDAVRunInBackground {
-            self.webDAVSettings.runInBackground = runInBackground
-        }
-        webDAVBackgroundSwitch.isOn = self.webDAVSettings.runInBackground
-        print(message: webDAVSettings.runInBackground)
+
     }
 
     override func initSubviews() {
         super.initSubviews()
         
         webDAVSwitch.addTarget(self, action: #selector(webDAVServer(sender:)), for: .valueChanged)
-        webDAVBackgroundSwitch.addTarget(self, action: #selector(webDAVRunInBackground(sender:)), for: .valueChanged)
         
         if #available(iOS 13.0, *) {
             self.tableView = QMUITableView.init(frame: .zero, style: .insetGrouped)
@@ -84,25 +77,6 @@ class WebDAVServerController: ViewController {
         self.dismissBlock?()
         self.dismiss(animated: true, completion: nil)
     }
-    
-    @objc
-    func webDAVRunInBackground(sender: UISwitch) {
-     
-        print(message: CLLocationManager.authorizationStatus())
-        if sender.isOn {
-            if CLLocationManager.authorizationStatus() == .denied  {
-                kAlert("请开启定位权限以便与WebDAV在后台运行。")
-                webDAVBackgroundSwitch.isOn = false
-                return
-            }
-            if CLLocationManager.authorizationStatus() != .authorizedAlways {
-                LocationManager.shared.requestAuthority()
-            }
-        }
-        self.webDAVSettings.runInBackground = sender.isOn
-        AppDefaults.shared.webDAVRunInBackground = self.webDAVSettings.runInBackground
-        print(message: AppDefaults.shared.webDAVRunInBackground)
-    }
 
     @objc
     func webDAVServer(sender: UISwitch) {
@@ -118,7 +92,7 @@ class WebDAVServerController: ViewController {
 extension WebDAVServerController: QMUITableViewDelegate, QMUITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return webDAVSwitch.isOn ? 3 : 2
+        return webDAVSwitch.isOn ? 2 : 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -159,9 +133,6 @@ extension WebDAVServerController: QMUITableViewDelegate, QMUITableViewDataSource
                 cell?.accessoryType = webDAVSwitch.isOn ? .none : .disclosureIndicator
             }
         } else if indexPath.section == 1 {
-            cell?.textLabel?.text = "后台运行"
-            cell?.accessoryView = webDAVBackgroundSwitch
-        } else {
             cell?.textLabel?.text = "URL"
             cell?.detailTextLabel?.text = Client.shared.davServer?.serverURL?.absoluteString
             let imageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: 35, height: 35))
