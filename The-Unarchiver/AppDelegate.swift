@@ -65,13 +65,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if AppDefaults.shared.backgroundTaskEnable! {
             var startLocation = false
             if let davServer = Client.shared.davServer {
-                startLocation = davServer.isRunning && davServer.serverURL != nil
+                if davServer.isRunning && davServer.serverURL != nil {
+                    startLocation = true
+                }
             }
             
             if let webUploader = Client.shared.webUploader {
-                startLocation = webUploader.isRunning && webUploader.serverURL != nil
+                if webUploader.isRunning && webUploader.serverURL != nil {
+                    startLocation = true
+                }
             }
-            
+            if Client.shared.unarchiverTask {
+                startLocation = true
+            }
+
             if startLocation {
                 LocationManager.shared.startLocation()
             }

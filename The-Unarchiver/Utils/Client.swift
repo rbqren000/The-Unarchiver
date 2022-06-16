@@ -15,7 +15,7 @@ class Client: NSObject {
     let store = YTKKeyValueStore.init(dbWithName: ".Unarchiver.db")
     var webUploader: GCDWebUploader?
     var davServer: GCDWebDAVServer?
-    
+    var unarchiverTask: Bool = false
     
     func webUploader(start: Bool, port: UInt = 5050) {
         if self.webUploader == nil {

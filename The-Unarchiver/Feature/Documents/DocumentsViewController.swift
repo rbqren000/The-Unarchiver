@@ -637,6 +637,8 @@ extension DocumentsViewController {
     }
     
     func unZip(_ file: File) {
+        print(message: "---- 开始解压：\(file.name)")
+        Client.shared.unarchiverTask = true
         let hud = QMUITips.showProgressView(self.view, status: "正在解压...")
         var toDirectoryURL = file.url.deletingPathExtension()
         if FileManager.default.fileExists(atPath: toDirectoryURL.path) {
@@ -650,6 +652,8 @@ extension DocumentsViewController {
                 }
             } completionHandler: { path, succeeded, error in
                 Async.main {
+                    Client.shared.unarchiverTask = false
+                    print(message: "---- 完成解压：\(file.name)")
                     hud.removeFromSuperview()
                     if succeeded {
                         self.getFolderFiles()
@@ -664,12 +668,15 @@ extension DocumentsViewController {
     }
     
     func unArchiver(_ file: File, password: String) {
-
+        print(message: "---- 开始解压：\(file.name)")
+        Client.shared.unarchiverTask = true
         QMUITips.showLoading("正在解压...", detailText: file.name, in: self.view).whiteStyle()
         Async.background {
             let destURL = file.url.deletingLastPathComponent().appendingPathComponent(file.url.deletingPathExtension().lastPathComponent)
             let result = XADHelper().unarchiver(withPath: file.url.path, dest: destURL.path, password: password)
             Async.main {
+                Client.shared.unarchiverTask = false
+                print(message: "---- 完成解压：\(file.name)")
                 QMUITips.hideAllTips()
                 if result == 0 {
                     self.getFolderFiles()
@@ -683,6 +690,7 @@ extension DocumentsViewController {
                 }
             }
         }
+
     }
 
     func showSuccessAlert(alertTitle: String, fileURL: URL) {
