@@ -105,21 +105,7 @@ class DocumentsViewController: ViewController {
         self.menuPopupView.sourceBarItem = menuButton
         
     }
-    
-    @objc
-    func dragMoving(control: UIControl, event: UIEvent) {
-        if let center = event.allTouches?.first?.location(in: self.view) {
-            control.center = center
-        }
-    }
-    
-    @objc
-    func dragEnded(control: UIControl, event: UIEvent) {
-        if let center = event.allTouches?.first?.location(in: self.view) {
-            control.center = center
-        }
-    }
-    
+
     @objc
     func menuButtonTapped() {
         self.menuPopupView.showWith(animated: true)
@@ -154,6 +140,9 @@ extension DocumentsViewController: QMUITableViewDelegate, QMUITableViewDataSourc
             cell?.detailTextLabel?.textColor = kSubtextColor
         }
         if indexPath.section == 0 {
+            if files.count <= indexPath.row {
+                return cell!
+            }
             let file = files[indexPath.row]
             cell?.textLabel?.text = file.name
             if file.isFolder {

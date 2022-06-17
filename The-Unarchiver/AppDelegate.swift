@@ -75,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     startLocation = true
                 }
             }
+            
             if Client.shared.unarchiverTask {
                 startLocation = true
             }

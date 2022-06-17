@@ -11,22 +11,33 @@ import CoreLocation
 class LocationManager: NSObject {
     
     public static let shared = LocationManager()
-    let locationManager = CLLocationManager()
+    var locationManager: CLLocationManager?
     
     func startLocation() {
-        locationManager.delegate = self
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 10
-        locationManager.requestAlwaysAuthorization()
+        print(message: "LocationManager startLocation ")
+
+        if self.locationManager == nil {
+            self.locationManager = CLLocationManager()
+            self.locationManager?.delegate = self
+            self.locationManager?.allowsBackgroundLocationUpdates = true
+            self.locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+            self.locationManager?.distanceFilter = 10
+            self.locationManager?.requestAlwaysAuthorization()
+        }
+        guard let locationManager = self.locationManager else { return }
         locationManager.startUpdatingLocation()
     }
     
     func stopLocation() {
+        print(message: "LocationManager stopLocation ")
+        guard let locationManager = self.locationManager else { return }
         locationManager.stopUpdatingHeading()
+        self.locationManager = nil
+
     }
     
     func requestAuthority() {
+        guard let locationManager = self.locationManager else { return }
         locationManager.requestAlwaysAuthorization()
     }
 
